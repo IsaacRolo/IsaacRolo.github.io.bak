@@ -3,7 +3,12 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>https://isaacrolo.github.io/content/post/first/</loc>
+    <loc>https://isaacrolo.github.io/post/first/</loc>
+    <lastmod>2019-03-01T15:26:53+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://isaacrolo.github.io/post/spring-boot/</loc>
     <lastmod>2019-03-01T15:26:53+08:00</lastmod>
   </url>
   
@@ -13,7 +18,7 @@
   </url>
   
   <url>
-    <loc>https://isaacrolo.github.io/content/</loc>
+    <loc>https://isaacrolo.github.io/post/</loc>
     <lastmod>2019-03-01T15:26:53+08:00</lastmod>
     <priority>0</priority>
   </url>
