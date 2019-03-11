@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="zn-CN">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		
+		<meta name="author" content="Rolo">
+		<meta name="description" content="Rolo&#39;s Blog">
+		<meta name="generator" content="Hugo 0.54.0" />
+		<title>Tableau发布视图，并在页面中展示 &middot; Rolo&#39;s Blog</title>
+		<link rel="shortcut icon" href="https://isaacrolo.github.io/images/favicon.ico">
+		<link rel="stylesheet" href="https://isaacrolo.github.io/css/style.css">
+		<link rel="stylesheet" href="https://isaacrolo.github.io/css/highlight.css">
+
+		
+		<link rel="stylesheet" href="https://isaacrolo.github.io/css/font-awesome.min.css">
+		
+
+		
+		<link href="https://isaacrolo.github.io/index.xml" rel="alternate" type="application/rss+xml" title="Rolo&#39;s Blog" />
+		
+
+		
+	</head>
+
+    <body>
+       <nav class="main-nav">
+	
+	
+		<a href='https://isaacrolo.github.io/'> <span class="arrow">←</span>Home</a>
+	
+	<a href='https://isaacrolo.github.io/posts'>Archive</a>
+	<a href='https://isaacrolo.github.io/tags'>Tags</a>
+	<a href='https://isaacrolo.github.io/about'>About</a>
+
+	
+
+	
+	<a class="cta" href="https://isaacrolo.github.io/index.xml">Subscribe</a>
+	
+</nav>
+
+
+        <section id="wrapper" class="post">
+            <article>
+                <header>
+                    <h1>
+                        Tableau发布视图，并在页面中展示
+                    </h1>
+                    <h2 class="headline">
+                    Mar 11, 2019 10:09
+                    · 410 words
+                    · 1 minute read
+                      <span class="tags">
+                      
+                      
+                          
+                              <a href="https://isaacrolo.github.io/tags/tableau%E5%AD%A6%E4%B9%A0">Tableau学习</a>
+                          
+                      
+                      
+                      </span>
+                    </h2>
+                </header>
+                
+                  
+                    <div id="toc">
+                      <nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li>
+<ul>
+<li>
+<ul>
+<li><a href="#tableau-desktop10-4安装">Tableau Desktop10.4安装</a></li>
+<li><a href="#tableau-server10-4安装">Tableau Server10.4安装</a></li>
+<li><a href="#发布工作簿">发布工作簿</a></li>
+<li><a href="#将tableau视图嵌入页面">将tableau视图嵌入页面</a></li>
+<li><a href="#整体思路">整体思路</a></li>
+</ul></li>
+</ul></li>
+</ul></li>
+</ul>
+</nav>
+                    </div>
+                  
+                
+                <section id="post-body">
+                    
+
+<h4 id="tableau-desktop10-4安装">Tableau Desktop10.4安装</h4>
+
+<h4 id="tableau-server10-4安装">Tableau Server10.4安装</h4>
+
+<p>输入密钥激活 desktop和server</p>
+
+<p>安装完成后浏览器输入<a href="http://127.0.0.1">http://127.0.0.1</a> 进入服务器管理后台</p>
+
+<p><a href="https://www.tableau.com/zh-cn/support/releases?_fsi=gPjLkNcU">tableau历史版本下载</a></p>
+
+<h4 id="发布工作簿">发布工作簿</h4>
+
+<p>Tableau Desktop中选择服务器选项卡-&gt;发布工作簿-&gt;输入Tableau Server服务器的ip-&gt;发布</p>
+
+<h4 id="将tableau视图嵌入页面">将tableau视图嵌入页面</h4>
+
+<ol>
+<li><p>浏览器输入<a href="http://serverip">http://serverip</a> 进入服务器管理后台</p></li>
+
+<li><p>内容选项卡-&gt;工作簿 选择刚刚发布的工作簿-&gt;选择要在页面展示的视图-&gt; 点击右上角共享选项卡 -&gt;复制嵌入代码或链接</p></li>
+
+<li><p>官方支持的2种方式展示</p></li>
+</ol>
+
+<p><a href="https://onlinehelp.tableau.com/current/pro/desktop/zh-cn/embed.htm">如何将视图嵌入网页</a></p>
+
+<ol>
+<li><p>嵌入代码</p>
+
+<pre><code class="language-javascript">  &lt;script type='text/javascript' src='http://127.0.0.1/javascripts/api/viz_v1.js'&gt;&lt;/script&gt;
+  &lt;div class='tableauPlaceholder' style='width: 1920px; height: 848px;'&gt;
+      &lt;object class='tableauViz' width='1920' height='848' style='display:none;'&gt;
+          &lt;param name='host_url' value='http%3A%2F%2F127.0.0.1%2F'/&gt;
+          &lt;param name='embed_code_version' value='3'/&gt;
+          &lt;param name='site_root' value=''/&gt;
+          &lt;param name='name' value='_0&amp;#47;sheet2'/&gt;
+          &lt;param name='tabs' value='no'/&gt;
+          &lt;param name='toolbar' value='yes'/&gt;
+          &lt;param name='showAppBanner' value='false'/&gt;
+      &lt;/object&gt;
+  &lt;/div&gt;
+</code></pre></li>
+
+<li><p>链接跳转</p>
+
+<pre><code class="language-html">  &lt;a href=&quot;http://127.0.0.1/views/_0/sheet2?:embed=y&amp;:showAppBanner=false&amp;:display_count=no&amp;:showVizHome=no&quot;&gt;tableau&lt;/a&gt;
+</code></pre></li>
+
+<li><p>修改嵌入式视图样式</p>
+
+<p><a href="https://onlinehelp.tableau.com/current/pro/desktop/zh-cn/embed_list.htm">定制嵌入代码的参数</a></p></li>
+</ol>
+
+<h4 id="整体思路">整体思路</h4>
+
+<p>在Tableau Desktop中绘制分析图表，将图表发布到Tableau Server中，页面进行引用</p>
+
+                </section>
+            </article>
+
+            
+                <a class="twitter" href="https://twitter.com/intent/tweet?text=https%3a%2f%2fisaacrolo.github.io%2fposts%2ftableau%2f - Tableau%e5%8f%91%e5%b8%83%e8%a7%86%e5%9b%be%ef%bc%8c%e5%b9%b6%e5%9c%a8%e9%a1%b5%e9%9d%a2%e4%b8%ad%e5%b1%95%e7%a4%ba by @your_twitter_id"><span class="icon-twitter"> tweet</span></a>
+
+<a class="facebook" href="#" onclick="
+    window.open(
+      'https://www.facebook.com/sharer/sharer.php?u='+encodeURIComponent(location.href),
+      'facebook-share-dialog',
+      'width=626,height=436');
+    return false;"><span class="icon-facebook-rect"> Share</span>
+</a>
+
+            
+
+            
+
+            
+
+            <footer id="footer">
+    
+        <div id="social">
+
+	
+	
+    <a class="symbol" href="https://www.facebook.com/nodejh">
+        <i class="fa fa-facebook-square"></i>
+    </a>
+    
+    <a class="symbol" href="https://www.github.com/nodejh">
+        <i class="fa fa-github-square"></i>
+    </a>
+    
+    <a class="symbol" href="https://www.twitter.com/nodejh">
+        <i class="fa fa-twitter-square"></i>
+    </a>
+    
+
+
+</div>
+
+    
+    <p class="small">
+    
+       © Copyright 2019 <i class="fa fa-heart" aria-hidden="true"></i> Rolo
+    
+    </p>
+    <p class="small">
+        Powered by <a href="http://www.gohugo.io/">Hugo</a> Theme By <a href="https://github.com/nodejh/hugo-theme-cactus-plus">nodejh</a>
+    </p>
+</footer>
+
+        </section>
+
+        <script src="https://isaacrolo.github.io/js/jquery-3.3.1.min.js"></script>
+<script src="https://isaacrolo.github.io/js/main.js"></script>
+<script src="https://isaacrolo.github.io/js/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+
+
+
+
+
+    </body>
+</html>
