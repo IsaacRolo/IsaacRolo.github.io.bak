@@ -49,9 +49,9 @@
                         Tableau发布视图，并在页面中展示
                     </h1>
                     <h2 class="headline">
-                    Mar 11, 2019 10:09
-                    · 722 words
-                    · 2 minute read
+                    Mar 11, 2019 15:26
+                    · 410 words
+                    · 1 minute read
                       <span class="tags">
                       
                       
@@ -79,8 +79,6 @@
 <li><a href="#发布工作簿">发布工作簿</a></li>
 <li><a href="#将tableau视图嵌入页面">将tableau视图嵌入页面</a></li>
 <li><a href="#整体思路">整体思路</a></li>
-<li><a href="#问题">问题</a></li>
-<li><a href="#硬件配置要求">硬件配置要求</a></li>
 </ul></li>
 </ul></li>
 </ul></li>
@@ -118,115 +116,42 @@
 
 <p><a href="https://onlinehelp.tableau.com/current/pro/desktop/zh-cn/embed.htm">如何将视图嵌入网页</a></p>
 
-<p>1）嵌入代码</p>
+<ol>
+<li><p>嵌入代码</p>
 
-<pre><code class="language-javascript">   &lt;script type='text/javascript' src='http://127.0.0.1/javascripts/api/viz_v1.js'&gt;&lt;/script&gt;
-   &lt;div class='tableauPlaceholder' style='width: 1920px; height: 848px;'&gt;
-       &lt;object class='tableauViz' width='1920' height='848' style='display:none;'&gt;
-           &lt;param name='host_url' value='http%3A%2F%2F127.0.0.1%2F'/&gt;
-           &lt;param name='embed_code_version' value='3'/&gt;
-           &lt;param name='site_root' value=''/&gt;
-           &lt;param name='name' value='_0&amp;#47;sheet2'/&gt;
-           &lt;param name='tabs' value='no'/&gt;
-           &lt;param name='toolbar' value='yes'/&gt;
-           &lt;param name='showAppBanner' value='false'/&gt;
-       &lt;/object&gt;
-   &lt;/div&gt;
-</code></pre>
+<pre><code class="language-javascript">  &lt;script type='text/javascript' src='http://127.0.0.1/javascripts/api/viz_v1.js'&gt;&lt;/script&gt;
+  &lt;div class='tableauPlaceholder' style='width: 1920px; height: 848px;'&gt;
+      &lt;object class='tableauViz' width='1920' height='848' style='display:none;'&gt;
+          &lt;param name='host_url' value='http%3A%2F%2F127.0.0.1%2F'/&gt;
+          &lt;param name='embed_code_version' value='3'/&gt;
+          &lt;param name='site_root' value=''/&gt;
+          &lt;param name='name' value='_0&amp;#47;sheet2'/&gt;
+          &lt;param name='tabs' value='no'/&gt;
+          &lt;param name='toolbar' value='yes'/&gt;
+          &lt;param name='showAppBanner' value='false'/&gt;
+      &lt;/object&gt;
+  &lt;/div&gt;
+</code></pre></li>
 
-<p>2）指定视图 URL</p>
+<li><p>链接跳转</p>
 
-<pre><code class="language-html">   &lt;a href=&quot;http://127.0.0.1/views/_0/sheet2?:embed=y&amp;:showAppBanner=false&amp;:display_count=no&amp;:showVizHome=no&quot;&gt;tableau&lt;/a&gt;
-</code></pre>
+<pre><code class="language-html">  &lt;a href=&quot;http://127.0.0.1/views/_0/sheet2?:embed=y&amp;:showAppBanner=false&amp;:display_count=no&amp;:showVizHome=no&quot;&gt;tableau&lt;/a&gt;
+</code></pre></li>
 
-<p>3）修改嵌入式视图样式</p>
+<li><p>修改嵌入式视图样式</p>
 
-<p><a href="https://onlinehelp.tableau.com/current/pro/desktop/zh-cn/embed_list.htm">定制嵌入代码的参数</a></p>
+<p><a href="https://onlinehelp.tableau.com/current/pro/desktop/zh-cn/embed_list.htm">定制嵌入代码的参数</a></p></li>
+</ol>
 
 <h4 id="整体思路">整体思路</h4>
 
 <p>在Tableau Desktop中绘制分析图表，将图表发布到Tableau Server中，页面进行引用</p>
 
-<h4 id="问题">问题</h4>
-
-<ol>
-<li>第一次访问时需要登陆tableau，需要进行身份验证</li>
-</ol>
-
-<p>是否需要免身份验证？</p>
-
-<p><a href="https://onlinehelp.tableau.com/current/server/zh-cn/trusted_auth_webrequ.htm">官方身份认证教程</a></p>
-
-<p><a href="https://blog.csdn.net/gwd1154978352/article/details/82664992">获取ticket后跳转到tableau页面</a></p>
-
-<p>解决思路：</p>
-
-<p><img src="https://i.loli.net/2019/03/11/5c86093da17df.png" alt="UTOOLS1552288058853.png" /></p>
-
-<p>1）向 Tableau Server 添加受信任的 IP 地址或主机名称</p>
-
-<p>2）在页面中使用嵌入式视图</p>
-
-<p>3）向Tableau Server发送post请求获取票证 ticket</p>
-
-<p>4）通过ajax获取到ticket后，设置ticket参数的值</p>
-
-<pre><code class="language-html">   &lt;param name=&quot;ticket&quot; value=&quot;9D1ObyqDQmSIOyQpKdy4Sw==:dg62gCsSE0QRArXNTOp6mlJ5&quot; /&gt;
-</code></pre>
-
-<ol>
-<li>图表数据的实时性</li>
-</ol>
-
-<p>重新发布后数据才会更新</p>
-
-<ol>
-<li>Tableau Server是否支持集群部署？</li>
-</ol>
-
-<p>至少需要三个节点来运行协调服务</p>
-
-<p><a href="https://onlinehelp.tableau.com/current/server/zh-cn/server_hardware_min.htm">使用仅协调服务节点配置 Tableau Server 以实现高可用性</a></p>
-
-<h4 id="硬件配置要求">硬件配置要求</h4>
-
-<table>
-<thead>
-<tr>
-<th><em>安装类型</em></th>
-<th><em>处理器</em></th>
-<th><em>CPU</em></th>
-<th><em>RAM</em></th>
-<th><em>可用磁盘空间</em></th>
-</tr>
-</thead>
-
-<tbody>
-<tr>
-<td>单节点</td>
-<td>64 位</td>
-<td>8 核，2.0 GHz 或更高频率</td>
-<td>32 GB</td>
-<td>50 GB</td>
-</tr>
-
-<tr>
-<td><strong>最低</strong>硬件要求</td>
-<td>64 位</td>
-<td>2 内核</td>
-<td>8 GB</td>
-<td>15 GB</td>
-</tr>
-</tbody>
-</table>
-
-<p><a href="https://onlinehelp.tableau.com/current/server/zh-cn/server_hardware_min.htm">官方最低硬件推荐配置</a></p>
-
                 </section>
             </article>
 
             
-                <a class="twitter" href="https://twitter.com/intent/tweet?text=https%3a%2f%2fisaacrolo.github.io%2fposts%2ftableau%2f - Tableau%e5%8f%91%e5%b8%83%e8%a7%86%e5%9b%be%ef%bc%8c%e5%b9%b6%e5%9c%a8%e9%a1%b5%e9%9d%a2%e4%b8%ad%e5%b1%95%e7%a4%ba by @your_twitter_id"><span class="icon-twitter"> tweet</span></a>
+                <a class="twitter" href="https://twitter.com/intent/tweet?text=https%3a%2f%2fisaacrolo.github.io%2fposts%2ftableau01%2f - Tableau%e5%8f%91%e5%b8%83%e8%a7%86%e5%9b%be%ef%bc%8c%e5%b9%b6%e5%9c%a8%e9%a1%b5%e9%9d%a2%e4%b8%ad%e5%b1%95%e7%a4%ba by @your_twitter_id"><span class="icon-twitter"> tweet</span></a>
 
 <a class="facebook" href="#" onclick="
     window.open(

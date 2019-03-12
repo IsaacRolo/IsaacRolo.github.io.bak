@@ -6,10 +6,19 @@
     <description>Recent content on Rolo&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zn-CN</language>
-    <lastBuildDate>Mon, 11 Mar 2019 10:09:51 +0800</lastBuildDate>
+    <lastBuildDate>Mon, 11 Mar 2019 15:26:53 +0800</lastBuildDate>
     
 	<atom:link href="https://isaacrolo.github.io/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Tableau发布视图，并在页面中展示</title>
+      <link>https://isaacrolo.github.io/posts/tableau01/</link>
+      <pubDate>Mon, 11 Mar 2019 15:26:53 +0800</pubDate>
+      
+      <guid>https://isaacrolo.github.io/posts/tableau01/</guid>
+      <description>Tableau Desktop10.4安装 Tableau Server10.4安装 输入密钥激活 desktop和server 安装完成后浏览器输入http://127.0.</description>
+    </item>
     
     <item>
       <title>Tableau发布视图，并在页面中展示</title>
