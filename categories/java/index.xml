@@ -2,13 +2,13 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Java on Rolo&#39;s Blog</title>
-    <link>https://isaacrolo.github.io/tags/java/</link>
+    <link>https://isaacrolo.github.io/categories/java/</link>
     <description>Recent content in Java on Rolo&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zn-CN</language>
     <lastBuildDate>Thu, 28 Mar 2019 20:36:54 +0800</lastBuildDate>
     
-	<atom:link href="https://isaacrolo.github.io/tags/java/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://isaacrolo.github.io/categories/java/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>

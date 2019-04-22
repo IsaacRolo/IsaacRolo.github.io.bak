@@ -6,17 +6,53 @@
     <description>Recent content in Tags on Rolo&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zn-CN</language>
-    <lastBuildDate>Mon, 11 Mar 2019 15:26:53 +0800</lastBuildDate>
+    <lastBuildDate>Thu, 28 Mar 2019 15:08:08 +0800</lastBuildDate>
     
 	<atom:link href="https://isaacrolo.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>Tableau学习</title>
-      <link>https://isaacrolo.github.io/tags/tableau%E5%AD%A6%E4%B9%A0/</link>
-      <pubDate>Mon, 11 Mar 2019 15:26:53 +0800</pubDate>
+      <title>Informatica</title>
+      <link>https://isaacrolo.github.io/tags/informatica/</link>
+      <pubDate>Thu, 28 Mar 2019 15:08:08 +0800</pubDate>
       
-      <guid>https://isaacrolo.github.io/tags/tableau%E5%AD%A6%E4%B9%A0/</guid>
+      <guid>https://isaacrolo.github.io/tags/informatica/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Java</title>
+      <link>https://isaacrolo.github.io/tags/java/</link>
+      <pubDate>Thu, 28 Mar 2019 20:36:54 +0800</pubDate>
+      
+      <guid>https://isaacrolo.github.io/tags/java/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Spring Boot</title>
+      <link>https://isaacrolo.github.io/tags/spring-boot/</link>
+      <pubDate>Thu, 21 Mar 2019 14:06:47 +0800</pubDate>
+      
+      <guid>https://isaacrolo.github.io/tags/spring-boot/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Spring Cloud</title>
+      <link>https://isaacrolo.github.io/tags/spring-cloud/</link>
+      <pubDate>Wed, 20 Mar 2019 13:46:10 +0800</pubDate>
+      
+      <guid>https://isaacrolo.github.io/tags/spring-cloud/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Tableau</title>
+      <link>https://isaacrolo.github.io/tags/tableau/</link>
+      <pubDate>Mon, 11 Mar 2019 10:09:51 +0800</pubDate>
+      
+      <guid>https://isaacrolo.github.io/tags/tableau/</guid>
       <description></description>
     </item>
     

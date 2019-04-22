@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Spring Cloud on Rolo&#39;s Blog</title>
+    <link>https://isaacrolo.github.io/categories/spring-cloud/</link>
+    <description>Recent content in Spring Cloud on Rolo&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zn-CN</language>
+    <lastBuildDate>Wed, 20 Mar 2019 13:46:10 +0800</lastBuildDate>
+    
+	<atom:link href="https://isaacrolo.github.io/categories/spring-cloud/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>整合Zuul</title>
+      <link>https://isaacrolo.github.io/posts/zuul/</link>
+      <pubDate>Wed, 20 Mar 2019 13:46:10 +0800</pubDate>
+      
+      <guid>https://isaacrolo.github.io/posts/zuul/</guid>
+      <description>场景：仅作为web服务集群与外界请求之间的网关，和Nginx结合使用 Zuul的使用 添加依赖 &amp;lt;dependency&amp;gt; &amp;lt;groupId&amp;gt;org.springframework.cloud&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;spring-cloud-starter-zuul&amp;lt;/artifactId&amp;gt; &amp;lt;/dependency&amp;gt; &amp;lt;dependency&amp;gt; &amp;lt;groupId&amp;gt;org.springframework.cloud&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;spring-cloud-starter-eureka&amp;lt;/artifactId&amp;gt; &amp;lt;/dependency&amp;gt; 配置文件 将Zuul注册到eurek</description>
+    </item>
+    
+    <item>
+      <title>整合HystrixDashboard和Turbine</title>
+      <link>https://isaacrolo.github.io/posts/hystrixdashboard/</link>
+      <pubDate>Tue, 19 Mar 2019 11:32:32 +0800</pubDate>
+      
+      <guid>https://isaacrolo.github.io/posts/hystrixdashboard/</guid>
+      <description>前提：springboot 1.5.19.RELEASE springcloud Edgware.SR5 场景：服务调用方使用Feign+Hystrix实现微服务之间的通信；新建一个Hystrix Dashboard</description>
+    </item>
+    
+  </channel>
+</rss>

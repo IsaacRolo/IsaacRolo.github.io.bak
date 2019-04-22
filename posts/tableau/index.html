@@ -50,13 +50,13 @@
                     </h1>
                     <h2 class="headline">
                     Mar 11, 2019 10:09
-                    · 722 words
-                    · 2 minute read
+                    · 1241 words
+                    · 3 minute read
                       <span class="tags">
                       
                       
                           
-                              <a href="https://isaacrolo.github.io/tags/tableau%E5%AD%A6%E4%B9%A0">Tableau学习</a>
+                              <a href="https://isaacrolo.github.io/tags/tableau">Tableau</a>
                           
                       
                       
@@ -150,26 +150,64 @@
 <h4 id="问题">问题</h4>
 
 <ol>
-<li>第一次访问时需要登陆tableau，需要进行身份验证</li>
+<li><strong>第一次访问时需要登陆tableau，需要进行身份验证</strong></li>
 </ol>
 
 <p>是否需要免身份验证？</p>
 
 <p><a href="https://onlinehelp.tableau.com/current/server/zh-cn/trusted_auth_webrequ.htm">官方身份认证教程</a></p>
 
+<p><strong><a href="https://onlinehelp.tableau.com/v10.4/server/zh-cn/trusted_auth_webrequ.htm">10.4版本身份认证官方教程</a></strong></p>
+
 <p><a href="https://blog.csdn.net/gwd1154978352/article/details/82664992">获取ticket后跳转到tableau页面</a></p>
 
-<p>解决思路：</p>
+<p><strong>解决思路</strong>：</p>
 
 <p><img src="https://i.loli.net/2019/03/11/5c86093da17df.png" alt="UTOOLS1552288058853.png" /></p>
 
 <p>1）向 Tableau Server 添加受信任的 IP 地址或主机名称</p>
 
+<p>以管理员身份打开命令提示符 ，导航到 Tableau Server 的 bin 目录</p>
+
+<p><code>cd  C:\Program Files\Tableau\Tableau Server\10.4\bin</code></p>
+
+<p><code>tabadmin stop</code></p>
+
+<p><code>tabadmin set wgserver.trusted_hosts &quot;&lt;trusted IP addresses or host names&gt;&quot;</code></p>
+
+<p><code>tabadmin config</code></p>
+
+<p><code>tabadmin start</code></p>
+
 <p>2）在页面中使用嵌入式视图</p>
 
 <p>3）向Tableau Server发送post请求获取票证 ticket</p>
 
-<p>4）通过ajax获取到ticket后，设置ticket参数的值</p>
+<ul>
+<li><p>编写java工具类发送http请求，使用RestTemplate 或 httpclient</p></li>
+
+<li><p>POST请求发送到<a href="https://tabserver/trusted；参数为`username=">https://tabserver/trusted；参数为`username=</a><username>`</p></li>
+
+<li><p>HTTP请求头中设置 <code>Content-Type</code>类型为 <code>application/x-www-form-urlencoded;charset=UTF-8</code></p>
+
+<p><strong>Post请求获取Ticket代码示例（RestTemplate ）</strong></p>
+
+<pre><code class="language-java"> static public String getTicket() {
+     String url = &quot;http://127.0.0.1/trusted&quot;;
+     RestTemplate restTemplate = new RestTemplate();
+     HttpHeaders headers = new HttpHeaders();
+     headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
+     MultiValueMap&lt;String, String&gt; params = new LinkedMultiValueMap&lt;&gt;();
+     params.add(&quot;username&quot;, &quot;admin&quot;);
+     HttpEntity&lt;MultiValueMap&lt;String, String&gt;&gt; requestEntity = new HttpEntity&lt;&gt;(params, headers);
+     String ticket = restTemplate.postForObject(url, requestEntity, String.class);
+     System.out.println(ticket);
+     return ticket;
+ }
+</code></pre></li>
+</ul>
+
+<p>4）在controller中获取到ticket后，传给前端设置ticket参数的值</p>
 
 <pre><code class="language-html">   &lt;param name=&quot;ticket&quot; value=&quot;9D1ObyqDQmSIOyQpKdy4Sw==:dg62gCsSE0QRArXNTOp6mlJ5&quot; /&gt;
 </code></pre>
@@ -187,6 +225,26 @@
 <p>至少需要三个节点来运行协调服务</p>
 
 <p><a href="https://onlinehelp.tableau.com/current/server/zh-cn/server_hardware_min.htm">使用仅协调服务节点配置 Tableau Server 以实现高可用性</a></p>
+
+<ol>
+<li><strong>如何实现系统不同的用户登陆，内嵌Tableau图表分角色显示数据</strong></li>
+</ol>
+
+<p>1）设置用户筛选器，分用户（用户为Tableau Server创建的用户）查看数据</p>
+
+<p>步骤：服务器选项卡-&gt;创建用户筛选器-&gt;选择要筛选的维度-&gt;勾选<strong>用户筛选的维度</strong>（见下图）-&gt;发布工作簿</p>
+
+<p><strong>注</strong>：发布工作簿之前要拖动筛选器到筛选器选项卡</p>
+
+<p><img src="https://i.loli.net/2019/03/29/5c9dd5b3d4377.png" alt="UTOOLS1553847731647.png" /></p>
+
+<p><a href="https://onlinehelp.tableau.com/current/pro/desktop/zh-cn/publish_userfilters_create.htm">创建用户筛选器官方教程</a></p>
+
+<p><a href="http://www.jintiankansha.me/t/tO9GtKce50">如何设置用户筛选器</a></p>
+
+<p>2）系统用户与Tableau用户之间的关联</p>
+
+<p>通过代码的方式来对2种用户进行关联；即系统登陆时获取对应Tableau用户的Ticket凭证，就可以以指定用户的身份登陆到Tableau Server</p>
 
 <h4 id="硬件配置要求">硬件配置要求</h4>
 

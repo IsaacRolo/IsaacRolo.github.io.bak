@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="zn-CN">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		
+		<meta name="author" content="Rolo">
+		<meta name="description" content="Rolo&#39;s Blog">
+		<meta name="generator" content="Hugo 0.54.0" />
+		<title>垃圾收集器与内存分配策略 &middot; Rolo&#39;s Blog</title>
+		<link rel="shortcut icon" href="https://isaacrolo.github.io/images/favicon.ico">
+		<link rel="stylesheet" href="https://isaacrolo.github.io/css/style.css">
+		<link rel="stylesheet" href="https://isaacrolo.github.io/css/highlight.css">
+
+		
+		<link rel="stylesheet" href="https://isaacrolo.github.io/css/font-awesome.min.css">
+		
+
+		
+		<link href="https://isaacrolo.github.io/index.xml" rel="alternate" type="application/rss+xml" title="Rolo&#39;s Blog" />
+		
+
+		
+	</head>
+
+    <body>
+       <nav class="main-nav">
+	
+	
+		<a href='https://isaacrolo.github.io/'> <span class="arrow">←</span>Home</a>
+	
+	<a href='https://isaacrolo.github.io/posts'>Archive</a>
+	<a href='https://isaacrolo.github.io/tags'>Tags</a>
+	<a href='https://isaacrolo.github.io/about'>About</a>
+
+	
+
+	
+	<a class="cta" href="https://isaacrolo.github.io/index.xml">Subscribe</a>
+	
+</nav>
+
+
+        <section id="wrapper" class="post">
+            <article>
+                <header>
+                    <h1>
+                        垃圾收集器与内存分配策略
+                    </h1>
+                    <h2 class="headline">
+                    Mar 28, 2019 20:36
+                    · 442 words
+                    · 1 minute read
+                      <span class="tags">
+                      
+                      
+                          
+                              <a href="https://isaacrolo.github.io/tags/java">Java</a>
+                          
+                      
+                      
+                      </span>
+                    </h2>
+                </header>
+                
+                  
+                    <div id="toc">
+                      <nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li>
+<ul>
+<li>
+<ul>
+<li><a href="#垃圾收集器主要作用于内存的哪部分">垃圾收集器主要作用于内存的哪部分？</a></li>
+<li><a href="#如何判断对象是否已死">如何判断对象是否已死？</a>
+<ul>
+<li><a href="#引用计数算法">引用计数算法</a></li>
+<li><a href="#可达性分析算法">可达性分析算法</a></li>
+</ul></li>
+<li><a href="#引用有哪几种类型">引用有哪几种类型？</a></li>
+<li><a href="#什么时候对象被回收-finalize方法">什么时候对象被回收（finalize方法）？</a></li>
+<li><a href="#垃圾收集算法有哪些">垃圾收集算法有哪些？</a></li>
+<li><a href="#hotspot虚拟机是如何实现存活判定和垃圾收集算法的">HotSpot虚拟机是如何实现存活判定和垃圾收集算法的？</a></li>
+<li><a href="#垃圾收集器有哪些">垃圾收集器有哪些？</a></li>
+<li><a href="#内存回收与分配策略">内存回收与分配策略</a></li>
+</ul></li>
+</ul></li>
+</ul></li>
+</ul>
+</nav>
+                    </div>
+                  
+                
+                <section id="post-body">
+                    
+
+<h4 id="垃圾收集器主要作用于内存的哪部分">垃圾收集器主要作用于内存的哪部分？</h4>
+
+<p><strong>不考虑回收</strong>：程序计数器，虚拟机栈，本地方法栈</p>
+
+<p>原因：方法结束或线程结束时，内存自然会回收</p>
+
+<p><strong>回收</strong>：堆，方法区</p>
+
+<p>原因：程序运行期间才知道会创建哪些对象，内存的分配和回收是动态的</p>
+
+<h4 id="如何判断对象是否已死">如何判断对象是否已死？</h4>
+
+<h5 id="引用计数算法">引用计数算法</h5>
+
+<h5 id="可达性分析算法">可达性分析算法</h5>
+
+<h4 id="引用有哪几种类型">引用有哪几种类型？</h4>
+
+<p>强引用</p>
+
+<p>软引用</p>
+
+<p>弱引用</p>
+
+<p>虚引用</p>
+
+<h4 id="什么时候对象被回收-finalize方法">什么时候对象被回收（finalize方法）？</h4>
+
+<p>对象需要经过2次的<strong>标记</strong>过程后才被回收</p>
+
+<p>第一次标记（不可达）——&gt;筛选（是否要执行finalize方法，有必要执行则执行，对象进入待回收的队列，等待第二次标记）——&gt;第二次标记（finalize方法中将对象重新与引用链连接，则不会被回收）——&gt;对象被回收</p>
+
+<p><strong>对象是否有必要执行finalize方法？</strong></p>
+
+<p>没有重写finalize方法 || finalize方法已经被虚拟机调用过  则没有必要执行</p>
+
+<h4 id="垃圾收集算法有哪些">垃圾收集算法有哪些？</h4>
+
+<p>标记-清除算法</p>
+
+<p>复制算法</p>
+
+<p>标记-整理算法</p>
+
+<p>分代收集算法</p>
+
+<h4 id="hotspot虚拟机是如何实现存活判定和垃圾收集算法的">HotSpot虚拟机是如何实现存活判定和垃圾收集算法的？</h4>
+
+<h4 id="垃圾收集器有哪些">垃圾收集器有哪些？</h4>
+
+<h4 id="内存回收与分配策略">内存回收与分配策略</h4>
+
+                </section>
+            </article>
+
+            
+                <a class="twitter" href="https://twitter.com/intent/tweet?text=https%3a%2f%2fisaacrolo.github.io%2fposts%2fjvm3%2f - %e5%9e%83%e5%9c%be%e6%94%b6%e9%9b%86%e5%99%a8%e4%b8%8e%e5%86%85%e5%ad%98%e5%88%86%e9%85%8d%e7%ad%96%e7%95%a5 by @your_twitter_id"><span class="icon-twitter"> tweet</span></a>
+
+<a class="facebook" href="#" onclick="
+    window.open(
+      'https://www.facebook.com/sharer/sharer.php?u='+encodeURIComponent(location.href),
+      'facebook-share-dialog',
+      'width=626,height=436');
+    return false;"><span class="icon-facebook-rect"> Share</span>
+</a>
+
+            
+
+            
+
+            
+
+            <footer id="footer">
+    
+        <div id="social">
+
+	
+	
+    <a class="symbol" href="https://github.com/IsaacRolo">
+        <i class="fa fa-github-square"></i>
+    </a>
+    
+
+
+</div>
+
+    
+    <p class="small">
+    
+       © Copyright 2019 <i class="fa fa-heart" aria-hidden="true"></i> Rolo
+    
+    </p>
+    <p class="small">
+        Powered by <a href="http://www.gohugo.io/">Hugo</a> Theme By <a href="https://github.com/nodejh/hugo-theme-cactus-plus">nodejh</a>
+    </p>
+</footer>
+
+        </section>
+
+        <script src="https://isaacrolo.github.io/js/jquery-3.3.1.min.js"></script>
+<script src="https://isaacrolo.github.io/js/main.js"></script>
+<script src="https://isaacrolo.github.io/js/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+
+
+
+
+
+    </body>
+</html>

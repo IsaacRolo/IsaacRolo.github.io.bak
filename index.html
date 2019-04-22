@@ -59,12 +59,72 @@
     
         
             <li>
-                <aside class="dates">Mar 11</aside>
-                <a href='https://isaacrolo.github.io/posts/tableau01/'>
-                    Tableau发布视图，并在页面中展示
+                <aside class="dates">Mar 28</aside>
+                <a href='https://isaacrolo.github.io/posts/jvm3/'>
+                    垃圾收集器与内存分配策略
                     
                         
-                            <h2>Tableau Desktop10.4安装 Tableau Server10.4安装 输入密钥激活 desktop和server 安装完成后浏览器输入http://127.0.</h2>
+                            <h2>垃圾收集器主要作用于内存的哪部分？ 不考虑回收：程序计数器，虚拟机栈，本地方法栈 原因：方法结束或线程结束时，内存自然会回收 回收：堆，方法区 原因</h2>
+                        
+                    
+                </a>
+            </li>
+        
+    
+    
+        
+            <li>
+                <aside class="dates">Mar 28</aside>
+                <a href='https://isaacrolo.github.io/posts/informatica/'>
+                    Informatica
+                    
+                        
+                            <h2>使用Informatica将数据导出到文件或数据库 导出时间比较 20300条数据 导出为文件：7s 导出到数据库：12s 187100条数据 导出为文</h2>
+                        
+                    
+                </a>
+            </li>
+        
+    
+    
+        
+            <li>
+                <aside class="dates">Mar 21</aside>
+                <a href='https://isaacrolo.github.io/posts/resttemplate/'>
+                    RestTemplate
+                    
+                        
+                            <h2>RestTemplate @Test public void restTemplatePost() { String url = &#34;http://127.0.0.1/trusted&#34;; RestTemplate restTemplate = new RestTemplate(); HttpHeaders headers = new HttpHeaders(); headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED); MultiValueMap&lt;String, String&gt; params = new LinkedMultiValueMap&lt;&gt;(); params.add(&#34;username&#34;, &#34;admin&#34;); HttpEntity&lt;MultiValueMap&lt;String, String&gt;&gt; requestEntity = new HttpEntity&lt;&gt;(params, headers); String result = restTemplate.postForObject(url, requestEntity, String.class); System.out.println(result); } HttpClient 普通的post请求 @Test public void httpClientPost() throws IOException { CloseableHttpClient client = HttpClients.createDefault(); HttpPost httpPost = new HttpPost(&#34;http://localhost:8080/post&#34;);</h2>
+                        
+                    
+                </a>
+            </li>
+        
+    
+    
+        
+            <li>
+                <aside class="dates">Mar 20</aside>
+                <a href='https://isaacrolo.github.io/posts/zuul/'>
+                    整合Zuul
+                    
+                        
+                            <h2>场景：仅作为web服务集群与外界请求之间的网关，和Nginx结合使用 Zuul的使用 添加依赖 &lt;dependency&gt; &lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt; &lt;artifactId&gt;spring-cloud-starter-zuul&lt;/artifactId&gt; &lt;/dependency&gt; &lt;dependency&gt; &lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt; &lt;artifactId&gt;spring-cloud-starter-eureka&lt;/artifactId&gt; &lt;/dependency&gt; 配置文件 将Zuul注册到eurek</h2>
+                        
+                    
+                </a>
+            </li>
+        
+    
+    
+        
+            <li>
+                <aside class="dates">Mar 19</aside>
+                <a href='https://isaacrolo.github.io/posts/hystrixdashboard/'>
+                    整合HystrixDashboard和Turbine
+                    
+                        
+                            <h2>前提：springboot 1.5.19.RELEASE springcloud Edgware.SR5 场景：服务调用方使用Feign&#43;Hystrix实现微服务之间的通信；新建一个Hystrix Dashboard</h2>
                         
                     
                 </a>

@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="zn-CN">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		
+		<meta name="author" content="Rolo">
+		<meta name="description" content="Rolo&#39;s Blog">
+		<meta name="generator" content="Hugo 0.54.0" />
+		<title>整合Zuul &middot; Rolo&#39;s Blog</title>
+		<link rel="shortcut icon" href="https://isaacrolo.github.io/images/favicon.ico">
+		<link rel="stylesheet" href="https://isaacrolo.github.io/css/style.css">
+		<link rel="stylesheet" href="https://isaacrolo.github.io/css/highlight.css">
+
+		
+		<link rel="stylesheet" href="https://isaacrolo.github.io/css/font-awesome.min.css">
+		
+
+		
+		<link href="https://isaacrolo.github.io/index.xml" rel="alternate" type="application/rss+xml" title="Rolo&#39;s Blog" />
+		
+
+		
+	</head>
+
+    <body>
+       <nav class="main-nav">
+	
+	
+		<a href='https://isaacrolo.github.io/'> <span class="arrow">←</span>Home</a>
+	
+	<a href='https://isaacrolo.github.io/posts'>Archive</a>
+	<a href='https://isaacrolo.github.io/tags'>Tags</a>
+	<a href='https://isaacrolo.github.io/about'>About</a>
+
+	
+
+	
+	<a class="cta" href="https://isaacrolo.github.io/index.xml">Subscribe</a>
+	
+</nav>
+
+
+        <section id="wrapper" class="post">
+            <article>
+                <header>
+                    <h1>
+                        整合Zuul
+                    </h1>
+                    <h2 class="headline">
+                    Mar 20, 2019 13:46
+                    · 705 words
+                    · 2 minute read
+                      <span class="tags">
+                      
+                      
+                          
+                              <a href="https://isaacrolo.github.io/tags/spring-cloud">Spring Cloud</a>
+                          
+                      
+                      
+                      </span>
+                    </h2>
+                </header>
+                
+                  
+                    <div id="toc">
+                      <nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li>
+<ul>
+<li>
+<ul>
+<li><a href="#zuul的使用">Zuul的使用</a></li>
+<li><a href="#跨域问题">跨域问题</a></li>
+<li><a href="#zuul和nginx的对比及使用场景">Zuul和Nginx的对比及使用场景</a>
+<ul>
+<li><a href="#api-gateway-解决的问题">API Gateway 解决的问题</a></li>
+<li><a href="#zuul的4种过滤器">Zuul的4种过滤器</a></li>
+</ul></li>
+</ul></li>
+</ul></li>
+</ul></li>
+</ul>
+</nav>
+                    </div>
+                  
+                
+                <section id="post-body">
+                    
+
+<p><strong>场景</strong>：仅作为web服务集群与外界请求之间的网关，和Nginx结合使用</p>
+
+<h4 id="zuul的使用">Zuul的使用</h4>
+
+<ol>
+<li>添加依赖</li>
+</ol>
+
+<pre><code class="language-xml">   &lt;dependency&gt;
+       &lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt;
+       &lt;artifactId&gt;spring-cloud-starter-zuul&lt;/artifactId&gt;
+   &lt;/dependency&gt;
+   
+   &lt;dependency&gt;
+       &lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt;
+       &lt;artifactId&gt;spring-cloud-starter-eureka&lt;/artifactId&gt;
+   &lt;/dependency&gt;
+</code></pre>
+
+<ol>
+<li>配置文件</li>
+</ol>
+
+<p>将Zuul注册到eureka server上，实现对serviceId的映射</p>
+
+<pre><code class="language-yaml">   server:
+     port: 8032
+   spring:
+     application:
+       name: microservice-zuul
+   eureka:
+     client:
+       service-url:
+         defaultZone: http://localhost:8761/eureka
+   zuul:
+     routes:
+       web:
+         path: /web/**
+         serviceId: microservice-web
+</code></pre>
+
+<ol>
+<li>启动类</li>
+</ol>
+
+<pre><code class="language-java">   @EnableZuulProxy
+</code></pre>
+
+<ol>
+<li>访问<a href="http://localhost:8032/web/login">http://localhost:8032/web/login</a> ;请求转发到<a href="http://localhost:8080/login">http://localhost:8080/login</a></li>
+</ol>
+
+<h4 id="跨域问题">跨域问题</h4>
+
+<p>Access to XMLHttpRequest at &lsquo;<a href="http://localhost:8080/login'">http://localhost:8080/login'</a> from origin &lsquo;<a href="http://localhost:8032'">http://localhost:8032'</a> has been blocked by CORS policy: Response to preflight request doesn&rsquo;t pass access control check: Redirect is not allowed for a preflight request.</p>
+
+<p><strong><a href="https://www.jianshu.com/p/b55086cbd9af">预检请求</a></strong>  解决的问题：跨域请求可以正常发起，但是返回的结果被浏览器拦截了，导致数据库受影响</p>
+
+<p><img src="https://i.loli.net/2019/03/20/5c91e3621b8a6.png" alt="UTOOLS1553064801268.png" /></p>
+
+<p><strong>跨域请求</strong>：当前发起请求的域与该请求指向的资源所在的域不一样。</p>
+
+<p>场景：向zuul服务发送请求，请求转发到web服务，controller跳转到jsp页面，jsp的ajax给controller发请求时出现跨域问题</p>
+
+<p>Web服务调用其他微服务为什么没有出现跨域问题？</p>
+
+<h4 id="zuul和nginx的对比及使用场景">Zuul和Nginx的对比及使用场景</h4>
+
+<h5 id="api-gateway-解决的问题">API Gateway 解决的问题</h5>
+
+<p>解决微服务过于分散，没有一个统一的出入口进行流量管理的问题；同时统一API的管理</p>
+
+<p>常见选型：基于 Spring Framework 5，Spring Boot 2.0的Spring Cloud Gateway 、基于 Openresty 的 Kong、基于 Go 的 Tyk 和基于 Java 的 Zuul</p>
+
+<h5 id="zuul的4种过滤器">Zuul的4种过滤器</h5>
+
+<p>一个请求会先按顺序通过所有的前置过滤器，之后在路由过滤器中转发给后端应用，得到响应后又会通过所有的后置过滤器，最后响应给客户端。在整个流程中如果发生了异常则会跳转到错误过滤器中。</p>
+
+<p>前置（Pre） 鉴权、请求转发、增加请求参数</p>
+
+<p>后置（Post） 统计返回值和调用时间、记录日志、增加跨域头</p>
+
+<p>路由（Route） 请求转发给后端应用</p>
+
+<p>错误（Error） 统一处理错误返回结果</p>
+
+<p>参考：</p>
+
+<p><a href="https://www.scienjus.com/api-gateway-and-netflix-zuul/">zuul使用场景</a></p>
+
+<p><a href="http://www.ityouknow.com/springcloud/2017/06/01/gateway-service-zuul.html">http://www.ityouknow.com/springcloud/2017/06/01/gateway-service-zuul.html</a></p>
+
+<p><a href="https://segmentfault.com/a/1190000015597029">https://segmentfault.com/a/1190000015597029</a></p>
+
+                </section>
+            </article>
+
+            
+                <a class="twitter" href="https://twitter.com/intent/tweet?text=https%3a%2f%2fisaacrolo.github.io%2fposts%2fzuul%2f - %e6%95%b4%e5%90%88Zuul by @your_twitter_id"><span class="icon-twitter"> tweet</span></a>
+
+<a class="facebook" href="#" onclick="
+    window.open(
+      'https://www.facebook.com/sharer/sharer.php?u='+encodeURIComponent(location.href),
+      'facebook-share-dialog',
+      'width=626,height=436');
+    return false;"><span class="icon-facebook-rect"> Share</span>
+</a>
+
+            
+
+            
+
+            
+
+            <footer id="footer">
+    
+        <div id="social">
+
+	
+	
+    <a class="symbol" href="https://github.com/IsaacRolo">
+        <i class="fa fa-github-square"></i>
+    </a>
+    
+
+
+</div>
+
+    
+    <p class="small">
+    
+       © Copyright 2019 <i class="fa fa-heart" aria-hidden="true"></i> Rolo
+    
+    </p>
+    <p class="small">
+        Powered by <a href="http://www.gohugo.io/">Hugo</a> Theme By <a href="https://github.com/nodejh/hugo-theme-cactus-plus">nodejh</a>
+    </p>
+</footer>
+
+        </section>
+
+        <script src="https://isaacrolo.github.io/js/jquery-3.3.1.min.js"></script>
+<script src="https://isaacrolo.github.io/js/main.js"></script>
+<script src="https://isaacrolo.github.io/js/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+
+
+
+
+
+    </body>
+</html>

@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="zn-CN">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		
+		<meta name="author" content="Rolo">
+		<meta name="description" content="Rolo&#39;s Blog">
+		<meta name="generator" content="Hugo 0.54.0" />
+		<title>Informatica &middot; Rolo&#39;s Blog</title>
+		<link rel="shortcut icon" href="https://isaacrolo.github.io/images/favicon.ico">
+		<link rel="stylesheet" href="https://isaacrolo.github.io/css/style.css">
+		<link rel="stylesheet" href="https://isaacrolo.github.io/css/highlight.css">
+
+		
+		<link rel="stylesheet" href="https://isaacrolo.github.io/css/font-awesome.min.css">
+		
+
+		
+		<link href="https://isaacrolo.github.io/index.xml" rel="alternate" type="application/rss+xml" title="Rolo&#39;s Blog" />
+		
+
+		
+	</head>
+
+    <body>
+       <nav class="main-nav">
+	
+	
+		<a href='https://isaacrolo.github.io/'> <span class="arrow">←</span>Home</a>
+	
+	<a href='https://isaacrolo.github.io/posts'>Archive</a>
+	<a href='https://isaacrolo.github.io/tags'>Tags</a>
+	<a href='https://isaacrolo.github.io/about'>About</a>
+
+	
+
+	
+	<a class="cta" href="https://isaacrolo.github.io/index.xml">Subscribe</a>
+	
+</nav>
+
+
+        <section id="wrapper" class="post">
+            <article>
+                <header>
+                    <h1>
+                        Informatica
+                    </h1>
+                    <h2 class="headline">
+                    Mar 28, 2019 15:08
+                    · 1715 words
+                    · 4 minute read
+                      <span class="tags">
+                      
+                      
+                          
+                              <a href="https://isaacrolo.github.io/tags/informatica">Informatica</a>
+                          
+                      
+                      
+                      </span>
+                    </h2>
+                </header>
+                
+                  
+                    <div id="toc">
+                      <nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li><a href="#使用informatica将数据导出到文件或数据库">使用Informatica将数据导出到文件或数据库</a>
+<ul>
+<li>
+<ul>
+<li><a href="#导出时间比较">导出时间比较</a></li>
+<li><a href="#操作步骤">操作步骤</a></li>
+<li><a href="#遇到的问题">遇到的问题</a>
+<ul>
+<li><a href="#1-数据源不支持mysql-社区版">1.数据源不支持MySQL 社区版</a></li>
+<li><a href="#2-无法创建任务">2.无法创建任务</a></li>
+<li><a href="#3-默认导出的csv文件数据格式有问题-无法处理字段中的换行符">3.默认导出的csv文件数据格式有问题，无法处理字段中的换行符</a></li>
+</ul></li>
+<li><a href="#参考">参考</a></li>
+</ul></li>
+</ul></li>
+</ul></li>
+</ul>
+</nav>
+                    </div>
+                  
+                
+                <section id="post-body">
+                    
+
+<h2 id="使用informatica将数据导出到文件或数据库">使用Informatica将数据导出到文件或数据库</h2>
+
+<h4 id="导出时间比较">导出时间比较</h4>
+
+<p>20300条数据</p>
+
+<p>导出为文件：7s  导出到数据库：12s</p>
+
+<p>187100条数据</p>
+
+<p>导出为文件：24s  导出到数据库：3m7s（4m48s）</p>
+
+<h4 id="操作步骤">操作步骤</h4>
+
+<ol>
+<li>创建数据源，连接数据库，选择表</li>
+</ol>
+
+<p><img src="C:UsersElrolDesktopinfoma2.png" alt="" /></p>
+
+<ol>
+<li>创建目标file文件（或数据表结构）</li>
+</ol>
+
+<p>切换视图到Target<img src="C:UsersElrolDesktopinfoma3.png" alt="选项卡" /></p>
+
+<ul>
+<li>导出到文件</li>
+</ul>
+
+<p><img src="C:UsersElrolDesktopinfoma5.png" alt="" /></p>
+
+<p>数据库类型选择flat file</p>
+
+<p><img src="C:UsersElrolDesktopinfoma6.png" alt="" /></p>
+
+<ul>
+<li>导出到表</li>
+</ul>
+
+<p><img src="C:UsersElrolDesktopinfoma4.png" alt="" /></p>
+
+<ol>
+<li>创建映射</li>
+</ol>
+
+<p>从Sources(源数据)中把需要的源数据表拖到映射视图中；从Targets(目标数据)中把需要转换后的数据表拖到映射视图中</p>
+
+<ol>
+<li>创建任务，配置任务数据插入方式</li>
+</ol>
+
+<p>注：需要编辑任务确认连接是否正确，不正确需要修改，如下图所示</p>
+
+<p><img src="C:UsersElrolDesktopinfoma7.png" alt="" /></p>
+
+<ol>
+<li><p>创建工作流，指定输出文件名及输出文件目录，拖动任务到工作流视图，并用箭头连接起来</p></li>
+
+<li><p>右键执行工作流</p></li>
+</ol>
+
+<h4 id="遇到的问题">遇到的问题</h4>
+
+<h5 id="1-数据源不支持mysql-社区版">1.数据源不支持MySQL 社区版</h5>
+
+<p>解决方法：</p>
+
+<p>1）下载社区版 ODBC Connector驱动，32位安装在 Informatica Client，64位安装在Informatica Sever</p>
+
+<p>注：安装ODBC 5.2.7及更高的版本需要Visual Studio 2013或2015的支持</p>
+
+<p><a href="https://dev.mysql.com/downloads/connector/odbc/">odbc下载地址</a></p>
+
+<p>2）Informatica Designer配置Mysql ODBC数据源</p>
+
+<p><img src="C:UsersElrolDesktopinfomainf1.png" alt="" /></p>
+
+<p>3）Informatica Client安装目录下修改C:\Informatica\9.1.0\clients\PowerCenterClient\client\bin\powrmart.ini 配置文件</p>
+
+<p>【ODBCDLL】下添加<code>MySQL=EXTODBC.DLL</code></p>
+
+<p><a href="https://www.jianshu.com/p/71b7c18f37e7">不支持 MySQL Community 版本的解决方案</a></p>
+
+<h5 id="2-无法创建任务">2.无法创建任务</h5>
+
+<p>原因：映射没有保存，导致找不到映射</p>
+
+<h5 id="3-默认导出的csv文件数据格式有问题-无法处理字段中的换行符">3.默认导出的csv文件数据格式有问题，无法处理字段中的换行符</h5>
+
+<p><img src="C:UsersElrolDesktopinfoma12.png" alt="" /></p>
+
+<p>映射中的source自定义sql，将字段中的换行符替换掉</p>
+
+<pre><code class="language-sql">SELECT T_EVENT_TYPE.EVENT_TYPE_NO, T_EVENT_TYPE.EVENT_TYPE_NAME, T_EVENT_TYPE.PARENT_NO, T_EVENT_TYPE.DISPLAY_INDEX, T_EVENT_TYPE.CREATOR, T_EVENT_TYPE.CREATION_DATE, T_EVENT_TYPE.MODIFIER, T_EVENT_TYPE.MODIFY_DATE, replace(T_EVENT_TYPE.EVENT_SAMPLE,chr(10),''), replace(T_EVENT_TYPE.EVENT_ELEMENT,chr(10),'') FROM T_EVENT_TYPE
+</code></pre>
+
+<p><strong>4. 分隔符与时间戳</strong></p>
+
+<p>在Target窗口编辑Target，自定义分隔符和时间戳</p>
+
+<ul>
+<li>导出的csv文件默认分隔符是“,” 可能会与字段里的逗号冲突</li>
+</ul>
+
+<p>修改默认分隔符</p>
+
+<p><img src="C:UsersElrolDesktopinfoma11.png" alt="" /></p>
+
+<ul>
+<li>修改默认时间戳格式</li>
+</ul>
+
+<p><img src="https://i.loli.net/2019/04/19/5cb96bff87a0d.png" alt="UTOOLS1555655677272.png" /></p>
+
+<p><strong>5.Target导出为flat file文件，文件的列名需要手动输入，非常麻烦</strong></p>
+
+<p>解决方案：将source源拖入到Target视图，修改Target表的数据库类型为flat file</p>
+
+<p><img src="C:UsersElrolDesktopinfoma9.png" alt="" /></p>
+
+<p><a href="https://network.informatica.com/thread/30876">https://network.informatica.com/thread/30876</a></p>
+
+<p><strong>6.如何将多个字段合并到一个字段中（为了解决自定义分隔符的问题）</strong></p>
+
+<p>映射中的source自定义sql，将多个字段连接为1个字段查询</p>
+
+<pre><code class="language-sql">SELECT T_EVENT_GROUP.EVENT_GROUP_NO || '|@' || T_EVENT_GROUP.OCCURS_DATE FROM T_EVENT_GROUP
+</code></pre>
+
+<p><strong>7.导出的文件或数据库的数据没问题但是会显示失败，如下图</strong></p>
+
+<p><img src="C:UsersElrolDesktopinfomaerror3.png" alt="" /></p>
+
+<p>原因：Mapping的类型没有对应   char-&gt;<strong>nstring</strong>   varchar-&gt;string</p>
+
+<p><a href="https://network.informatica.com/message/191246#191246">https://network.informatica.com/message/191246#191246</a></p>
+
+<p><a href="https://kb.informatica.com/faq/7/pages/19/520087.aspx">https://kb.informatica.com/faq/7/pages/19/520087.aspx</a></p>
+
+<p><strong>8.如何增量同步数据</strong></p>
+
+<ul>
+<li>思路：SQL语句增加过滤条件  <code>$$v_pumpdt（初始值设为01/01/1970 00:00:01）&lt;=MODITY_DATE&lt; $$$SESSSTARTTIME</code></li>
+</ul>
+
+<p>每次执行工作流更新 变量$$v_pumpdt的值为SESSSTARTTIME <code>SETVARIABLE($$v_pumpdt,SESSSTARTTIME)</code></p>
+
+<p><a href="https://wenku.baidu.com/view/f1575c5c6ad97f192279168884868762caaebbf4.html?re=view">https://wenku.baidu.com/view/f1575c5c6ad97f192279168884868762caaebbf4.html?re=view</a></p>
+
+<p><a href="https://blog.csdn.net/DXJ_dengxiaoju/article/details/80938576">https://blog.csdn.net/DXJ_dengxiaoju/article/details/80938576</a></p>
+
+<ul>
+<li>数据量小的可以考虑全量导数据，导数据之前先将数据表清空（使用informatica会话中的pre sql功能）</li>
+</ul>
+
+<p><img src="https://i.loli.net/2019/04/19/5cb98b43d2168.png" alt="UTOOLS1555663682417.png" /></p>
+
+<p><strong>9.如何配置ftp服务器连接，实现文件上传</strong></p>
+
+<p><a href="https://www.cnblogs.com/john2017/p/6269671.html">Windows Server 2008 R2 搭建FTP服务</a></p>
+
+<p><a href="https://blog.csdn.net/bobo74108520/article/details/81874239">informatica配置ftp</a></p>
+
+<p>Q：ftp 550 the parameter is incorrect报错</p>
+
+<p>A：ftp的default remote directory应该设为相对路径，不应设为绝对路径</p>
+
+<p><a href="https://kb.informatica.com/solution/23/Pages/53/323613.aspx">https://kb.informatica.com/solution/23/Pages/53/323613.aspx</a></p>
+
+<p><strong>10.informatica的安装步骤</strong></p>
+
+<p><a href="https://www.cnblogs.com/haseo/p/SetupInformatica.html">informatica的安装步骤教程</a></p>
+
+<p><a href="https://blog.csdn.net/zutsoft/article/details/44924303">创建存储库和集成服务教程</a></p>
+
+<ul>
+<li>Q：启动工作流时遇到错误，未为此工作流找到集成服务</li>
+</ul>
+
+<p>A：在Informatica administrator home page页面中创建存储库之后还需要创建<strong>集成服务</strong></p>
+
+<ul>
+<li>Q：创建集成服务失败，日志显示字符集编码不匹配</li>
+</ul>
+
+<p>A：选择字符集，字符集要与操作系统的字符集一致</p>
+
+<p><img src="https://i.loli.net/2019/04/19/5cb9369b98d79.png" alt="UTOOLS1555642009938.png" /></p>
+
+<p><strong>11.informatica连接sybase ase数据库</strong></p>
+
+<p><a href="https://jingyan.baidu.com/article/4b52d702c9918cfc5c774b8b.html">informatica连接sybase参考教程</a></p>
+
+<ul>
+<li>数据源配置：Informatica PowerCenter Designer</li>
+</ul>
+
+<p>数据源源导入表，连接sybase数据库</p>
+
+<p><img src="https://i.loli.net/2019/04/19/5cb93800e42d0.png" alt="UTOOLS1555642364750.png" /></p>
+
+<p><strong>注</strong>：ip和端口号之间用逗号间隔；如：192.168.1.17,5000</p>
+
+<ul>
+<li>工作流配置：Informatica PowerCenter Designer Workflow Manager</li>
+</ul>
+
+<p>1）开始菜单，设置数据源（odbc）也可也配置odbc</p>
+
+<p>2）连接—&gt;关系—&gt;创建ODBC对象—&gt;连接字符串选择之前在ODBC数据源管理器中添加的数据源（sybaseodbc）</p>
+
+<p><img src="https://i.loli.net/2019/04/19/5cb93a2f59ae2.png" alt="UTOOLS1555642925708.png" /></p>
+
+<p>3）编辑任务，选择源的连接为上一步创建的odbc</p>
+
+<p><img src="https://i.loli.net/2019/04/19/5cb978bce6fd5.png" alt="UTOOLS1555658939601.png" /></p>
+
+<h4 id="参考">参考</h4>
+
+<p><a href="https://blog.csdn.net/qq_20408903/article/details/84310771">https://blog.csdn.net/qq_20408903/article/details/84310771</a></p>
+
+<p><a href="https://blog.csdn.net/demonson/article/details/79639114">https://blog.csdn.net/demonson/article/details/79639114</a></p>
+
+                </section>
+            </article>
+
+            
+                <a class="twitter" href="https://twitter.com/intent/tweet?text=https%3a%2f%2fisaacrolo.github.io%2fposts%2finformatica%2f - Informatica by @your_twitter_id"><span class="icon-twitter"> tweet</span></a>
+
+<a class="facebook" href="#" onclick="
+    window.open(
+      'https://www.facebook.com/sharer/sharer.php?u='+encodeURIComponent(location.href),
+      'facebook-share-dialog',
+      'width=626,height=436');
+    return false;"><span class="icon-facebook-rect"> Share</span>
+</a>
+
+            
+
+            
+
+            
+
+            <footer id="footer">
+    
+        <div id="social">
+
+	
+	
+    <a class="symbol" href="https://github.com/IsaacRolo">
+        <i class="fa fa-github-square"></i>
+    </a>
+    
+
+
+</div>
+
+    
+    <p class="small">
+    
+       © Copyright 2019 <i class="fa fa-heart" aria-hidden="true"></i> Rolo
+    
+    </p>
+    <p class="small">
+        Powered by <a href="http://www.gohugo.io/">Hugo</a> Theme By <a href="https://github.com/nodejh/hugo-theme-cactus-plus">nodejh</a>
+    </p>
+</footer>
+
+        </section>
+
+        <script src="https://isaacrolo.github.io/js/jquery-3.3.1.min.js"></script>
+<script src="https://isaacrolo.github.io/js/main.js"></script>
+<script src="https://isaacrolo.github.io/js/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+
+
+
+
+
+    </body>
+</html>
