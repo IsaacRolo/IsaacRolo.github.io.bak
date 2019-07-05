@@ -1,150 +1,217 @@
 <!DOCTYPE html>
-<html lang="zn-CN">
-	<head>
-		<meta charset="utf-8">
-		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-		
-		<meta name="author" content="Rolo">
-		<meta name="description" content="Rolo&#39;s Blog">
-		<meta name="generator" content="Hugo 0.54.0" />
-		<title>整合Zuul &middot; Rolo&#39;s Blog</title>
-		<link rel="shortcut icon" href="https://isaacrolo.github.io/images/favicon.ico">
-		<link rel="stylesheet" href="https://isaacrolo.github.io/css/style.css">
-		<link rel="stylesheet" href="https://isaacrolo.github.io/css/highlight.css">
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>整合Zuul - Even - A super concise theme for Hugo</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 
-		
-		<link rel="stylesheet" href="https://isaacrolo.github.io/css/font-awesome.min.css">
-		
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
 
-		
-		<link href="https://isaacrolo.github.io/index.xml" rel="alternate" type="application/rss+xml" title="Rolo&#39;s Blog" />
-		
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
-		
-	</head>
 
-    <body>
-       <nav class="main-nav">
-	
-	
-		<a href='https://isaacrolo.github.io/'> <span class="arrow">←</span>Home</a>
-	
-	<a href='https://isaacrolo.github.io/posts'>Archive</a>
-	<a href='https://isaacrolo.github.io/tags'>Tags</a>
-	<a href='https://isaacrolo.github.io/about'>About</a>
+<meta name="author" content="Rolo" /><meta name="description" content="场景：仅作为web服务集群与外界请求之间的网关，和Nginx结合使用 Zuul的使用 添加依赖 1 2 3 4 5 6 7 8 9 &amp;lt;dependency&amp;gt; &amp;lt;groupId&amp;gt;org.springframework.cloud&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;spring-cloud-starter-zuul&amp;lt;/artifactId&amp;gt; &amp;lt;/dependency&amp;gt; &amp;lt;dependency&amp;gt; &amp;lt;groupId&amp;gt;org.springframework.cloud&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;spring-cloud-starter-eureka&amp;lt;/artifactId&amp;gt; &amp;lt;/dependency&amp;gt; 配置文件 将Zuu" /><meta name="keywords" content="Hugo, theme, even" />
 
-	
 
-	
-	<a class="cta" href="https://isaacrolo.github.io/index.xml">Subscribe</a>
-	
+
+
+
+
+<meta name="generator" content="Hugo 0.54.0 with even 4.0.0" />
+
+
+<link rel="canonical" href="https://isaacrolo.github.io/posts/zuul/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+<link href="/dist/even.c2a46f00.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="整合Zuul" />
+<meta property="og:description" content="场景：仅作为web服务集群与外界请求之间的网关，和Nginx结合使用 Zuul的使用 添加依赖 1 2 3 4 5 6 7 8 9 &lt;dependency&gt; &lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt; &lt;artifactId&gt;spring-cloud-starter-zuul&lt;/artifactId&gt; &lt;/dependency&gt; &lt;dependency&gt; &lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt; &lt;artifactId&gt;spring-cloud-starter-eureka&lt;/artifactId&gt; &lt;/dependency&gt; 配置文件 将Zuu" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://isaacrolo.github.io/posts/zuul/" />
+<meta property="article:published_time" content="2019-03-20T13:46:10&#43;08:00"/>
+<meta property="article:modified_time" content="2019-03-20T13:46:10&#43;08:00"/>
+
+<meta itemprop="name" content="整合Zuul">
+<meta itemprop="description" content="场景：仅作为web服务集群与外界请求之间的网关，和Nginx结合使用 Zuul的使用 添加依赖 1 2 3 4 5 6 7 8 9 &lt;dependency&gt; &lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt; &lt;artifactId&gt;spring-cloud-starter-zuul&lt;/artifactId&gt; &lt;/dependency&gt; &lt;dependency&gt; &lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt; &lt;artifactId&gt;spring-cloud-starter-eureka&lt;/artifactId&gt; &lt;/dependency&gt; 配置文件 将Zuu">
+
+
+<meta itemprop="datePublished" content="2019-03-20T13:46:10&#43;08:00" />
+<meta itemprop="dateModified" content="2019-03-20T13:46:10&#43;08:00" />
+<meta itemprop="wordCount" content="2773">
+
+
+
+<meta itemprop="keywords" content="Spring Cloud," />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="整合Zuul"/>
+<meta name="twitter:description" content="场景：仅作为web服务集群与外界请求之间的网关，和Nginx结合使用 Zuul的使用 添加依赖 1 2 3 4 5 6 7 8 9 &lt;dependency&gt; &lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt; &lt;artifactId&gt;spring-cloud-starter-zuul&lt;/artifactId&gt; &lt;/dependency&gt; &lt;dependency&gt; &lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt; &lt;artifactId&gt;spring-cloud-starter-eureka&lt;/artifactId&gt; &lt;/dependency&gt; 配置文件 将Zuu"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">Even</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a>
+  </ul>
 </nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">Even</a>
+</div>
 
-
-        <section id="wrapper" class="post">
-            <article>
-                <header>
-                    <h1>
-                        整合Zuul
-                    </h1>
-                    <h2 class="headline">
-                    Mar 20, 2019 13:46
-                    · 705 words
-                    · 2 minute read
-                      <span class="tags">
-                      
-                      
-                          
-                              <a href="https://isaacrolo.github.io/tags/spring-cloud">Spring Cloud</a>
-                          
-                      
-                      
-                      </span>
-                    </h2>
-                </header>
-                
-                  
-                    <div id="toc">
-                      <nav id="TableOfContents">
-<ul>
-<li>
-<ul>
-<li>
-<ul>
-<li>
-<ul>
-<li><a href="#zuul的使用">Zuul的使用</a></li>
-<li><a href="#跨域问题">跨域问题</a></li>
-<li><a href="#zuul和nginx的对比及使用场景">Zuul和Nginx的对比及使用场景</a>
-<ul>
-<li><a href="#api-gateway-解决的问题">API Gateway 解决的问题</a></li>
-<li><a href="#zuul的4种过滤器">Zuul的4种过滤器</a></li>
-</ul></li>
-</ul></li>
-</ul></li>
-</ul></li>
-</ul>
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li>
+  </ul>
 </nav>
-                    </div>
-                  
-                
-                <section id="post-body">
-                    
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+  <div class="post-content">
+    
 
 <p><strong>场景</strong>：仅作为web服务集群与外界请求之间的网关，和Nginx结合使用</p>
 
 <h4 id="zuul的使用">Zuul的使用</h4>
 
+<hr />
+
 <ol>
 <li>添加依赖</li>
 </ol>
-
-<pre><code class="language-xml">   &lt;dependency&gt;
-       &lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt;
-       &lt;artifactId&gt;spring-cloud-starter-zuul&lt;/artifactId&gt;
-   &lt;/dependency&gt;
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-xml" data-lang="xml"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-xml" data-lang="xml">   <span class="nt">&lt;dependency&gt;</span>
+       <span class="nt">&lt;groupId&gt;</span>org.springframework.cloud<span class="nt">&lt;/groupId&gt;</span>
+       <span class="nt">&lt;artifactId&gt;</span>spring-cloud-starter-zuul<span class="nt">&lt;/artifactId&gt;</span>
+   <span class="nt">&lt;/dependency&gt;</span>
    
-   &lt;dependency&gt;
-       &lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt;
-       &lt;artifactId&gt;spring-cloud-starter-eureka&lt;/artifactId&gt;
-   &lt;/dependency&gt;
-</code></pre>
-
+   <span class="nt">&lt;dependency&gt;</span>
+       <span class="nt">&lt;groupId&gt;</span>org.springframework.cloud<span class="nt">&lt;/groupId&gt;</span>
+       <span class="nt">&lt;artifactId&gt;</span>spring-cloud-starter-eureka<span class="nt">&lt;/artifactId&gt;</span>
+   <span class="nt">&lt;/dependency&gt;</span></code></pre></td></tr></table>
+</div>
+</div>
 <ol>
 <li>配置文件</li>
 </ol>
 
 <p>将Zuul注册到eureka server上，实现对serviceId的映射</p>
-
-<pre><code class="language-yaml">   server:
-     port: 8032
-   spring:
-     application:
-       name: microservice-zuul
-   eureka:
-     client:
-       service-url:
-         defaultZone: http://localhost:8761/eureka
-   zuul:
-     routes:
-       web:
-         path: /web/**
-         serviceId: microservice-web
-</code></pre>
-
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-yaml" data-lang="yaml"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-yaml" data-lang="yaml"><span class="w">   </span>server<span class="p">:</span><span class="w">
+</span><span class="w">     </span>port<span class="p">:</span><span class="w"> </span><span class="m">8032</span><span class="w">
+</span><span class="w">   </span>spring<span class="p">:</span><span class="w">
+</span><span class="w">     </span>application<span class="p">:</span><span class="w">
+</span><span class="w">       </span>name<span class="p">:</span><span class="w"> </span>microservice-zuul<span class="w">
+</span><span class="w">   </span>eureka<span class="p">:</span><span class="w">
+</span><span class="w">     </span>client<span class="p">:</span><span class="w">
+</span><span class="w">       </span>service-url<span class="p">:</span><span class="w">
+</span><span class="w">         </span>defaultZone<span class="p">:</span><span class="w"> </span>http<span class="p">:</span>//localhost<span class="p">:</span><span class="m">8761</span>/eureka<span class="w">
+</span><span class="w">   </span>zuul<span class="p">:</span><span class="w">
+</span><span class="w">     </span>routes<span class="p">:</span><span class="w">
+</span><span class="w">       </span>web<span class="p">:</span><span class="w">
+</span><span class="w">         </span>path<span class="p">:</span><span class="w"> </span>/web/<span class="cp">**</span><span class="w">
+</span><span class="w">         </span>serviceId<span class="p">:</span><span class="w"> </span>microservice-web</code></pre></td></tr></table>
+</div>
+</div>
 <ol>
 <li>启动类</li>
 </ol>
-
-<pre><code class="language-java">   @EnableZuulProxy
-</code></pre>
-
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java">   <span class="nd">@EnableZuulProxy</span></code></pre></td></tr></table>
+</div>
+</div>
 <ol>
 <li>访问<a href="http://localhost:8032/web/login">http://localhost:8032/web/login</a> ;请求转发到<a href="http://localhost:8080/login">http://localhost:8080/login</a></li>
 </ol>
 
 <h4 id="跨域问题">跨域问题</h4>
+
+<hr />
 
 <p>Access to XMLHttpRequest at &lsquo;<a href="http://localhost:8080/login'">http://localhost:8080/login'</a> from origin &lsquo;<a href="http://localhost:8032'">http://localhost:8032'</a> has been blocked by CORS policy: Response to preflight request doesn&rsquo;t pass access control check: Redirect is not allowed for a preflight request.</p>
 
@@ -158,7 +225,158 @@
 
 <p>Web服务调用其他微服务为什么没有出现跨域问题？</p>
 
+<p><strong>产生跨域问题的原因：</strong></p>
+
+<p><a href="https://segmentfault.com/a/1190000012469713#articleHeader5">https://segmentfault.com/a/1190000012469713#articleHeader5</a></p>
+
+<p>解决方法：</p>
+
+<ol>
+<li><p>filter过滤器，添加响应头</p>
+
+<ul>
+<li>方法1.在微服务上添加过滤器</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"> <span class="nd">@Component</span>
+ <span class="nd">@WebFilter</span><span class="o">(</span><span class="n">urlPatterns</span> <span class="o">=</span> <span class="o">{</span><span class="s">&#34;/*&#34;</span><span class="o">},</span><span class="n">filterName</span> <span class="o">=</span> <span class="s">&#34;headerFilter&#34;</span><span class="o">)</span>
+ <span class="kd">public</span> <span class="kd">class</span> <span class="nc">HeaderFilter</span> <span class="kd">implements</span> <span class="n">Filter</span> <span class="o">{</span>
+     
+     <span class="nd">@Override</span>
+     <span class="kd">public</span> <span class="kt">void</span> <span class="nf">init</span><span class="o">(</span><span class="n">FilterConfig</span> <span class="n">filterConfig</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">ServletException</span> <span class="o">{</span>
+         <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;过滤器启动&#34;</span><span class="o">);</span>
+     <span class="o">}</span>
+     
+     <span class="nd">@Override</span>
+     <span class="kd">public</span> <span class="kt">void</span> <span class="nf">doFilter</span><span class="o">(</span><span class="n">ServletRequest</span> <span class="n">request</span><span class="o">,</span> <span class="n">ServletResponse</span> <span class="n">response</span><span class="o">,</span> <span class="n">FilterChain</span> <span class="n">chain</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">IOException</span><span class="o">,</span> <span class="n">ServletException</span> <span class="o">{</span>
+         <span class="n">HttpServletResponse</span> <span class="n">httpServletResponse</span> <span class="o">=</span> <span class="o">(</span><span class="n">HttpServletResponse</span><span class="o">)</span> <span class="n">response</span><span class="o">;</span>
+         <span class="n">httpServletResponse</span><span class="o">.</span><span class="na">setHeader</span><span class="o">(</span><span class="s">&#34;Access-Control-Allow-Origin&#34;</span><span class="o">,</span><span class="s">&#34;*&#34;</span><span class="o">);</span>
+         <span class="c1">//是否支持cookie跨域
+</span><span class="c1"></span>         <span class="n">httpServletResponse</span><span class="o">.</span><span class="na">setHeader</span><span class="o">(</span><span class="s">&#34;Access-Control-Allow-Credentials&#34;</span><span class="o">,</span> <span class="s">&#34;true&#34;</span><span class="o">);</span>
+         <span class="n">chain</span><span class="o">.</span><span class="na">doFilter</span><span class="o">(</span><span class="n">request</span><span class="o">,</span><span class="n">httpServletResponse</span><span class="o">);</span>
+     <span class="o">}</span>
+     
+     <span class="nd">@Override</span>
+     <span class="kd">public</span> <span class="kt">void</span> <span class="nf">destroy</span><span class="o">()</span> <span class="o">{</span>
+         <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;过滤器销毁&#34;</span><span class="o">);</span>
+     <span class="o">}</span>
+ <span class="o">}</span></code></pre></td></tr></table>
+</div>
+</div>
+<ul>
+<li>方法2.在zuul网关添加过滤器</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"> <span class="nd">@Component</span>
+ <span class="kd">public</span> <span class="kd">class</span> <span class="nc">WebZuulFilter</span> <span class="kd">extends</span> <span class="n">ZuulFilter</span> <span class="o">{</span>
+     
+     <span class="c1">//定义filter的类型，有pre、route、post、error四种
+</span><span class="c1"></span>     <span class="nd">@Override</span>
+     <span class="kd">public</span> <span class="n">String</span> <span class="nf">filterType</span><span class="o">()</span> <span class="o">{</span>
+         <span class="k">return</span> <span class="s">&#34;pre&#34;</span><span class="o">;</span>
+     <span class="o">}</span>
+     
+     <span class="c1">//定义filter的顺序，数字越小表示顺序越高，越先执行
+</span><span class="c1"></span>     <span class="nd">@Override</span>
+     <span class="kd">public</span> <span class="kt">int</span> <span class="nf">filterOrder</span><span class="o">()</span> <span class="o">{</span>
+         <span class="k">return</span> <span class="n">0</span><span class="o">;</span>
+     <span class="o">}</span>
+     
+     <span class="c1">//表示是否需要执行该filter，true表示执行，false表示不执行
+</span><span class="c1"></span>     <span class="nd">@Override</span>
+     <span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">shouldFilter</span><span class="o">()</span> <span class="o">{</span>
+         <span class="k">return</span> <span class="kc">true</span><span class="o">;</span>
+     <span class="o">}</span>
+     
+     <span class="c1">//filter需要执行的具体操作
+</span><span class="c1"></span>     <span class="nd">@Override</span>
+     <span class="kd">public</span> <span class="n">Object</span> <span class="nf">run</span><span class="o">()</span> <span class="o">{</span>
+         <span class="n">RequestContext</span> <span class="n">ctx</span> <span class="o">=</span> <span class="n">RequestContext</span><span class="o">.</span><span class="na">getCurrentContext</span><span class="o">();</span>
+         <span class="n">HttpServletResponse</span> <span class="n">response</span> <span class="o">=</span> <span class="n">ctx</span><span class="o">.</span><span class="na">getResponse</span><span class="o">();</span>
+         <span class="n">response</span><span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">&#34;Access-Control-Allow-Origin&#34;</span><span class="o">,</span> <span class="s">&#34;http://localhost:8877&#34;</span><span class="o">);</span>
+         <span class="n">response</span><span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">&#34;Access-Control-Allow-Credentials&#34;</span><span class="o">,</span> <span class="s">&#34;true&#34;</span><span class="o">);</span>
+         <span class="n">response</span><span class="o">.</span><span class="na">setContentType</span><span class="o">(</span><span class="s">&#34;application/json&#34;</span><span class="o">);</span>
+         <span class="n">response</span><span class="o">.</span><span class="na">setCharacterEncoding</span><span class="o">(</span><span class="s">&#34;UTF-8&#34;</span><span class="o">);</span>
+         <span class="n">response</span><span class="o">.</span><span class="na">setContentType</span><span class="o">(</span><span class="s">&#34;text/html;charset=UTF-8&#34;</span><span class="o">);</span>
+         <span class="k">return</span> <span class="kc">null</span><span class="o">;</span>
+     <span class="o">}</span>
+ <span class="o">}</span></code></pre></td></tr></table>
+</div>
+</div></li>
+</ol>
+
+<p><a href="https://www.jianshu.com/p/ca6475345d4f">https://www.jianshu.com/p/ca6475345d4f</a></p>
+
+<ol>
+<li>@CrossOrigin注解（403），未测试成功</li>
+</ol>
+
 <h4 id="zuul和nginx的对比及使用场景">Zuul和Nginx的对比及使用场景</h4>
+
+<hr />
 
 <h5 id="api-gateway-解决的问题">API Gateway 解决的问题</h5>
 
@@ -178,7 +396,114 @@
 
 <p>错误（Error） 统一处理错误返回结果</p>
 
-<p>参考：</p>
+<h4 id="springcloud-zuul-整合shiro实现权限认证">SpringCloud zuul 整合shiro实现权限认证</h4>
+
+<hr />
+
+<ul>
+<li>新建一个专门负责权限认证的微服务，集成shiro
+
+<ul>
+<li>登录【登录请求—zuul网关—请求转发到权限认证微服务—调用subject的login方法—将用户信息写入session】</li>
+<li>登录之前页面的拦截【Nginx，zuul拦截，zuul集成shiro拦截】</li>
+<li>不同用户不同权限，能访问的页面也不同</li>
+</ul></li>
+
+<li><p>每个微服务都集成shiro</p>
+
+<ul>
+<li>登录【登录请求—zuul网关—请求转发到权限认证微服务—调用subject的login方法—将用户信息写入session】</li>
+<li>登录之前页面的拦截【Nginx，zuul拦截，zuul集成shiro拦截】</li>
+<li>不同用户不同权限，能访问的页面也不同【接口加上@RequiresPermissions注解】</li>
+</ul></li>
+
+<li><p>分布式<code>Session</code>方案
+分布式会话方案原理主要是将关于用户认证的信息存储在共享存储中，且通常由用户会话作为 key 来实现的简单分布式哈希映射。当用户访问微服务时，用户数据可以从共享存储中获取。在某些场景下，这种方案很不错，用户登录状态是不透明的。同时也是一个高可用且可扩展的解决方案。这种方案的缺点在于共享存储需要一定保护机制，因此需要通过安全链接来访问，这时解决方案的实现就通常具有相当高的复杂性了。</p></li>
+
+<li><p>基于<code>OAuth2 Token</code>方案
+随着 Restful API、微服务的兴起，基于<code>Token</code>的认证现在已经越来越普遍。Token和Session ID 不同，并非只是一个 key。<strong>Token 一般会包含用户的相关信息</strong>，通过验证 Token 就可以完成身份校验。用户输入登录信息，发送到身份认证服务进行认证。AuthorizationServer验证登录信息是否正确，返回用户基础信息、权限范围、有效时间等信息，客户端存储接口。用户将 Token 放在 HTTP 请求头中，发起相关 API 调用。被调用的微服务，验证<code>Token</code>。ResourceServer返回相关资源和数据。</p></li>
+</ul>
+
+<p>Q1：经过zuul转发的请求，被shiro过滤器拦截，重定向到其他接口时，会有跨域问题</p>
+
+<blockquote>
+<p>Access to XMLHttpRequest at &lsquo;<a href="http://169.254.122.237:7902/login/index'">http://169.254.122.237:7902/login/index'</a> (redirected from &lsquo;<a href="http://localhost:8032/microservice-caac-user/login/test'">http://localhost:8032/microservice-caac-user/login/test'</a>) from origin &lsquo;null&rsquo; has been blocked by CORS policy: No &lsquo;Access-Control-Allow-Origin&rsquo; header is present on the requested resource.</p>
+</blockquote>
+
+<p>方法1：【拦截器重定向】解决shiro重定向跨域问题，过滤器中添加响应头</p>
+
+<p><a href="https://stackoverflow.com/questions/22397072/are-there-any-browsers-that-set-the-origin-header-to-null-for-privacy-sensitiv">重定向跨域请求时，request header的origin字段会被设为null</a></p>
+
+<p>方法2：重定向302请求的response headers 的location字段，设置为zuul网关的域，这样重定向就不会跨域</p>
+
+<p>Q2：【不同服务共享session，和登录状态】如果在其他服务中获取session中的值，会报ClassNotFoundException，其他服务中也必须引入shiro的包和配置</p>
+
+<p>A：在其他服务的pom文件中，引用使用了shiro的权限认证服务，但是其他每个服务还是要配置shiro以实现拦截的功能，也要分别实现被拦截后返回的接口</p>
+
+<p>Q3：【前后分离架构下的授权认证】@RequiresPermissions(&ldquo;logManage&rdquo;) 注解无效（细粒度的权限认证）</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"> <span class="cm">/**
+</span><span class="cm">   *  开启shiro aop注解支持.
+</span><span class="cm">   *  使用代理方式;所以需要开启代码支持;否则@RequiresRoles等注解无法生效
+</span><span class="cm">   * @param securityManager
+</span><span class="cm">   * @return
+</span><span class="cm">   */</span>
+  <span class="nd">@Bean</span>
+  <span class="kd">public</span> <span class="n">AuthorizationAttributeSourceAdvisor</span> <span class="nf">authorizationAttributeSourceAdvisor</span><span class="o">(</span><span class="n">SecurityManager</span> <span class="n">securityManager</span><span class="o">){</span>
+      <span class="n">AuthorizationAttributeSourceAdvisor</span> <span class="n">authorizationAttributeSourceAdvisor</span> <span class="o">=</span> <span class="k">new</span> <span class="n">AuthorizationAttributeSourceAdvisor</span><span class="o">();</span>
+      <span class="n">authorizationAttributeSourceAdvisor</span><span class="o">.</span><span class="na">setSecurityManager</span><span class="o">(</span><span class="n">securityManager</span><span class="o">);</span>
+      <span class="k">return</span> <span class="n">authorizationAttributeSourceAdvisor</span><span class="o">;</span>
+  <span class="o">}</span></code></pre></td></tr></table>
+</div>
+</div>
+<p><a href="https://www.cnblogs.com/yfzhou/p/9813177.html">前后端分离shiro权限管理</a></p>
+
+<p><a href="http://blog.smallerpig.com/thinking-in-shiro-part1.html">在SpringCloud中使用shiro</a></p>
+
+<p><a href="http://blueskykong.com/2017/10/19/security1/">认证鉴权基于OAuth2 Token方案</a></p>
+
+<p><strong>总结</strong>【关于如何整合shiro+zuul实现登录认证和细粒度的权鉴】</p>
+
+<ul>
+<li><p>shiro+分布式session</p>
+
+<ul>
+<li>使用@RequiresPermissions注解实现细粒度的鉴权</li>
+</ul>
+
+<p>问题：每个微服务（不包括zuul网关）都需要引入shiro，并配置shiro filter</p>
+
+<ul>
+<li>在zuul网关中集成shiro，api级别的权鉴通过配置shiro filter中的url来实现</li>
+</ul>
+
+<p>比如：user/* 拥有用户相关的权限</p>
+
+<p>登录接口在user微服务中实现【user微服务也要引如shiro】</p></li>
+
+<li><p>spring security+无状态的token（jwt）</p></li>
+</ul>
+
+<p>没有实践过</p>
+
+<h4 id="参考">参考：</h4>
+
+<hr />
 
 <p><a href="https://www.scienjus.com/api-gateway-and-netflix-zuul/">zuul使用场景</a></p>
 
@@ -186,74 +511,80 @@
 
 <p><a href="https://segmentfault.com/a/1190000015597029">https://segmentfault.com/a/1190000015597029</a></p>
 
-                </section>
-            </article>
+<p><a href="https://frontenddev.org/article/ajax-browser-cross-domain-request-access-control.html#heading-2-21">浏览器 AJAX 跨域请求访问控制</a></p>
 
-            
-                <a class="twitter" href="https://twitter.com/intent/tweet?text=https%3a%2f%2fisaacrolo.github.io%2fposts%2fzuul%2f - %e6%95%b4%e5%90%88Zuul by @your_twitter_id"><span class="icon-twitter"> tweet</span></a>
+  </div>
+</article>
+        </div>
+        
+  
+  
 
-<a class="facebook" href="#" onclick="
-    window.open(
-      'https://www.facebook.com/sharer/sharer.php?u='+encodeURIComponent(location.href),
-      'facebook-share-dialog',
-      'width=626,height=436');
-    return false;"><span class="icon-facebook-rect"> Share</span>
-</a>
+  
 
-            
+      </div>
+    </main>
 
-            
-
-            
-
-            <footer id="footer">
-    
-        <div id="social">
-
-	
-	
-    <a class="symbol" href="https://github.com/IsaacRolo">
-        <i class="fa fa-github-square"></i>
-    </a>
-    
-
-
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:your@email.com" class="iconfont icon-email" title="email"></a>
+      <a href="http://localhost:1313" class="iconfont icon-stack-overflow" title="stack-overflow"></a>
+      <a href="http://localhost:1313" class="iconfont icon-twitter" title="twitter"></a>
+      <a href="http://localhost:1313" class="iconfont icon-facebook" title="facebook"></a>
+      <a href="http://localhost:1313" class="iconfont icon-linkedin" title="linkedin"></a>
+      <a href="http://localhost:1313" class="iconfont icon-google" title="google"></a>
+      <a href="http://localhost:1313" class="iconfont icon-github" title="github"></a>
+      <a href="http://localhost:1313" class="iconfont icon-weibo" title="weibo"></a>
+      <a href="http://localhost:1313" class="iconfont icon-zhihu" title="zhihu"></a>
+      <a href="http://localhost:1313" class="iconfont icon-douban" title="douban"></a>
+      <a href="http://localhost:1313" class="iconfont icon-pocket" title="pocket"></a>
+      <a href="http://localhost:1313" class="iconfont icon-tumblr" title="tumblr"></a>
+      <a href="http://localhost:1313" class="iconfont icon-instagram" title="instagram"></a>
+      <a href="http://localhost:1313" class="iconfont icon-gitlab" title="gitlab"></a>
+      <a href="http://localhost:1313" class="iconfont icon-bilibili" title="bilibili"></a>
+  <a href="https://isaacrolo.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
 </div>
 
-    
-    <p class="small">
-    
-       © Copyright 2019 <i class="fa fa-heart" aria-hidden="true"></i> Rolo
-    
-    </p>
-    <p class="small">
-        Powered by <a href="http://www.gohugo.io/">Hugo</a> Theme By <a href="https://github.com/nodejh/hugo-theme-cactus-plus">nodejh</a>
-    </p>
-</footer>
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
 
-        </section>
+  
 
-        <script src="https://isaacrolo.github.io/js/jquery-3.3.1.min.js"></script>
-<script src="https://isaacrolo.github.io/js/main.js"></script>
-<script src="https://isaacrolo.github.io/js/highlight.min.js"></script>
-<script>hljs.initHighlightingOnLoad();</script>
+  <span class="copyright-year">
+    &copy; 
+    2017 - 
+    2019
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">Rolo</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="/dist/even.26188efa.min.js"></script>
 
 
 
 
 
 
-<script>
-var baiduAnalytics = 'your_baidu_analysis_code';
-var _hmt = _hmt || [];
-(function() {
-  var hm = document.createElement("script");
-  hm.src = "https://hm.baidu.com/hm.js?" + baiduAnalytics;
-  var s = document.getElementsByTagName("script")[0];
-  s.parentNode.insertBefore(hm, s);
-})();
-</script>
 
 
-    </body>
+</body>
 </html>

@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Java8 - Even - A super concise theme for Hugo</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="Rolo" /><meta name="description" content="使用Lambda的List排序 https://my.oschina.net/HJCui/blog/1573344 遍历map 1 2 3 4 //传统方式 for (Map.Entry&amp;lt;String,Object&amp;gt; entry:sourceAsMap.entrySet()){ System.out.println(&amp;#34;Item : &amp;#34; &#43; entry.getKey() &#43; &amp;#34; Count : &amp;#34; &#43; entry.getValue()); } 1 2 3 4 //lambda sourceAsMap.forEach((k,v)-&amp;gt;{ System.out.println(&amp;#34;k &amp;#34;&#43;k&#43;&amp;#34;;v &amp;#34;&#43;v); }); 项目问题 JAVA反射功能，" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.54.0 with even 4.0.0" />
+
+
+<link rel="canonical" href="https://isaacrolo.github.io/posts/java8/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+<link href="/dist/even.c2a46f00.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="Java8" />
+<meta property="og:description" content="使用Lambda的List排序 https://my.oschina.net/HJCui/blog/1573344 遍历map 1 2 3 4 //传统方式 for (Map.Entry&lt;String,Object&gt; entry:sourceAsMap.entrySet()){ System.out.println(&#34;Item : &#34; &#43; entry.getKey() &#43; &#34; Count : &#34; &#43; entry.getValue()); } 1 2 3 4 //lambda sourceAsMap.forEach((k,v)-&gt;{ System.out.println(&#34;k &#34;&#43;k&#43;&#34;;v &#34;&#43;v); }); 项目问题 JAVA反射功能，" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://isaacrolo.github.io/posts/java8/" />
+<meta property="article:published_time" content="2019-06-12T16:46:30&#43;08:00"/>
+<meta property="article:modified_time" content="2019-06-12T16:46:30&#43;08:00"/>
+
+<meta itemprop="name" content="Java8">
+<meta itemprop="description" content="使用Lambda的List排序 https://my.oschina.net/HJCui/blog/1573344 遍历map 1 2 3 4 //传统方式 for (Map.Entry&lt;String,Object&gt; entry:sourceAsMap.entrySet()){ System.out.println(&#34;Item : &#34; &#43; entry.getKey() &#43; &#34; Count : &#34; &#43; entry.getValue()); } 1 2 3 4 //lambda sourceAsMap.forEach((k,v)-&gt;{ System.out.println(&#34;k &#34;&#43;k&#43;&#34;;v &#34;&#43;v); }); 项目问题 JAVA反射功能，">
+
+
+<meta itemprop="datePublished" content="2019-06-12T16:46:30&#43;08:00" />
+<meta itemprop="dateModified" content="2019-06-12T16:46:30&#43;08:00" />
+<meta itemprop="wordCount" content="495">
+
+
+
+<meta itemprop="keywords" content="," />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Java8"/>
+<meta name="twitter:description" content="使用Lambda的List排序 https://my.oschina.net/HJCui/blog/1573344 遍历map 1 2 3 4 //传统方式 for (Map.Entry&lt;String,Object&gt; entry:sourceAsMap.entrySet()){ System.out.println(&#34;Item : &#34; &#43; entry.getKey() &#43; &#34; Count : &#34; &#43; entry.getValue()); } 1 2 3 4 //lambda sourceAsMap.forEach((k,v)-&gt;{ System.out.println(&#34;k &#34;&#43;k&#43;&#34;;v &#34;&#43;v); }); 项目问题 JAVA反射功能，"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">Even</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">Even</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+  <div class="post-content">
+    
+
+<p>使用Lambda的List排序</p>
+
+<p><a href="https://my.oschina.net/HJCui/blog/1573344">https://my.oschina.net/HJCui/blog/1573344</a></p>
+
+<p>遍历map</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="c1">//传统方式
+</span><span class="c1"></span><span class="k">for</span> <span class="o">(</span><span class="n">Map</span><span class="o">.</span><span class="na">Entry</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span><span class="n">Object</span><span class="o">&gt;</span> <span class="nl">entry:</span><span class="n">sourceAsMap</span><span class="o">.</span><span class="na">entrySet</span><span class="o">()){</span>
+    <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;Item : &#34;</span> <span class="o">+</span> <span class="n">entry</span><span class="o">.</span><span class="na">getKey</span><span class="o">()</span> <span class="o">+</span> <span class="s">&#34; Count : &#34;</span> <span class="o">+</span> <span class="n">entry</span><span class="o">.</span><span class="na">getValue</span><span class="o">());</span>
+<span class="o">}</span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="c1">//lambda
+</span><span class="c1"></span><span class="n">sourceAsMap</span><span class="o">.</span><span class="na">forEach</span><span class="o">((</span><span class="n">k</span><span class="o">,</span><span class="n">v</span><span class="o">)-&gt;{</span>
+    <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;k &#34;</span><span class="o">+</span><span class="n">k</span><span class="o">+</span><span class="s">&#34;;v &#34;</span><span class="o">+</span><span class="n">v</span><span class="o">);</span>
+<span class="o">});</span></code></pre></td></tr></table>
+</div>
+</div>
+<h4 id="项目问题">项目问题</h4>
+
+<p>JAVA反射功能，调用class.getField()方法报错noSuchFieldException，几点解决方法</p>
+
+<p><a href="https://blog.csdn.net/javaimport/article/details/56834585">https://blog.csdn.net/javaimport/article/details/56834585</a></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="n">fieldObj</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">objs</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">j</span><span class="o">))</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>报错:IllegalAccessException</p>
+
+<p>解决方法：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="n">fieldObj</span><span class="o">.</span><span class="na">setAccessible</span><span class="o">(</span><span class="kc">true</span><span class="o">);</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>lambda表达式foreach如何获取遍历的index</p>
+
+<p><a href="https://bbs.csdn.net/topics/392215690">https://bbs.csdn.net/topics/392215690</a></p>
+
+<p>lambda表达式中为什么要求外部变量为final</p>
+
+<p>在Java中lambda表达式是匿名类语法上的进一步简化，其本质还是调用对象的方法。
+在Java中方法调用是值传递的，所以在lambda表达式中对变量的操作都是基于原变量的副本，不会影响到原变量的值。</p>
+
+<p><strong>值传递 引用传递</strong></p>
+
+<p>list remove 元素</p>
+
+<p>java.util.ConcurrentModificationException: null</p>
+
+<p>必须用迭代器的remove()方法，不要用list的remove，不然会发生java.util.ConcurrentModificationException 异常</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="k">if</span> <span class="o">(</span><span class="kc">null</span> <span class="o">!=</span> <span class="n">list</span> <span class="o">&amp;&amp;</span> <span class="n">list</span><span class="o">.</span><span class="na">size</span><span class="o">()</span> <span class="o">&gt;</span> <span class="n">0</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">Iterator</span> <span class="n">it</span> <span class="o">=</span> <span class="n">list</span><span class="o">.</span><span class="na">iterator</span><span class="o">();</span>  
+    <span class="k">while</span><span class="o">(</span><span class="n">it</span><span class="o">.</span><span class="na">hasNext</span><span class="o">()){</span>
+        <span class="n">Student</span> <span class="n">stu</span> <span class="o">=</span> <span class="o">(</span><span class="n">Student</span><span class="o">)</span><span class="n">it</span><span class="o">.</span><span class="na">next</span><span class="o">();</span> 
+        <span class="k">if</span> <span class="o">(</span><span class="n">stu</span><span class="o">.</span><span class="na">getStudentId</span><span class="o">()</span> <span class="o">==</span> <span class="n">studentId</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">it</span><span class="o">.</span><span class="na">remove</span><span class="o">();</span> <span class="c1">//移除该对象
+</span><span class="c1"></span>        <span class="o">}</span>
+    <span class="o">}</span>
+<span class="o">}</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>数据库 &ldquo; 和 null的区别</p>
+
+<p>有啥用</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="kt">long</span> <span class="n">serialVersionUID</span> <span class="o">=</span> <span class="n">3755026209870472855L</span><span class="o">;</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>bean的Integer类型 变量的初始化</p>
+
+<p>验证码图片生成</p>
+
+<p><a href="https://blog.csdn.net/qq_34021712/article/details/80470738">https://blog.csdn.net/qq_34021712/article/details/80470738</a></p>
+
+  </div>
+</article>
+        </div>
+        
+  
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:your@email.com" class="iconfont icon-email" title="email"></a>
+      <a href="http://localhost:1313" class="iconfont icon-stack-overflow" title="stack-overflow"></a>
+      <a href="http://localhost:1313" class="iconfont icon-twitter" title="twitter"></a>
+      <a href="http://localhost:1313" class="iconfont icon-facebook" title="facebook"></a>
+      <a href="http://localhost:1313" class="iconfont icon-linkedin" title="linkedin"></a>
+      <a href="http://localhost:1313" class="iconfont icon-google" title="google"></a>
+      <a href="http://localhost:1313" class="iconfont icon-github" title="github"></a>
+      <a href="http://localhost:1313" class="iconfont icon-weibo" title="weibo"></a>
+      <a href="http://localhost:1313" class="iconfont icon-zhihu" title="zhihu"></a>
+      <a href="http://localhost:1313" class="iconfont icon-douban" title="douban"></a>
+      <a href="http://localhost:1313" class="iconfont icon-pocket" title="pocket"></a>
+      <a href="http://localhost:1313" class="iconfont icon-tumblr" title="tumblr"></a>
+      <a href="http://localhost:1313" class="iconfont icon-instagram" title="instagram"></a>
+      <a href="http://localhost:1313" class="iconfont icon-gitlab" title="gitlab"></a>
+      <a href="http://localhost:1313" class="iconfont icon-bilibili" title="bilibili"></a>
+  <a href="https://isaacrolo.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2017 - 
+    2019
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">Rolo</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="/dist/even.26188efa.min.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

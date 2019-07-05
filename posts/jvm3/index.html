@@ -1,101 +1,126 @@
 <!DOCTYPE html>
-<html lang="zn-CN">
-	<head>
-		<meta charset="utf-8">
-		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-		
-		<meta name="author" content="Rolo">
-		<meta name="description" content="Rolo&#39;s Blog">
-		<meta name="generator" content="Hugo 0.54.0" />
-		<title>垃圾收集器与内存分配策略 &middot; Rolo&#39;s Blog</title>
-		<link rel="shortcut icon" href="https://isaacrolo.github.io/images/favicon.ico">
-		<link rel="stylesheet" href="https://isaacrolo.github.io/css/style.css">
-		<link rel="stylesheet" href="https://isaacrolo.github.io/css/highlight.css">
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>垃圾收集器与内存分配策略 - Even - A super concise theme for Hugo</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 
-		
-		<link rel="stylesheet" href="https://isaacrolo.github.io/css/font-awesome.min.css">
-		
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
 
-		
-		<link href="https://isaacrolo.github.io/index.xml" rel="alternate" type="application/rss+xml" title="Rolo&#39;s Blog" />
-		
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
-		
-	</head>
 
-    <body>
-       <nav class="main-nav">
-	
-	
-		<a href='https://isaacrolo.github.io/'> <span class="arrow">←</span>Home</a>
-	
-	<a href='https://isaacrolo.github.io/posts'>Archive</a>
-	<a href='https://isaacrolo.github.io/tags'>Tags</a>
-	<a href='https://isaacrolo.github.io/about'>About</a>
+<meta name="author" content="Rolo" /><meta name="description" content="垃圾收集器主要作用于内存的哪部分？ 不考虑回收：程序计数器，虚拟机栈，本地方法栈 原因：方法结束或线程结束时，内存自然会回收 回收：堆，方法区 原因" /><meta name="keywords" content="Hugo, theme, even" />
 
-	
 
-	
-	<a class="cta" href="https://isaacrolo.github.io/index.xml">Subscribe</a>
-	
+
+
+
+
+<meta name="generator" content="Hugo 0.54.0 with even 4.0.0" />
+
+
+<link rel="canonical" href="https://isaacrolo.github.io/posts/jvm3/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+<link href="/dist/even.c2a46f00.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="垃圾收集器与内存分配策略" />
+<meta property="og:description" content="垃圾收集器主要作用于内存的哪部分？ 不考虑回收：程序计数器，虚拟机栈，本地方法栈 原因：方法结束或线程结束时，内存自然会回收 回收：堆，方法区 原因" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://isaacrolo.github.io/posts/jvm3/" />
+<meta property="article:published_time" content="2019-03-28T20:36:54&#43;08:00"/>
+<meta property="article:modified_time" content="2019-03-28T20:36:54&#43;08:00"/>
+
+<meta itemprop="name" content="垃圾收集器与内存分配策略">
+<meta itemprop="description" content="垃圾收集器主要作用于内存的哪部分？ 不考虑回收：程序计数器，虚拟机栈，本地方法栈 原因：方法结束或线程结束时，内存自然会回收 回收：堆，方法区 原因">
+
+
+<meta itemprop="datePublished" content="2019-03-28T20:36:54&#43;08:00" />
+<meta itemprop="dateModified" content="2019-03-28T20:36:54&#43;08:00" />
+<meta itemprop="wordCount" content="442">
+
+
+
+<meta itemprop="keywords" content="Java," />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="垃圾收集器与内存分配策略"/>
+<meta name="twitter:description" content="垃圾收集器主要作用于内存的哪部分？ 不考虑回收：程序计数器，虚拟机栈，本地方法栈 原因：方法结束或线程结束时，内存自然会回收 回收：堆，方法区 原因"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">Even</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a>
+  </ul>
 </nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">Even</a>
+</div>
 
-
-        <section id="wrapper" class="post">
-            <article>
-                <header>
-                    <h1>
-                        垃圾收集器与内存分配策略
-                    </h1>
-                    <h2 class="headline">
-                    Mar 28, 2019 20:36
-                    · 442 words
-                    · 1 minute read
-                      <span class="tags">
-                      
-                      
-                          
-                              <a href="https://isaacrolo.github.io/tags/java">Java</a>
-                          
-                      
-                      
-                      </span>
-                    </h2>
-                </header>
-                
-                  
-                    <div id="toc">
-                      <nav id="TableOfContents">
-<ul>
-<li>
-<ul>
-<li>
-<ul>
-<li>
-<ul>
-<li><a href="#垃圾收集器主要作用于内存的哪部分">垃圾收集器主要作用于内存的哪部分？</a></li>
-<li><a href="#如何判断对象是否已死">如何判断对象是否已死？</a>
-<ul>
-<li><a href="#引用计数算法">引用计数算法</a></li>
-<li><a href="#可达性分析算法">可达性分析算法</a></li>
-</ul></li>
-<li><a href="#引用有哪几种类型">引用有哪几种类型？</a></li>
-<li><a href="#什么时候对象被回收-finalize方法">什么时候对象被回收（finalize方法）？</a></li>
-<li><a href="#垃圾收集算法有哪些">垃圾收集算法有哪些？</a></li>
-<li><a href="#hotspot虚拟机是如何实现存活判定和垃圾收集算法的">HotSpot虚拟机是如何实现存活判定和垃圾收集算法的？</a></li>
-<li><a href="#垃圾收集器有哪些">垃圾收集器有哪些？</a></li>
-<li><a href="#内存回收与分配策略">内存回收与分配策略</a></li>
-</ul></li>
-</ul></li>
-</ul></li>
-</ul>
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li>
+  </ul>
 </nav>
-                    </div>
-                  
-                
-                <section id="post-body">
-                    
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+  <div class="post-content">
+    
 
 <h4 id="垃圾收集器主要作用于内存的哪部分">垃圾收集器主要作用于内存的哪部分？</h4>
 
@@ -149,74 +174,78 @@
 
 <h4 id="内存回收与分配策略">内存回收与分配策略</h4>
 
-                </section>
-            </article>
+  </div>
+</article>
+        </div>
+        
+  
+  
 
-            
-                <a class="twitter" href="https://twitter.com/intent/tweet?text=https%3a%2f%2fisaacrolo.github.io%2fposts%2fjvm3%2f - %e5%9e%83%e5%9c%be%e6%94%b6%e9%9b%86%e5%99%a8%e4%b8%8e%e5%86%85%e5%ad%98%e5%88%86%e9%85%8d%e7%ad%96%e7%95%a5 by @your_twitter_id"><span class="icon-twitter"> tweet</span></a>
+  
 
-<a class="facebook" href="#" onclick="
-    window.open(
-      'https://www.facebook.com/sharer/sharer.php?u='+encodeURIComponent(location.href),
-      'facebook-share-dialog',
-      'width=626,height=436');
-    return false;"><span class="icon-facebook-rect"> Share</span>
-</a>
+      </div>
+    </main>
 
-            
-
-            
-
-            
-
-            <footer id="footer">
-    
-        <div id="social">
-
-	
-	
-    <a class="symbol" href="https://github.com/IsaacRolo">
-        <i class="fa fa-github-square"></i>
-    </a>
-    
-
-
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:your@email.com" class="iconfont icon-email" title="email"></a>
+      <a href="http://localhost:1313" class="iconfont icon-stack-overflow" title="stack-overflow"></a>
+      <a href="http://localhost:1313" class="iconfont icon-twitter" title="twitter"></a>
+      <a href="http://localhost:1313" class="iconfont icon-facebook" title="facebook"></a>
+      <a href="http://localhost:1313" class="iconfont icon-linkedin" title="linkedin"></a>
+      <a href="http://localhost:1313" class="iconfont icon-google" title="google"></a>
+      <a href="http://localhost:1313" class="iconfont icon-github" title="github"></a>
+      <a href="http://localhost:1313" class="iconfont icon-weibo" title="weibo"></a>
+      <a href="http://localhost:1313" class="iconfont icon-zhihu" title="zhihu"></a>
+      <a href="http://localhost:1313" class="iconfont icon-douban" title="douban"></a>
+      <a href="http://localhost:1313" class="iconfont icon-pocket" title="pocket"></a>
+      <a href="http://localhost:1313" class="iconfont icon-tumblr" title="tumblr"></a>
+      <a href="http://localhost:1313" class="iconfont icon-instagram" title="instagram"></a>
+      <a href="http://localhost:1313" class="iconfont icon-gitlab" title="gitlab"></a>
+      <a href="http://localhost:1313" class="iconfont icon-bilibili" title="bilibili"></a>
+  <a href="https://isaacrolo.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
 </div>
 
-    
-    <p class="small">
-    
-       © Copyright 2019 <i class="fa fa-heart" aria-hidden="true"></i> Rolo
-    
-    </p>
-    <p class="small">
-        Powered by <a href="http://www.gohugo.io/">Hugo</a> Theme By <a href="https://github.com/nodejh/hugo-theme-cactus-plus">nodejh</a>
-    </p>
-</footer>
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
 
-        </section>
+  
 
-        <script src="https://isaacrolo.github.io/js/jquery-3.3.1.min.js"></script>
-<script src="https://isaacrolo.github.io/js/main.js"></script>
-<script src="https://isaacrolo.github.io/js/highlight.min.js"></script>
-<script>hljs.initHighlightingOnLoad();</script>
+  <span class="copyright-year">
+    &copy; 
+    2017 - 
+    2019
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">Rolo</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="/dist/even.26188efa.min.js"></script>
 
 
 
 
 
 
-<script>
-var baiduAnalytics = 'your_baidu_analysis_code';
-var _hmt = _hmt || [];
-(function() {
-  var hm = document.createElement("script");
-  hm.src = "https://hm.baidu.com/hm.js?" + baiduAnalytics;
-  var s = document.getElementsByTagName("script")[0];
-  s.parentNode.insertBefore(hm, s);
-})();
-</script>
 
 
-    </body>
+</body>
 </html>

@@ -1,15 +1,78 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Posts on Rolo&#39;s Blog</title>
+    <title>Posts on Even - A super concise theme for Hugo</title>
     <link>https://isaacrolo.github.io/posts/</link>
-    <description>Recent content in Posts on Rolo&#39;s Blog</description>
+    <description>Recent content in Posts on Even - A super concise theme for Hugo</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>zn-CN</language>
-    <lastBuildDate>Thu, 28 Mar 2019 20:36:54 +0800</lastBuildDate>
+    <language>en</language>
+    <lastBuildDate>Thu, 04 Jul 2019 10:52:11 +0800</lastBuildDate>
     
 	<atom:link href="https://isaacrolo.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Elasticsearch</title>
+      <link>https://isaacrolo.github.io/posts/elasticsearch/</link>
+      <pubDate>Thu, 04 Jul 2019 10:52:11 +0800</pubDate>
+      
+      <guid>https://isaacrolo.github.io/posts/elasticsearch/</guid>
+      <description>MongoDB和Elasticsearch的对比 https://leriou.github.io/2019-01-09-mongodb-compareto-elasticsearch/ Elasticsearch 2.x中文文档 https://www.elastic.co/guide/cn/elasticsearch/guide/cn/_add-an-index.html ES java api的选择 TransportClient【ES7.0废弃】 RestClient Java Low Level</description>
+    </item>
+    
+    <item>
+      <title>DateFormat</title>
+      <link>https://isaacrolo.github.io/posts/dateformat/</link>
+      <pubDate>Tue, 02 Jul 2019 16:37:56 +0800</pubDate>
+      
+      <guid>https://isaacrolo.github.io/posts/dateformat/</guid>
+      <description>日期按月分段【yyyy-MM】 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 String start=&amp;#34;2019-02&amp;#34;; String end=&amp;#34;2019-07&amp;#34;; Date startDate = null; Date endDate=null; SimpleDateFormat simpleDateFormat = new SimpleDateFormat(&amp;#34;yyyy-MM&amp;#34;); try { startDate = simpleDateFormat.parse(start); endDate = simpleDateFormat.parse(end); } catch (ParseException e) { e.printStackTrace(); }</description>
+    </item>
+    
+    <item>
+      <title>Java8</title>
+      <link>https://isaacrolo.github.io/posts/java8/</link>
+      <pubDate>Wed, 12 Jun 2019 16:46:30 +0800</pubDate>
+      
+      <guid>https://isaacrolo.github.io/posts/java8/</guid>
+      <description>使用Lambda的List排序 https://my.oschina.net/HJCui/blog/1573344 遍历map 1 2 3 4 //传统方式 for (Map.Entry&amp;lt;String,Object&amp;gt; entry:sourceAsMap.entrySet()){ System.out.println(&amp;#34;Item : &amp;#34; + entry.getKey() + &amp;#34; Count : &amp;#34; + entry.getValue()); } 1 2 3 4 //lambda sourceAsMap.forEach((k,v)-&amp;gt;{ System.out.println(&amp;#34;k &amp;#34;+k+&amp;#34;;v &amp;#34;+v); }); 项目问题 JAVA反射功能，</description>
+    </item>
+    
+    <item>
+      <title>AOP</title>
+      <link>https://isaacrolo.github.io/posts/aop/</link>
+      <pubDate>Fri, 31 May 2019 10:13:29 +0800</pubDate>
+      
+      <guid>https://isaacrolo.github.io/posts/aop/</guid>
+      <description>spring aop后切如何获取目标方法中的某个局部变量值 https://bbs.csdn.net/topics/390215163 https://mrbird.cc/Spring-Boot-AOP%20log.html</description>
+    </item>
+    
+    <item>
+      <title>Cookie_session</title>
+      <link>https://isaacrolo.github.io/posts/cookie_session/</link>
+      <pubDate>Mon, 20 May 2019 19:30:33 +0800</pubDate>
+      
+      <guid>https://isaacrolo.github.io/posts/cookie_session/</guid>
+      <description>为什么在2个服务器之间来回请求，同一个服务器的sessionId会找不到 第一次请求【服务器A】 Response Headers Set-Cookie: JSESSIONID=4A8E119166F37F26FF1D8ACF38F9742C;path=/;HttpOnly 第二次请求【服务器B】 Response Headers Set-Cookie: JSESSIONID=1A08F620F659F860BF599FD37A51DCDD;path=/;HttpOnly Request Headers Cookie: JSESSIONID=4A8E119166F37F26FF1D8ACF38F9742C</description>
+    </item>
+    
+    <item>
+      <title>Springboot Note</title>
+      <link>https://isaacrolo.github.io/posts/springboot-note/</link>
+      <pubDate>Thu, 25 Apr 2019 15:16:43 +0800</pubDate>
+      
+      <guid>https://isaacrolo.github.io/posts/springboot-note/</guid>
+      <description>创建多个yml配置文件时，需要用到@PropertySource注解，但是该注解却不支持解析yml配置文件（默认支持解析properties</description>
+    </item>
+    
+    <item>
+      <title>Jsoup</title>
+      <link>https://isaacrolo.github.io/posts/jsoup/</link>
+      <pubDate>Wed, 24 Apr 2019 14:05:11 +0800</pubDate>
+      
+      <guid>https://isaacrolo.github.io/posts/jsoup/</guid>
+      <description>选择器的使用 基本用法 | tagname | 使用标签名来定位，例如 a | | &amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash; | &amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash; | | ns|tag | 使用命名空间的标签定位，例如 fb:name 来查找 fb:name 元素 | | #id | 使用元素 id 定位，例如 #logo</description>
+    </item>
     
     <item>
       <title>垃圾收集器与内存分配策略</title>
@@ -35,7 +98,7 @@
       <pubDate>Thu, 21 Mar 2019 14:06:47 +0800</pubDate>
       
       <guid>https://isaacrolo.github.io/posts/resttemplate/</guid>
-      <description>RestTemplate @Test public void restTemplatePost() { String url = &amp;quot;http://127.0.0.1/trusted&amp;quot;; RestTemplate restTemplate = new RestTemplate(); HttpHeaders headers = new HttpHeaders(); headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED); MultiValueMap&amp;lt;String, String&amp;gt; params = new LinkedMultiValueMap&amp;lt;&amp;gt;(); params.add(&amp;quot;username&amp;quot;, &amp;quot;admin&amp;quot;); HttpEntity&amp;lt;MultiValueMap&amp;lt;String, String&amp;gt;&amp;gt; requestEntity = new HttpEntity&amp;lt;&amp;gt;(params, headers); String result = restTemplate.postForObject(url, requestEntity, String.class); System.out.println(result); } HttpClient 普通的post请求 @Test public void httpClientPost() throws IOException { CloseableHttpClient client = HttpClients.createDefault(); HttpPost httpPost = new HttpPost(&amp;quot;http://localhost:8080/post&amp;quot;);</description>
+      <description>RestTemplate 1 2 3 4 5 6 7 8 9 10 11 12 @Test public void restTemplatePost() { String url = &amp;#34;http://127.0.0.1/trusted&amp;#34;; RestTemplate restTemplate = new RestTemplate(); HttpHeaders headers = new HttpHeaders(); headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED); MultiValueMap&amp;lt;String, String&amp;gt; params = new LinkedMultiValueMap&amp;lt;&amp;gt;(); params.add(&amp;#34;username&amp;#34;, &amp;#34;admin&amp;#34;); HttpEntity&amp;lt;MultiValueMap&amp;lt;String, String&amp;gt;&amp;gt; requestEntity = new HttpEntity&amp;lt;&amp;gt;(params, headers); String result = restTemplate.postForObject(url, requestEntity, String.class); System.out.println(result); } HttpClient 普通的post请求 1 2 3 4</description>
     </item>
     
     <item>
@@ -44,7 +107,7 @@
       <pubDate>Wed, 20 Mar 2019 13:46:10 +0800</pubDate>
       
       <guid>https://isaacrolo.github.io/posts/zuul/</guid>
-      <description>场景：仅作为web服务集群与外界请求之间的网关，和Nginx结合使用 Zuul的使用 添加依赖 &amp;lt;dependency&amp;gt; &amp;lt;groupId&amp;gt;org.springframework.cloud&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;spring-cloud-starter-zuul&amp;lt;/artifactId&amp;gt; &amp;lt;/dependency&amp;gt; &amp;lt;dependency&amp;gt; &amp;lt;groupId&amp;gt;org.springframework.cloud&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;spring-cloud-starter-eureka&amp;lt;/artifactId&amp;gt; &amp;lt;/dependency&amp;gt; 配置文件 将Zuul注册到eurek</description>
+      <description>场景：仅作为web服务集群与外界请求之间的网关，和Nginx结合使用 Zuul的使用 添加依赖 1 2 3 4 5 6 7 8 9 &amp;lt;dependency&amp;gt; &amp;lt;groupId&amp;gt;org.springframework.cloud&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;spring-cloud-starter-zuul&amp;lt;/artifactId&amp;gt; &amp;lt;/dependency&amp;gt; &amp;lt;dependency&amp;gt; &amp;lt;groupId&amp;gt;org.springframework.cloud&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;spring-cloud-starter-eureka&amp;lt;/artifactId&amp;gt; &amp;lt;/dependency&amp;gt; 配置文件 将Zuu</description>
     </item>
     
     <item>

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Spring Cloud on Rolo&#39;s Blog</title>
+    <title>Spring Cloud on Even - A super concise theme for Hugo</title>
     <link>https://isaacrolo.github.io/categories/spring-cloud/</link>
-    <description>Recent content in Spring Cloud on Rolo&#39;s Blog</description>
+    <description>Recent content in Spring Cloud on Even - A super concise theme for Hugo</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>zn-CN</language>
+    <language>en</language>
     <lastBuildDate>Wed, 20 Mar 2019 13:46:10 +0800</lastBuildDate>
     
 	<atom:link href="https://isaacrolo.github.io/categories/spring-cloud/index.xml" rel="self" type="application/rss+xml" />
@@ -17,7 +17,7 @@
       <pubDate>Wed, 20 Mar 2019 13:46:10 +0800</pubDate>
       
       <guid>https://isaacrolo.github.io/posts/zuul/</guid>
-      <description>场景：仅作为web服务集群与外界请求之间的网关，和Nginx结合使用 Zuul的使用 添加依赖 &amp;lt;dependency&amp;gt; &amp;lt;groupId&amp;gt;org.springframework.cloud&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;spring-cloud-starter-zuul&amp;lt;/artifactId&amp;gt; &amp;lt;/dependency&amp;gt; &amp;lt;dependency&amp;gt; &amp;lt;groupId&amp;gt;org.springframework.cloud&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;spring-cloud-starter-eureka&amp;lt;/artifactId&amp;gt; &amp;lt;/dependency&amp;gt; 配置文件 将Zuul注册到eurek</description>
+      <description>场景：仅作为web服务集群与外界请求之间的网关，和Nginx结合使用 Zuul的使用 添加依赖 1 2 3 4 5 6 7 8 9 &amp;lt;dependency&amp;gt; &amp;lt;groupId&amp;gt;org.springframework.cloud&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;spring-cloud-starter-zuul&amp;lt;/artifactId&amp;gt; &amp;lt;/dependency&amp;gt; &amp;lt;dependency&amp;gt; &amp;lt;groupId&amp;gt;org.springframework.cloud&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;spring-cloud-starter-eureka&amp;lt;/artifactId&amp;gt; &amp;lt;/dependency&amp;gt; 配置文件 将Zuu</description>
     </item>
     
     <item>

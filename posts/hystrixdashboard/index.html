@@ -1,93 +1,126 @@
 <!DOCTYPE html>
-<html lang="zn-CN">
-	<head>
-		<meta charset="utf-8">
-		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-		
-		<meta name="author" content="Rolo">
-		<meta name="description" content="Rolo&#39;s Blog">
-		<meta name="generator" content="Hugo 0.54.0" />
-		<title>整合HystrixDashboard和Turbine &middot; Rolo&#39;s Blog</title>
-		<link rel="shortcut icon" href="https://isaacrolo.github.io/images/favicon.ico">
-		<link rel="stylesheet" href="https://isaacrolo.github.io/css/style.css">
-		<link rel="stylesheet" href="https://isaacrolo.github.io/css/highlight.css">
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>整合HystrixDashboard和Turbine - Even - A super concise theme for Hugo</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 
-		
-		<link rel="stylesheet" href="https://isaacrolo.github.io/css/font-awesome.min.css">
-		
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
 
-		
-		<link href="https://isaacrolo.github.io/index.xml" rel="alternate" type="application/rss+xml" title="Rolo&#39;s Blog" />
-		
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
-		
-	</head>
 
-    <body>
-       <nav class="main-nav">
-	
-	
-		<a href='https://isaacrolo.github.io/'> <span class="arrow">←</span>Home</a>
-	
-	<a href='https://isaacrolo.github.io/posts'>Archive</a>
-	<a href='https://isaacrolo.github.io/tags'>Tags</a>
-	<a href='https://isaacrolo.github.io/about'>About</a>
+<meta name="author" content="Rolo" /><meta name="description" content="前提：springboot 1.5.19.RELEASE springcloud Edgware.SR5 场景：服务调用方使用Feign&#43;Hystrix实现微服务之间的通信；新建一个Hystrix Dashboard" /><meta name="keywords" content="Hugo, theme, even" />
 
-	
 
-	
-	<a class="cta" href="https://isaacrolo.github.io/index.xml">Subscribe</a>
-	
+
+
+
+
+<meta name="generator" content="Hugo 0.54.0 with even 4.0.0" />
+
+
+<link rel="canonical" href="https://isaacrolo.github.io/posts/hystrixdashboard/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+<link href="/dist/even.c2a46f00.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="整合HystrixDashboard和Turbine" />
+<meta property="og:description" content="前提：springboot 1.5.19.RELEASE springcloud Edgware.SR5 场景：服务调用方使用Feign&#43;Hystrix实现微服务之间的通信；新建一个Hystrix Dashboard" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://isaacrolo.github.io/posts/hystrixdashboard/" />
+<meta property="article:published_time" content="2019-03-19T11:32:32&#43;08:00"/>
+<meta property="article:modified_time" content="2019-03-19T11:32:32&#43;08:00"/>
+
+<meta itemprop="name" content="整合HystrixDashboard和Turbine">
+<meta itemprop="description" content="前提：springboot 1.5.19.RELEASE springcloud Edgware.SR5 场景：服务调用方使用Feign&#43;Hystrix实现微服务之间的通信；新建一个Hystrix Dashboard">
+
+
+<meta itemprop="datePublished" content="2019-03-19T11:32:32&#43;08:00" />
+<meta itemprop="dateModified" content="2019-03-19T11:32:32&#43;08:00" />
+<meta itemprop="wordCount" content="962">
+
+
+
+<meta itemprop="keywords" content="Spring Cloud," />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="整合HystrixDashboard和Turbine"/>
+<meta name="twitter:description" content="前提：springboot 1.5.19.RELEASE springcloud Edgware.SR5 场景：服务调用方使用Feign&#43;Hystrix实现微服务之间的通信；新建一个Hystrix Dashboard"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">Even</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a>
+  </ul>
 </nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">Even</a>
+</div>
 
-
-        <section id="wrapper" class="post">
-            <article>
-                <header>
-                    <h1>
-                        整合HystrixDashboard和Turbine
-                    </h1>
-                    <h2 class="headline">
-                    Mar 19, 2019 11:32
-                    · 912 words
-                    · 2 minute read
-                      <span class="tags">
-                      
-                      
-                          
-                              <a href="https://isaacrolo.github.io/tags/spring-cloud">Spring Cloud</a>
-                          
-                      
-                      
-                      </span>
-                    </h2>
-                </header>
-                
-                  
-                    <div id="toc">
-                      <nav id="TableOfContents">
-<ul>
-<li>
-<ul>
-<li>
-<ul>
-<li>
-<ul>
-<li><a href="#hystrix-dashboard服务">Hystrix Dashboard服务</a></li>
-<li><a href="#springboot-consumer服务">Springboot-Consumer服务</a></li>
-<li><a href="#为什么要配置hystrixmetricsstreamservlet">为什么要配置HystrixMetricsStreamServlet</a></li>
-<li><a href="#turbine服务">Turbine服务</a></li>
-</ul></li>
-</ul></li>
-</ul></li>
-</ul>
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li>
+  </ul>
 </nav>
-                    </div>
-                  
-                
-                <section id="post-body">
-                    
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+  <div class="post-content">
+    
 
 <p><strong>前提</strong>：springboot 1.5.19.RELEASE    springcloud Edgware.SR5</p>
 
@@ -100,66 +133,115 @@
 <ol>
 <li>添加依赖</li>
 </ol>
-
-<pre><code class="language-xml">        &lt;dependency&gt;
-             &lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt;
-               &lt;artifactId&gt;spring-cloud-starter-hystrix-dashboard&lt;/artifactId&gt;
-        &lt;/dependency&gt;
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-xml" data-lang="xml"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-xml" data-lang="xml">        <span class="nt">&lt;dependency&gt;</span>
+             <span class="nt">&lt;groupId&gt;</span>org.springframework.cloud<span class="nt">&lt;/groupId&gt;</span>
+               <span class="nt">&lt;artifactId&gt;</span>spring-cloud-starter-hystrix-dashboard<span class="nt">&lt;/artifactId&gt;</span>
+        <span class="nt">&lt;/dependency&gt;</span>
    
-        &lt;dependency&gt;
-            &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
-            &lt;artifactId&gt;spring-boot-starter-actuator&lt;/artifactId&gt;
-        &lt;/dependency&gt;
+        <span class="nt">&lt;dependency&gt;</span>
+            <span class="nt">&lt;groupId&gt;</span>org.springframework.boot<span class="nt">&lt;/groupId&gt;</span>
+            <span class="nt">&lt;artifactId&gt;</span>spring-boot-starter-actuator<span class="nt">&lt;/artifactId&gt;</span>
+        <span class="nt">&lt;/dependency&gt;</span>
    
-        &lt;dependency&gt;
-            &lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt;
-            &lt;artifactId&gt;spring-cloud-starter-hystrix&lt;/artifactId&gt;
-        &lt;/dependency&gt;
-</code></pre>
-
+        <span class="nt">&lt;dependency&gt;</span>
+            <span class="nt">&lt;groupId&gt;</span>org.springframework.cloud<span class="nt">&lt;/groupId&gt;</span>
+            <span class="nt">&lt;artifactId&gt;</span>spring-cloud-starter-hystrix<span class="nt">&lt;/artifactId&gt;</span>
+        <span class="nt">&lt;/dependency&gt;</span></code></pre></td></tr></table>
+</div>
+</div>
 <ol>
 <li>启动类添加注解</li>
 </ol>
-
-<pre><code class="language-java">   @EnableHystrixDashboard
-   @EnableCircuitBreaker
-</code></pre>
-
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java">   <span class="nd">@EnableHystrixDashboard</span>
+   <span class="nd">@EnableCircuitBreaker</span></code></pre></td></tr></table>
+</div>
+</div>
 <h4 id="springboot-consumer服务">Springboot-Consumer服务</h4>
 
 <ol>
 <li>添加依赖；因为Feign里内置Hystrix断路器，所以无需引入spring-cloud-starter-hystrix依赖，无需添加@EnableCircuitBreaker注解</li>
 </ol>
-
-<pre><code class="language-xml">           &lt;dependency&gt;
-              &lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt;
-              &lt;artifactId&gt;spring-cloud-starter-hystrix-dashboard&lt;/artifactId&gt;
-           &lt;/dependency&gt;
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-xml" data-lang="xml"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-xml" data-lang="xml">           <span class="nt">&lt;dependency&gt;</span>
+              <span class="nt">&lt;groupId&gt;</span>org.springframework.cloud<span class="nt">&lt;/groupId&gt;</span>
+              <span class="nt">&lt;artifactId&gt;</span>spring-cloud-starter-hystrix-dashboard<span class="nt">&lt;/artifactId&gt;</span>
+           <span class="nt">&lt;/dependency&gt;</span>
    
-           &lt;dependency&gt;
-              &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
-              &lt;artifactId&gt;spring-boot-starter-actuator&lt;/artifactId&gt;
-           &lt;/dependency&gt;
-</code></pre>
-
+           <span class="nt">&lt;dependency&gt;</span>
+              <span class="nt">&lt;groupId&gt;</span>org.springframework.boot<span class="nt">&lt;/groupId&gt;</span>
+              <span class="nt">&lt;artifactId&gt;</span>spring-boot-starter-actuator<span class="nt">&lt;/artifactId&gt;</span>
+           <span class="nt">&lt;/dependency&gt;</span></code></pre></td></tr></table>
+</div>
+</div>
 <ol>
 <li>配置映射到&rdquo;/hystrix.stream&rdquo;的servlet (HystrixMetricsStreamServlet)</li>
 </ol>
-
-<pre><code class="language-java">   @Configuration
-   public class HystrixStreamConfig {
-       @Bean
-       public ServletRegistrationBean getServlet() {
-           HystrixMetricsStreamServlet streamServlet = new HystrixMetricsStreamServlet();
-           ServletRegistrationBean registrationBean = new ServletRegistrationBean(streamServlet);
-           registrationBean.setLoadOnStartup(1);
-           registrationBean.addUrlMappings(&quot;/hystrix.stream&quot;);
-           registrationBean.setName(&quot;HystrixMetricsStreamServlet&quot;);
-           return registrationBean;
-       }
-   }
-</code></pre>
-
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java">   <span class="nd">@Configuration</span>
+   <span class="kd">public</span> <span class="kd">class</span> <span class="nc">HystrixStreamConfig</span> <span class="o">{</span>
+       <span class="nd">@Bean</span>
+       <span class="kd">public</span> <span class="n">ServletRegistrationBean</span> <span class="nf">getServlet</span><span class="o">()</span> <span class="o">{</span>
+           <span class="n">HystrixMetricsStreamServlet</span> <span class="n">streamServlet</span> <span class="o">=</span> <span class="k">new</span> <span class="n">HystrixMetricsStreamServlet</span><span class="o">();</span>
+           <span class="n">ServletRegistrationBean</span> <span class="n">registrationBean</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ServletRegistrationBean</span><span class="o">(</span><span class="n">streamServlet</span><span class="o">);</span>
+           <span class="n">registrationBean</span><span class="o">.</span><span class="na">setLoadOnStartup</span><span class="o">(</span><span class="n">1</span><span class="o">);</span>
+           <span class="n">registrationBean</span><span class="o">.</span><span class="na">addUrlMappings</span><span class="o">(</span><span class="s">&#34;/hystrix.stream&#34;</span><span class="o">);</span>
+           <span class="n">registrationBean</span><span class="o">.</span><span class="na">setName</span><span class="o">(</span><span class="s">&#34;HystrixMetricsStreamServlet&#34;</span><span class="o">);</span>
+           <span class="k">return</span> <span class="n">registrationBean</span><span class="o">;</span>
+       <span class="o">}</span>
+   <span class="o">}</span></code></pre></td></tr></table>
+</div>
+</div>
 <ol>
 <li>启动工程后访问 <a href="http://localhost:">http://localhost:</a> HystrixDashboard服务的port/hystrix</li>
 </ol>
@@ -181,49 +263,86 @@
 <ol>
 <li>添加依赖</li>
 </ol>
-
-<pre><code class="language-xml">   &lt;dependency&gt;
-      &lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt;
-      &lt;artifactId&gt;spring-cloud-starter-turbine&lt;/artifactId&gt;
-   &lt;/dependency&gt;
-   &lt;dependency&gt;
-      &lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt;
-      &lt;artifactId&gt;spring-cloud-netflix-turbine&lt;/artifactId&gt;
-   &lt;/dependency&gt;
-   &lt;dependency&gt;
-      &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
-      &lt;artifactId&gt;spring-boot-starter-actuator&lt;/artifactId&gt;
-   &lt;/dependency&gt;
-   &lt;dependency&gt;
-      &lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt;
-      &lt;artifactId&gt;spring-cloud-starter-hystrix-dashboard&lt;/artifactId&gt;
-   &lt;/dependency&gt;
-</code></pre>
-
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-xml" data-lang="xml"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-xml" data-lang="xml">   <span class="nt">&lt;dependency&gt;</span>
+      <span class="nt">&lt;groupId&gt;</span>org.springframework.cloud<span class="nt">&lt;/groupId&gt;</span>
+      <span class="nt">&lt;artifactId&gt;</span>spring-cloud-starter-turbine<span class="nt">&lt;/artifactId&gt;</span>
+   <span class="nt">&lt;/dependency&gt;</span>
+   <span class="nt">&lt;dependency&gt;</span>
+      <span class="nt">&lt;groupId&gt;</span>org.springframework.cloud<span class="nt">&lt;/groupId&gt;</span>
+      <span class="nt">&lt;artifactId&gt;</span>spring-cloud-netflix-turbine<span class="nt">&lt;/artifactId&gt;</span>
+   <span class="nt">&lt;/dependency&gt;</span>
+   <span class="nt">&lt;dependency&gt;</span>
+      <span class="nt">&lt;groupId&gt;</span>org.springframework.boot<span class="nt">&lt;/groupId&gt;</span>
+      <span class="nt">&lt;artifactId&gt;</span>spring-boot-starter-actuator<span class="nt">&lt;/artifactId&gt;</span>
+   <span class="nt">&lt;/dependency&gt;</span>
+   <span class="nt">&lt;dependency&gt;</span>
+      <span class="nt">&lt;groupId&gt;</span>org.springframework.cloud<span class="nt">&lt;/groupId&gt;</span>
+      <span class="nt">&lt;artifactId&gt;</span>spring-cloud-starter-hystrix-dashboard<span class="nt">&lt;/artifactId&gt;</span>
+   <span class="nt">&lt;/dependency&gt;</span></code></pre></td></tr></table>
+</div>
+</div>
 <ol>
 <li>启动类添加注解</li>
 </ol>
-
-<pre><code class="language-java">   @EnableHystrixDashboard
-   @EnableTurbine
-</code></pre>
-
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java">   <span class="nd">@EnableHystrixDashboard</span>
+   <span class="nd">@EnableTurbine</span></code></pre></td></tr></table>
+</div>
+</div>
 <ol>
 <li>配置文件</li>
 </ol>
-
-<pre><code class="language-yaml">   server:
-     port: 8031
-   spring:
-     application:
-       name: microservice-turbine
-   turbine:
-     appConfig: microservice-web
-     aggregator:
-       clusterConfig: default
-     clusterNameExpression: new String(&quot;default&quot;)
-</code></pre>
-
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-yaml" data-lang="yaml"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-yaml" data-lang="yaml"><span class="w">   </span>server<span class="p">:</span><span class="w">
+</span><span class="w">     </span>port<span class="p">:</span><span class="w"> </span><span class="m">8031</span><span class="w">
+</span><span class="w">   </span>spring<span class="p">:</span><span class="w">
+</span><span class="w">     </span>application<span class="p">:</span><span class="w">
+</span><span class="w">       </span>name<span class="p">:</span><span class="w"> </span>microservice-turbine<span class="w">
+</span><span class="w">   </span>turbine<span class="p">:</span><span class="w">
+</span><span class="w">     </span>appConfig<span class="p">:</span><span class="w"> </span>microservice-web<span class="w">
+</span><span class="w">     </span>aggregator<span class="p">:</span><span class="w">
+</span><span class="w">       </span>clusterConfig<span class="p">:</span><span class="w"> </span>default<span class="w">
+</span><span class="w">     </span>clusterNameExpression<span class="p">:</span><span class="w"> </span>new<span class="w"> </span>String(<span class="s2">&#34;default&#34;</span>)</code></pre></td></tr></table>
+</div>
+</div>
 <ol>
 <li>访问<a href="http://localhost:8031/hystrix填入http://localhost:8031/turbine.stream">http://localhost:8031/hystrix填入http://localhost:8031/turbine.stream</a></li>
 </ol>
@@ -238,74 +357,78 @@
 
 <p><a href="https://blog.csdn.net/ddxd0406/article/details/79643059">https://blog.csdn.net/ddxd0406/article/details/79643059</a></p>
 
-                </section>
-            </article>
+  </div>
+</article>
+        </div>
+        
+  
+  
 
-            
-                <a class="twitter" href="https://twitter.com/intent/tweet?text=https%3a%2f%2fisaacrolo.github.io%2fposts%2fhystrixdashboard%2f - %e6%95%b4%e5%90%88HystrixDashboard%e5%92%8cTurbine by @your_twitter_id"><span class="icon-twitter"> tweet</span></a>
+  
 
-<a class="facebook" href="#" onclick="
-    window.open(
-      'https://www.facebook.com/sharer/sharer.php?u='+encodeURIComponent(location.href),
-      'facebook-share-dialog',
-      'width=626,height=436');
-    return false;"><span class="icon-facebook-rect"> Share</span>
-</a>
+      </div>
+    </main>
 
-            
-
-            
-
-            
-
-            <footer id="footer">
-    
-        <div id="social">
-
-	
-	
-    <a class="symbol" href="https://github.com/IsaacRolo">
-        <i class="fa fa-github-square"></i>
-    </a>
-    
-
-
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:your@email.com" class="iconfont icon-email" title="email"></a>
+      <a href="http://localhost:1313" class="iconfont icon-stack-overflow" title="stack-overflow"></a>
+      <a href="http://localhost:1313" class="iconfont icon-twitter" title="twitter"></a>
+      <a href="http://localhost:1313" class="iconfont icon-facebook" title="facebook"></a>
+      <a href="http://localhost:1313" class="iconfont icon-linkedin" title="linkedin"></a>
+      <a href="http://localhost:1313" class="iconfont icon-google" title="google"></a>
+      <a href="http://localhost:1313" class="iconfont icon-github" title="github"></a>
+      <a href="http://localhost:1313" class="iconfont icon-weibo" title="weibo"></a>
+      <a href="http://localhost:1313" class="iconfont icon-zhihu" title="zhihu"></a>
+      <a href="http://localhost:1313" class="iconfont icon-douban" title="douban"></a>
+      <a href="http://localhost:1313" class="iconfont icon-pocket" title="pocket"></a>
+      <a href="http://localhost:1313" class="iconfont icon-tumblr" title="tumblr"></a>
+      <a href="http://localhost:1313" class="iconfont icon-instagram" title="instagram"></a>
+      <a href="http://localhost:1313" class="iconfont icon-gitlab" title="gitlab"></a>
+      <a href="http://localhost:1313" class="iconfont icon-bilibili" title="bilibili"></a>
+  <a href="https://isaacrolo.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
 </div>
 
-    
-    <p class="small">
-    
-       © Copyright 2019 <i class="fa fa-heart" aria-hidden="true"></i> Rolo
-    
-    </p>
-    <p class="small">
-        Powered by <a href="http://www.gohugo.io/">Hugo</a> Theme By <a href="https://github.com/nodejh/hugo-theme-cactus-plus">nodejh</a>
-    </p>
-</footer>
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
 
-        </section>
+  
 
-        <script src="https://isaacrolo.github.io/js/jquery-3.3.1.min.js"></script>
-<script src="https://isaacrolo.github.io/js/main.js"></script>
-<script src="https://isaacrolo.github.io/js/highlight.min.js"></script>
-<script>hljs.initHighlightingOnLoad();</script>
+  <span class="copyright-year">
+    &copy; 
+    2017 - 
+    2019
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">Rolo</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="/dist/even.26188efa.min.js"></script>
 
 
 
 
 
 
-<script>
-var baiduAnalytics = 'your_baidu_analysis_code';
-var _hmt = _hmt || [];
-(function() {
-  var hm = document.createElement("script");
-  hm.src = "https://hm.baidu.com/hm.js?" + baiduAnalytics;
-  var s = document.getElementsByTagName("script")[0];
-  s.parentNode.insertBefore(hm, s);
-})();
-</script>
 
 
-    </body>
+</body>
 </html>

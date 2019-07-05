@@ -1,15 +1,24 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Spring Boot on Rolo&#39;s Blog</title>
+    <title>Spring Boot on Even - A super concise theme for Hugo</title>
     <link>https://isaacrolo.github.io/tags/spring-boot/</link>
-    <description>Recent content in Spring Boot on Rolo&#39;s Blog</description>
+    <description>Recent content in Spring Boot on Even - A super concise theme for Hugo</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>zn-CN</language>
-    <lastBuildDate>Thu, 21 Mar 2019 14:06:47 +0800</lastBuildDate>
+    <language>en</language>
+    <lastBuildDate>Thu, 25 Apr 2019 15:16:43 +0800</lastBuildDate>
     
 	<atom:link href="https://isaacrolo.github.io/tags/spring-boot/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Springboot Note</title>
+      <link>https://isaacrolo.github.io/posts/springboot-note/</link>
+      <pubDate>Thu, 25 Apr 2019 15:16:43 +0800</pubDate>
+      
+      <guid>https://isaacrolo.github.io/posts/springboot-note/</guid>
+      <description>创建多个yml配置文件时，需要用到@PropertySource注解，但是该注解却不支持解析yml配置文件（默认支持解析properties</description>
+    </item>
     
     <item>
       <title>RestTemplate</title>
@@ -17,7 +26,7 @@
       <pubDate>Thu, 21 Mar 2019 14:06:47 +0800</pubDate>
       
       <guid>https://isaacrolo.github.io/posts/resttemplate/</guid>
-      <description>RestTemplate @Test public void restTemplatePost() { String url = &amp;quot;http://127.0.0.1/trusted&amp;quot;; RestTemplate restTemplate = new RestTemplate(); HttpHeaders headers = new HttpHeaders(); headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED); MultiValueMap&amp;lt;String, String&amp;gt; params = new LinkedMultiValueMap&amp;lt;&amp;gt;(); params.add(&amp;quot;username&amp;quot;, &amp;quot;admin&amp;quot;); HttpEntity&amp;lt;MultiValueMap&amp;lt;String, String&amp;gt;&amp;gt; requestEntity = new HttpEntity&amp;lt;&amp;gt;(params, headers); String result = restTemplate.postForObject(url, requestEntity, String.class); System.out.println(result); } HttpClient 普通的post请求 @Test public void httpClientPost() throws IOException { CloseableHttpClient client = HttpClients.createDefault(); HttpPost httpPost = new HttpPost(&amp;quot;http://localhost:8080/post&amp;quot;);</description>
+      <description>RestTemplate 1 2 3 4 5 6 7 8 9 10 11 12 @Test public void restTemplatePost() { String url = &amp;#34;http://127.0.0.1/trusted&amp;#34;; RestTemplate restTemplate = new RestTemplate(); HttpHeaders headers = new HttpHeaders(); headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED); MultiValueMap&amp;lt;String, String&amp;gt; params = new LinkedMultiValueMap&amp;lt;&amp;gt;(); params.add(&amp;#34;username&amp;#34;, &amp;#34;admin&amp;#34;); HttpEntity&amp;lt;MultiValueMap&amp;lt;String, String&amp;gt;&amp;gt; requestEntity = new HttpEntity&amp;lt;&amp;gt;(params, headers); String result = restTemplate.postForObject(url, requestEntity, String.class); System.out.println(result); } HttpClient 普通的post请求 1 2 3 4</description>
     </item>
     
   </channel>
