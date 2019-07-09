@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <title>Elasticsearch - Even - A super concise theme for Hugo</title>
+  <title>Elasticsearch - TouchFish</title>
   <meta name="renderer" content="webkit" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 
@@ -33,7 +33,7 @@
 <link rel="manifest" href="/manifest.json">
 <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
 
-
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 <link href="/dist/even.c2a46f00.min.css" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
 
@@ -73,7 +73,7 @@
 <body>
   <div id="mobile-navbar" class="mobile-navbar">
   <div class="mobile-header-logo">
-    <a href="/" class="logo">Even</a>
+    <a href="/" class="logo">Rolo</a>
   </div>
   <div class="mobile-navbar-icon">
     <span></span>
@@ -97,7 +97,7 @@
   <div class="container" id="mobile-panel">
     <header id="header" class="header">
         <div class="logo-wrapper">
-  <a href="/" class="logo">Even</a>
+  <a href="/" class="logo">Rolo</a>
 </div>
 
 <nav class="site-navbar">
@@ -128,7 +128,9 @@
         <div class="post-category">
             <a href="/categories//">  </a>
             </div>
-        
+          <span class="more-meta"> 477 words </span>
+          <span class="more-meta"> 1 min read </span>
+        <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> times read </span>
       </div>
     </header>
 
@@ -136,8 +138,6 @@
   <h2 class="post-toc-title">Contents</h2>
   <div class="post-toc-content always-active">
     <nav id="TableOfContents">
-<ul>
-<li>
 <ul>
 <li>
 <ul>
@@ -152,7 +152,6 @@
 <li><a href="#rest-high-level-client-api-官方文档-https-www-elastic-co-guide-en-elasticsearch-client-java-rest-6-4-java-rest-high-search-html">Rest High Level Client API【<a href="https://www.elastic.co/guide/en/elasticsearch/client/java-rest/6.4/java-rest-high-search.html">官方文档</a>】</a></li>
 </ul></li>
 </ul></li>
-</ul></li>
 </ul>
 </nav>
   </div>
@@ -160,15 +159,15 @@
     <div class="post-content">
       
 
-<h4 id="mongodb和elasticsearch的对比">MongoDB和Elasticsearch的对比</h4>
+<h3 id="mongodb和elasticsearch的对比">MongoDB和Elasticsearch的对比</h3>
 
 <p><a href="https://leriou.github.io/2019-01-09-mongodb-compareto-elasticsearch/">https://leriou.github.io/2019-01-09-mongodb-compareto-elasticsearch/</a></p>
 
-<h4 id="elasticsearch-2-x中文文档">Elasticsearch 2.x中文文档</h4>
+<h3 id="elasticsearch-2-x中文文档">Elasticsearch 2.x中文文档</h3>
 
 <p><a href="https://www.elastic.co/guide/cn/elasticsearch/guide/cn/_add-an-index.html">https://www.elastic.co/guide/cn/elasticsearch/guide/cn/_add-an-index.html</a></p>
 
-<h4 id="es-java-api的选择">ES java api的选择</h4>
+<h3 id="es-java-api的选择">ES java api的选择</h3>
 
 <ul>
 <li>TransportClient【ES7.0废弃】</li>
@@ -182,7 +181,7 @@
 <li>Spring Data Elasticsearch 【<a href="https://docs.spring.io/spring-boot/docs/2.1.2.RELEASE/reference/htmlsingle/#boot-features-connecting-to-elasticsearch-rest">SpingBoot官方文档</a>】</li>
 </ul>
 
-<h4 id="在docker中安装es">在docker中安装ES</h4>
+<h3 id="在docker中安装es">在docker中安装ES</h3>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code class="language-shell" data-lang="shell"><span class="lnt"> 1
@@ -215,7 +214,7 @@ curl -XPUT -u elastic <span class="s1">&#39;http://localhost:9200/_xpack/securit
 </div>
 <p><a href="https://github.com/jaywcjlove/docker-tutorial/blob/master/docker/elasticsearch.md">https://github.com/jaywcjlove/docker-tutorial/blob/master/docker/elasticsearch.md</a></p>
 
-<h4 id="依赖">依赖</h4>
+<h3 id="依赖">依赖</h3>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt"> 1
@@ -257,11 +256,11 @@ curl -XPUT -u elastic <span class="s1">&#39;http://localhost:9200/_xpack/securit
 </div>
 <p>使用了<code>spring-boot-starter-parent</code>作为maven的parent，在这个parent的dependencyManagement标签下有elasticsearch版本<code>&lt;elasticsearch.version&gt;2.4.6&lt;/elasticsearch.version&gt;</code>，与实际版本不一致</p>
 
-<h4 id="springboot整合-rest-high-level-client">Springboot整合 Rest High Level Client</h4>
+<h3 id="springboot整合-rest-high-level-client">Springboot整合 Rest High Level Client</h3>
 
 <p><a href="https://www.jianshu.com/p/0b4f5e41405e">https://www.jianshu.com/p/0b4f5e41405e</a></p>
 
-<h4 id="rest-high-level-client-api-官方文档-https-www-elastic-co-guide-en-elasticsearch-client-java-rest-6-4-java-rest-high-search-html">Rest High Level Client API【<a href="https://www.elastic.co/guide/en/elasticsearch/client/java-rest/6.4/java-rest-high-search.html">官方文档</a>】</h4>
+<h3 id="rest-high-level-client-api-官方文档-https-www-elastic-co-guide-en-elasticsearch-client-java-rest-6-4-java-rest-high-search-html">Rest High Level Client API【<a href="https://www.elastic.co/guide/en/elasticsearch/client/java-rest/6.4/java-rest-high-search.html">官方文档</a>】</h3>
 
 <ul>
 <li>基本增删改查</li>
@@ -322,19 +321,9 @@ curl -XPUT -u elastic <span class="s1">&#39;http://localhost:9200/_xpack/securit
     <footer id="footer" class="footer">
       <div class="social-links">
       <a href="mailto:your@email.com" class="iconfont icon-email" title="email"></a>
-      <a href="http://localhost:1313" class="iconfont icon-stack-overflow" title="stack-overflow"></a>
-      <a href="http://localhost:1313" class="iconfont icon-twitter" title="twitter"></a>
-      <a href="http://localhost:1313" class="iconfont icon-facebook" title="facebook"></a>
-      <a href="http://localhost:1313" class="iconfont icon-linkedin" title="linkedin"></a>
       <a href="http://localhost:1313" class="iconfont icon-google" title="google"></a>
-      <a href="http://localhost:1313" class="iconfont icon-github" title="github"></a>
+      <a href="https://github.com/IsaacRolo" class="iconfont icon-github" title="github"></a>
       <a href="http://localhost:1313" class="iconfont icon-weibo" title="weibo"></a>
-      <a href="http://localhost:1313" class="iconfont icon-zhihu" title="zhihu"></a>
-      <a href="http://localhost:1313" class="iconfont icon-douban" title="douban"></a>
-      <a href="http://localhost:1313" class="iconfont icon-pocket" title="pocket"></a>
-      <a href="http://localhost:1313" class="iconfont icon-tumblr" title="tumblr"></a>
-      <a href="http://localhost:1313" class="iconfont icon-instagram" title="instagram"></a>
-      <a href="http://localhost:1313" class="iconfont icon-gitlab" title="gitlab"></a>
       <a href="http://localhost:1313" class="iconfont icon-bilibili" title="bilibili"></a>
   <a href="https://isaacrolo.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
 </div>
@@ -349,7 +338,11 @@ curl -XPUT -u elastic <span class="s1">&#39;http://localhost:9200/_xpack/securit
     <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
   </span>
 
-  
+  <div class="busuanzi-footer">
+    <span id="busuanzi_container_site_pv"> site pv: <span id="busuanzi_value_site_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> </span>
+      <span class="division">|</span>
+    <span id="busuanzi_container_site_uv"> site uv: <span id="busuanzi_value_site_uv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> </span>
+  </div>
 
   <span class="copyright-year">
     &copy; 
