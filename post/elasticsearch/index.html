@@ -1,173 +1,83 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <title>Elasticsearch - TouchFish</title>
-  <meta name="renderer" content="webkit" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		
+		
+		<meta name="description" content="It&#39;s time to touch fish.">
+		<meta name="generator" content="Hugo 0.54.0" />
+		<title>Elasticsearch &middot; Rolo</title>
+		<link rel="shortcut icon" href="https://isaacrolo.github.io/images/favicon.ico">
+		<link rel="stylesheet" href="https://isaacrolo.github.io/css/style.css">
+		<link rel="stylesheet" href="https://isaacrolo.github.io/css/highlight.css">
 
-<meta http-equiv="Cache-Control" content="no-transform" />
-<meta http-equiv="Cache-Control" content="no-siteapp" />
+		
+		<link rel="stylesheet" href="https://isaacrolo.github.io/css/monosocialiconsfont.css">
+		
 
-<meta name="theme-color" content="#f8f5ec" />
-<meta name="msapplication-navbutton-color" content="#f8f5ec">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+		
 
+		
+	</head>
 
-<meta name="author" content="Rolo" /><meta name="description" content="MongoDB和Elasticsearch的对比 https://leriou.github.io/2019-01-09-mongodb-compareto-elasticsearch/ Elasticsearch 2.x中文文档 https://www.elastic.co/guide/cn/elasticsearch/guide/cn/_add-an-index.html ES java api的选择 TransportClient【ES7.0废弃】 RestClient Java Low Level" /><meta name="keywords" content="Hugo, theme, even" />
+    <body>
+       <nav class="main-nav">
+	
+	
+		<a href='https://isaacrolo.github.io/'> <span class="arrow">←</span>Home</a>
+	
+	<a href='https://isaacrolo.github.io/posts'>Archive</a>
+	<a href='https://isaacrolo.github.io/tags'>Tags</a>
+	<a href='https://isaacrolo.github.io/about'>About</a>
 
+	
 
-
-
-
-
-<meta name="generator" content="Hugo 0.54.0 with even 4.0.0" />
-
-
-<link rel="canonical" href="https://isaacrolo.github.io/post/elasticsearch/" />
-<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-<link rel="manifest" href="/manifest.json">
-<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
-
-<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-<link href="/dist/even.c2a46f00.min.css" rel="stylesheet">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
-
-
-<meta property="og:title" content="Elasticsearch" />
-<meta property="og:description" content="MongoDB和Elasticsearch的对比 https://leriou.github.io/2019-01-09-mongodb-compareto-elasticsearch/ Elasticsearch 2.x中文文档 https://www.elastic.co/guide/cn/elasticsearch/guide/cn/_add-an-index.html ES java api的选择 TransportClient【ES7.0废弃】 RestClient Java Low Level" />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="https://isaacrolo.github.io/post/elasticsearch/" />
-<meta property="article:published_time" content="2019-07-04T10:52:11&#43;08:00"/>
-<meta property="article:modified_time" content="2019-07-04T10:52:11&#43;08:00"/>
-
-<meta itemprop="name" content="Elasticsearch">
-<meta itemprop="description" content="MongoDB和Elasticsearch的对比 https://leriou.github.io/2019-01-09-mongodb-compareto-elasticsearch/ Elasticsearch 2.x中文文档 https://www.elastic.co/guide/cn/elasticsearch/guide/cn/_add-an-index.html ES java api的选择 TransportClient【ES7.0废弃】 RestClient Java Low Level">
-
-
-<meta itemprop="datePublished" content="2019-07-04T10:52:11&#43;08:00" />
-<meta itemprop="dateModified" content="2019-07-04T10:52:11&#43;08:00" />
-<meta itemprop="wordCount" content="477">
-
-
-
-<meta itemprop="keywords" content="," />
-<meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Elasticsearch"/>
-<meta name="twitter:description" content="MongoDB和Elasticsearch的对比 https://leriou.github.io/2019-01-09-mongodb-compareto-elasticsearch/ Elasticsearch 2.x中文文档 https://www.elastic.co/guide/cn/elasticsearch/guide/cn/_add-an-index.html ES java api的选择 TransportClient【ES7.0废弃】 RestClient Java Low Level"/>
-
-<!--[if lte IE 9]>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
-<![endif]-->
-
-<!--[if lt IE 9]>
-  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
-<![endif]-->
-
-</head>
-<body>
-  <div id="mobile-navbar" class="mobile-navbar">
-  <div class="mobile-header-logo">
-    <a href="/" class="logo">Rolo</a>
-  </div>
-  <div class="mobile-navbar-icon">
-    <span></span>
-    <span></span>
-    <span></span>
-  </div>
-</div>
-<nav id="mobile-menu" class="mobile-menu slideout-menu">
-  <ul class="mobile-menu-list">
-    <a href="/">
-        <li class="mobile-menu-item">Home</li>
-      </a><a href="/post/">
-        <li class="mobile-menu-item">Archives</li>
-      </a><a href="/tags/">
-        <li class="mobile-menu-item">Tags</li>
-      </a><a href="/categories/">
-        <li class="mobile-menu-item">Categories</li>
-      </a>
-  </ul>
+	
 </nav>
-  <div class="container" id="mobile-panel">
-    <header id="header" class="header">
-        <div class="logo-wrapper">
-  <a href="/" class="logo">Rolo</a>
-</div>
 
-<nav class="site-navbar">
-  <ul id="menu" class="menu">
-    <li class="menu-item">
-        <a class="menu-item-link" href="/">Home</a>
-      </li><li class="menu-item">
-        <a class="menu-item-link" href="/post/">Archives</a>
-      </li><li class="menu-item">
-        <a class="menu-item-link" href="/tags/">Tags</a>
-      </li><li class="menu-item">
-        <a class="menu-item-link" href="/categories/">Categories</a>
-      </li>
-  </ul>
-</nav>
-    </header>
 
-    <main id="main" class="main">
-      <div class="content-wrapper">
-        <div id="content" class="content">
-          <article class="post">
-    
-    <header class="post-header">
-      <h1 class="post-title">Elasticsearch</h1>
-
-      <div class="post-meta">
-        <span class="post-time"> 2019-07-04 </span>
-        <div class="post-category">
-            <a href="/categories//">  </a>
-            </div>
-          <span class="more-meta"> 477 words </span>
-          <span class="more-meta"> 1 min read </span>
-        <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> times read </span>
-      </div>
-    </header>
-
-    <div class="post-toc" id="post-toc">
-  <h2 class="post-toc-title">Contents</h2>
-  <div class="post-toc-content always-active">
-    <nav id="TableOfContents">
-<ul>
-<li>
-<ul>
-<li>
-<ul>
-<li><a href="#mongodb和elasticsearch的对比">MongoDB和Elasticsearch的对比</a></li>
-<li><a href="#elasticsearch-2-x中文文档">Elasticsearch 2.x中文文档</a></li>
-<li><a href="#es-java-api的选择">ES java api的选择</a></li>
-<li><a href="#在docker中安装es">在docker中安装ES</a></li>
-<li><a href="#依赖">依赖</a></li>
-<li><a href="#springboot整合-rest-high-level-client">Springboot整合 Rest High Level Client</a></li>
-<li><a href="#rest-high-level-client-api-官方文档-https-www-elastic-co-guide-en-elasticsearch-client-java-rest-6-4-java-rest-high-search-html">Rest High Level Client API【<a href="https://www.elastic.co/guide/en/elasticsearch/client/java-rest/6.4/java-rest-high-search.html">官方文档</a>】</a></li>
-</ul></li>
-</ul></li>
-</ul>
-</nav>
-  </div>
-</div>
-    <div class="post-content">
-      
+        <section id="wrapper" class="post">
+            <article>
+                <header>
+                    <h1>
+                        Elasticsearch
+                    </h1>
+                    <h2 class="headline">
+                    Jul 4, 2019 10:52
+                    · 709 words
+                    · 2 minute read
+                      <span class="tags">
+                      
+                      
+                          
+                              <a href="https://isaacrolo.github.io/tags/"></a>
+                          
+                      
+                      
+                      </span>
+                    </h2>
+                </header>
+                
+                <section id="post-body">
+                    
 
 <h3 id="mongodb和elasticsearch的对比">MongoDB和Elasticsearch的对比</h3>
+
+<hr />
 
 <p><a href="https://leriou.github.io/2019-01-09-mongodb-compareto-elasticsearch/">https://leriou.github.io/2019-01-09-mongodb-compareto-elasticsearch/</a></p>
 
 <h3 id="elasticsearch-2-x中文文档">Elasticsearch 2.x中文文档</h3>
 
+<hr />
+
 <p><a href="https://www.elastic.co/guide/cn/elasticsearch/guide/cn/_add-an-index.html">https://www.elastic.co/guide/cn/elasticsearch/guide/cn/_add-an-index.html</a></p>
 
 <h3 id="es-java-api的选择">ES java api的选择</h3>
+
+<hr />
 
 <ul>
 <li>TransportClient【ES7.0废弃】</li>
@@ -181,7 +91,49 @@
 <li>Spring Data Elasticsearch 【<a href="https://docs.spring.io/spring-boot/docs/2.1.2.RELEASE/reference/htmlsingle/#boot-features-connecting-to-elasticsearch-rest">SpingBoot官方文档</a>】</li>
 </ul>
 
+<h3 id="概念">概念</h3>
+
+<hr />
+
+<ul>
+<li>索引</li>
+</ul>
+
+<p>索引实际上是指向一个或者多个物理 <em>分片</em> 的 <em>逻辑命名空间</em> 。</p>
+
+<ul>
+<li>分片</li>
+</ul>
+
+<p>一个<em>分片</em> 是一个底层的 <em>工作单元</em> ，它仅保存了 全部数据中的一部分</p>
+
+<ul>
+<li>主/副本分片</li>
+</ul>
+
+<p>一个副本分片只是一个主分片的拷贝。 副本分片作为硬件故障时保护数据不丢失的冗余备份，并为搜索和返回文档等读操作提供服务。</p>
+
+<p>在索引建立的时候就已经确定了主分片数，但是副本分片数可以随时修改。</p>
+
+<ul>
+<li>映射Mapping</li>
+</ul>
+
+<p>Elasticsearch 需要知道每个域中数据的类型。这个信息包含在映射中。</p>
+
+<p>Elasticsearch 支持 如下简单域类型：</p>
+
+<ul>
+<li>字符串: <code>string</code></li>
+<li>整数 : <code>byte</code>, <code>short</code>, <code>integer</code>, <code>long</code></li>
+<li>浮点数: <code>float</code>, <code>double</code></li>
+<li>布尔型: <code>boolean</code></li>
+<li>日期: <code>date</code></li>
+</ul>
+
 <h3 id="在docker中安装es">在docker中安装ES</h3>
+
+<hr />
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code class="language-shell" data-lang="shell"><span class="lnt"> 1
@@ -215,6 +167,8 @@ curl -XPUT -u elastic <span class="s1">&#39;http://localhost:9200/_xpack/securit
 <p><a href="https://github.com/jaywcjlove/docker-tutorial/blob/master/docker/elasticsearch.md">https://github.com/jaywcjlove/docker-tutorial/blob/master/docker/elasticsearch.md</a></p>
 
 <h3 id="依赖">依赖</h3>
+
+<hr />
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt"> 1
@@ -258,9 +212,13 @@ curl -XPUT -u elastic <span class="s1">&#39;http://localhost:9200/_xpack/securit
 
 <h3 id="springboot整合-rest-high-level-client">Springboot整合 Rest High Level Client</h3>
 
+<hr />
+
 <p><a href="https://www.jianshu.com/p/0b4f5e41405e">https://www.jianshu.com/p/0b4f5e41405e</a></p>
 
 <h3 id="rest-high-level-client-api-官方文档-https-www-elastic-co-guide-en-elasticsearch-client-java-rest-6-4-java-rest-high-search-html">Rest High Level Client API【<a href="https://www.elastic.co/guide/en/elasticsearch/client/java-rest/6.4/java-rest-high-search.html">官方文档</a>】</h3>
+
+<hr />
 
 <ul>
 <li>基本增删改查</li>
@@ -273,98 +231,33 @@ curl -XPUT -u elastic <span class="s1">&#39;http://localhost:9200/_xpack/securit
 </ul></li>
 </ul>
 
-    </div>
+                </section>
+            </article>
 
-    <div class="post-copyright">
-  <p class="copyright-item">
-    <span class="item-title">Author</span>
-    <span class="item-content">Rolo</span>
-  </p>
-  <p class="copyright-item">
-    <span class="item-title">LastMod</span>
-    <span class="item-content">
-        2019-07-04
-        
-    </span>
-  </p>
-  
-  
-</div>
-<footer class="post-footer">
-      <div class="post-tags">
-          <a href="/tags//"></a>
-          </div>
-      <nav class="post-nav">
-        <a class="prev" href="/post/test/">
-            <i class="iconfont icon-left"></i>
-            <span class="prev-text nav-default">Test</span>
-            <span class="prev-text nav-mobile">Prev</span>
-          </a>
-        <a class="next" href="/post/tableau/">
-            <span class="next-text nav-default">Tableau发布视图，并在页面中展示</span>
-            <span class="next-text nav-mobile">Next</span>
-            <i class="iconfont icon-right"></i>
-          </a>
-      </nav>
-    </footer>
-  </article>
-        </div>
-        
-  
-  
+            
 
-  
+            
 
-      </div>
-    </main>
+            
 
-    <footer id="footer" class="footer">
-      <div class="social-links">
-      <a href="mailto:your@email.com" class="iconfont icon-email" title="email"></a>
-      <a href="http://localhost:1313" class="iconfont icon-google" title="google"></a>
-      <a href="https://github.com/IsaacRolo" class="iconfont icon-github" title="github"></a>
-      <a href="http://localhost:1313" class="iconfont icon-weibo" title="weibo"></a>
-      <a href="http://localhost:1313" class="iconfont icon-bilibili" title="bilibili"></a>
-  <a href="https://isaacrolo.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
-</div>
+            <footer id="footer">
+    
+    <p class="small">
+    
+       © Copyright 2019 <i class="fa fa-heart" aria-hidden="true"></i> 
+    
+    </p>
+    <p class="small">
+        Powered by <a href="http://www.gohugo.io/">Hugo</a> Theme By <a href="https://github.com/nodejh/hugo-theme-cactus-plus">nodejh</a>
+    </p>
+</footer>
 
-<div class="copyright">
-  <span class="power-by">
-    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
-  </span>
-  <span class="division">|</span>
-  <span class="theme-info">
-    Theme - 
-    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
-  </span>
+        </section>
 
-  <div class="busuanzi-footer">
-    <span id="busuanzi_container_site_pv"> site pv: <span id="busuanzi_value_site_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> </span>
-      <span class="division">|</span>
-    <span id="busuanzi_container_site_uv"> site uv: <span id="busuanzi_value_site_uv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> </span>
-  </div>
-
-  <span class="copyright-year">
-    &copy; 
-    2017 - 
-    2019
-    <span class="heart">
-      <i class="iconfont icon-heart"></i>
-    </span>
-    <span class="author">Rolo</span>
-  </span>
-</div>
-    </footer>
-
-    <div class="back-to-top" id="back-to-top">
-      <i class="iconfont icon-up"></i>
-    </div>
-  </div>
-  
-  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
-<script type="text/javascript" src="/dist/even.26188efa.min.js"></script>
+        <script src="https://isaacrolo.github.io/js/jquery-3.3.1.min.js"></script>
+<script src="https://isaacrolo.github.io/js/main.js"></script>
+<script src="https://isaacrolo.github.io/js/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
 
 
 
@@ -372,6 +265,5 @@ curl -XPUT -u elastic <span class="s1">&#39;http://localhost:9200/_xpack/securit
 
 
 
-
-</body>
+    </body>
 </html>

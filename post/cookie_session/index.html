@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		
+		
+		<meta name="description" content="It&#39;s time to touch fish.">
+		<meta name="generator" content="Hugo 0.54.0" />
+		<title>Cookie_session &middot; Rolo</title>
+		<link rel="shortcut icon" href="https://isaacrolo.github.io/images/favicon.ico">
+		<link rel="stylesheet" href="https://isaacrolo.github.io/css/style.css">
+		<link rel="stylesheet" href="https://isaacrolo.github.io/css/highlight.css">
+
+		
+		<link rel="stylesheet" href="https://isaacrolo.github.io/css/monosocialiconsfont.css">
+		
+
+		
+
+		
+	</head>
+
+    <body>
+       <nav class="main-nav">
+	
+	
+		<a href='https://isaacrolo.github.io/'> <span class="arrow">←</span>Home</a>
+	
+	<a href='https://isaacrolo.github.io/posts'>Archive</a>
+	<a href='https://isaacrolo.github.io/tags'>Tags</a>
+	<a href='https://isaacrolo.github.io/about'>About</a>
+
+	
+
+	
+</nav>
+
+
+        <section id="wrapper" class="post">
+            <article>
+                <header>
+                    <h1>
+                        Cookie_session
+                    </h1>
+                    <h2 class="headline">
+                    May 20, 2019 19:30
+                    · 1095 words
+                    · 3 minute read
+                      <span class="tags">
+                      
+                      
+                          
+                              <a href="https://isaacrolo.github.io/tags/web">web</a>
+                          
+                      
+                      
+                      </span>
+                    </h2>
+                </header>
+                
+                <section id="post-body">
+                    
+
+<ul>
+<li>为什么在2个服务器之间来回请求，同一个服务器的sessionId会找不到</li>
+</ul>
+
+<p><strong>第一次请求【服务器A】</strong></p>
+
+<p><code>Response Headers</code></p>
+
+<p>Set-Cookie: JSESSIONID=4A8E119166F37F26FF1D8ACF38F9742C;path=/;HttpOnly</p>
+
+<p><strong>第二次请求【服务器B】</strong></p>
+
+<p><code>Response Headers</code></p>
+
+<p>Set-Cookie: JSESSIONID=<strong>1A08F620F659F860BF599FD37A51DCDD</strong>;path=/;HttpOnly</p>
+
+<p><code>Request Headers</code></p>
+
+<p>Cookie: JSESSIONID=4A8E119166F37F26FF1D8ACF38F9742C</p>
+
+<p><strong>第三次请求【服务器A】</strong></p>
+
+<p><code>Response Headers</code></p>
+
+<p>Set-Cookie: JSESSIONID=25F872DEA8145E2A6811ED212038478B;path=/;HttpOnly</p>
+
+<p><code>Request Headers</code></p>
+
+<p>Cookie: JSESSIONID=<strong>1A08F620F659F860BF599FD37A51DCDD</strong></p>
+
+<p>服务端找不到cookie中的jessionid，会创建新的session，并把sessionId存到客户端的cookie中</p>
+
+<h4 id="解决分布式系统session共享的问题-使用redis存储管理httpsession">解决分布式系统session共享的问题【使用Redis存储管理HttpSession】</h4>
+
+<hr />
+
+<h4 id="问题原因">问题原因</h4>
+
+<p>HttpSession是通过Servlet容器创建和管理的，像Tomcat/Jetty session都是保存在内存中的。而如果把web服务器搭建成分布式的集群，然后利用LVS或Nginx做负载均衡，那么来自同一用户的Http请求将有可能被分发到两个不同的web站点中去，从而导致session不一致的问题。</p>
+
+<h4 id="解决方法">解决方法</h4>
+
+<p>Spring Session提供了一套创建和管理Servlet HttpSession的方案，默认采用外置的Redis来存储Session数据，以此来解决Session共享的问题。</p>
+
+<h4 id="集成步骤">集成步骤</h4>
+
+<ul>
+<li>pom文件添加依赖</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-xml" data-lang="xml"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-xml" data-lang="xml">  <span class="nt">&lt;dependency&gt;</span>
+     <span class="nt">&lt;groupId&gt;</span>org.springframework.boot<span class="nt">&lt;/groupId&gt;</span>
+     <span class="nt">&lt;artifactId&gt;</span>spring-boot-starter-data-redis<span class="nt">&lt;/artifactId&gt;</span>
+  <span class="nt">&lt;/dependency&gt;</span>
+  
+  <span class="nt">&lt;dependency&gt;</span>
+     <span class="nt">&lt;groupId&gt;</span>org.springframework.session<span class="nt">&lt;/groupId&gt;</span>
+     <span class="nt">&lt;artifactId&gt;</span>spring-session-data-redis<span class="nt">&lt;/artifactId&gt;</span>
+  <span class="nt">&lt;/dependency&gt;</span></code></pre></td></tr></table>
+</div>
+</div>
+<ul>
+<li>application.yml配置redis连接</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-yaml" data-lang="yaml"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-yaml" data-lang="yaml"><span class="w">  </span>spring<span class="p">:</span><span class="w">
+</span><span class="w">    </span>redis<span class="p">:</span><span class="w">
+</span><span class="w">      </span>host<span class="p">:</span><span class="w"> </span><span class="m">10.10</span>.<span class="m">10.236</span><span class="w">
+</span><span class="w">      </span>password<span class="p">:</span><span class="w">
+</span><span class="w">      </span>port<span class="p">:</span><span class="w"> </span><span class="m">6379</span></code></pre></td></tr></table>
+</div>
+</div>
+<ul>
+<li>添加spring-session配置类【默认session最长有效时间1800s】</li>
+</ul>
+
+<p>实现原理：@EnableRedisHttpSession注解会创建一个Filter，过滤器中用Spring Session【Redis实现】来替换原先的默认HttpSession。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java">  <span class="nd">@Configuration</span>
+  <span class="nd">@EnableRedisHttpSession</span><span class="o">(</span><span class="n">maxInactiveIntervalInSeconds</span> <span class="o">=</span> <span class="n">3000</span><span class="o">)</span>
+  <span class="kd">public</span> <span class="kd">class</span> <span class="nc">SessionConfig</span> <span class="o">{</span>
+  <span class="o">}</span></code></pre></td></tr></table>
+</div>
+</div>
+<ul>
+<li>操作HttpSession</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java">      <span class="nd">@RequestMapping</span><span class="o">(</span><span class="s">&#34;/set&#34;</span><span class="o">)</span>
+      <span class="n">String</span> <span class="nf">set</span><span class="o">(</span><span class="n">HttpServletRequest</span> <span class="n">req</span><span class="o">)</span> <span class="o">{</span>
+          <span class="n">req</span><span class="o">.</span><span class="na">getSession</span><span class="o">().</span><span class="na">setAttribute</span><span class="o">(</span><span class="s">&#34;testKey&#34;</span><span class="o">,</span> <span class="s">&#34;testValue&#34;</span><span class="o">);</span>
+          <span class="k">return</span> <span class="s">&#34;设置session:testKey=testValue&#34;</span><span class="o">;</span>
+      <span class="o">}</span>
+  
+      <span class="nd">@RequestMapping</span><span class="o">(</span><span class="s">&#34;/query&#34;</span><span class="o">)</span>
+      <span class="n">String</span> <span class="nf">query</span><span class="o">(</span><span class="n">HttpServletRequest</span> <span class="n">req</span><span class="o">)</span> <span class="o">{</span>
+          <span class="n">Object</span> <span class="n">value</span> <span class="o">=</span> <span class="n">req</span><span class="o">.</span><span class="na">getSession</span><span class="o">().</span><span class="na">getAttribute</span><span class="o">(</span><span class="s">&#34;testKey&#34;</span><span class="o">);</span>
+          <span class="k">return</span> <span class="s">&#34;查询Session：\&#34;testKey\&#34;=&#34;</span> <span class="o">+</span> <span class="n">value</span><span class="o">;</span>
+      <span class="o">}</span></code></pre></td></tr></table>
+</div>
+</div>
+<h4 id="解决ajax跨域session丢失的问题">解决AJAX跨域session丢失的问题</h4>
+
+<hr />
+
+<ul>
+<li>ajax请求时将withCredentials设为true</li>
+</ul>
+
+<p>表示浏览器发请求时，发送Cookie和HTTP认证信息</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-javascript" data-lang="javascript"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-javascript" data-lang="javascript">  <span class="nx">$</span><span class="p">.</span><span class="nx">ajax</span><span class="p">({</span>
+      <span class="nx">type</span><span class="o">:</span> <span class="s2">&#34;GET&#34;</span><span class="p">,</span>
+      <span class="nx">dataType</span><span class="o">:</span> <span class="s2">&#34;text&#34;</span><span class="p">,</span>
+      <span class="nx">url</span><span class="o">:</span> <span class="s2">&#34;http://localhost:8032/&#34;</span><span class="p">,</span>
+      <span class="nx">xhrFields</span><span class="o">:</span> <span class="p">{</span>
+          <span class="nx">withCredentials</span><span class="o">:</span> <span class="kc">true</span>
+      <span class="p">},</span>
+      <span class="nx">success</span> <span class="o">:</span><span class="kd">function</span> <span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{}</span>
+  <span class="p">}</span><span class="err">）</span>
+</code></pre></td></tr></table>
+</div>
+</div>
+<ul>
+<li>zuul网关设置过滤器【继承ZuulFilter】</li>
+</ul>
+
+<p><code>Access-Control-Allow-Credentials</code>表示是否允许发送Cookie</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java">  <span class="n">response</span><span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">&#34;Access-Control-Allow-Origin&#34;</span><span class="o">,</span> <span class="s">&#34;http://localhost:8877&#34;</span><span class="o">);</span>
+  <span class="n">response</span><span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">&#34;Access-Control-Allow-Credentials&#34;</span><span class="o">,</span> <span class="s">&#34;true&#34;</span><span class="o">);</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>PS：如果要发送Cookie，<code>Access-Control-Allow-Origin</code>不能设为 *，必须指定明确的、与请求网页一致的域名</p>
+
+<h4 id="无状态的token认证">无状态的Token认证</h4>
+
+<hr />
+
+<h4 id="remember-me">Remember Me</h4>
+
+<hr />
+
+<p>系统默认位登录状态，跨session记录用户身份</p>
+
+<h4 id="登录次数限制">登录次数限制</h4>
+
+<hr />
+
+<h4 id="参考资料">参考资料</h4>
+
+<hr />
+
+<p><a href="http://www.ityouknow.com/it/2019/05/11/cookie-session.html">你真的了解 Cookie 和 Session 吗</a></p>
+
+<p><a href="https://blog.csdn.net/hansexploration/article/details/80314948">jsonp原理详解</a></p>
+
+<p><a href="https://www.jianshu.com/p/b5a96142fdd9">session共享问题</a></p>
+
+<p><a href="http://www.ruanyifeng.com/blog/2016/04/cors.html">跨域资源共享 CORS 详解</a></p>
+
+                </section>
+            </article>
+
+            
+
+            
+
+            
+
+            <footer id="footer">
+    
+    <p class="small">
+    
+       © Copyright 2019 <i class="fa fa-heart" aria-hidden="true"></i> 
+    
+    </p>
+    <p class="small">
+        Powered by <a href="http://www.gohugo.io/">Hugo</a> Theme By <a href="https://github.com/nodejh/hugo-theme-cactus-plus">nodejh</a>
+    </p>
+</footer>
+
+        </section>
+
+        <script src="https://isaacrolo.github.io/js/jquery-3.3.1.min.js"></script>
+<script src="https://isaacrolo.github.io/js/main.js"></script>
+<script src="https://isaacrolo.github.io/js/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+
+
+
+
+
+    </body>
+</html>

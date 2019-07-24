@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		
+		
+		<meta name="description" content="It&#39;s time to touch fish.">
+		<meta name="generator" content="Hugo 0.54.0" />
+		<title>Jsoup &middot; Rolo</title>
+		<link rel="shortcut icon" href="https://isaacrolo.github.io/images/favicon.ico">
+		<link rel="stylesheet" href="https://isaacrolo.github.io/css/style.css">
+		<link rel="stylesheet" href="https://isaacrolo.github.io/css/highlight.css">
+
+		
+		<link rel="stylesheet" href="https://isaacrolo.github.io/css/monosocialiconsfont.css">
+		
+
+		
+
+		
+	</head>
+
+    <body>
+       <nav class="main-nav">
+	
+	
+		<a href='https://isaacrolo.github.io/'> <span class="arrow">←</span>Home</a>
+	
+	<a href='https://isaacrolo.github.io/posts'>Archive</a>
+	<a href='https://isaacrolo.github.io/tags'>Tags</a>
+	<a href='https://isaacrolo.github.io/about'>About</a>
+
+	
+
+	
+</nav>
+
+
+        <section id="wrapper" class="post">
+            <article>
+                <header>
+                    <h1>
+                        Jsoup
+                    </h1>
+                    <h2 class="headline">
+                    Apr 24, 2019 14:05
+                    · 1017 words
+                    · 3 minute read
+                      <span class="tags">
+                      
+                      
+                          
+                              <a href="https://isaacrolo.github.io/tags/java">Java</a>
+                          
+                      
+                      
+                      </span>
+                    </h2>
+                </header>
+                
+                <section id="post-body">
+                    
+
+<h3 id="选择器的使用">选择器的使用</h3>
+
+<ul>
+<li>基本用法</li>
+</ul>
+
+<p>| tagname                                          | 使用标签名来定位，例如 a                                     |
+  | &mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash; | &mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash; |
+  | <strong>ns|tag</strong>                                      | 使用命名空间的标签定位，例如 fb:name 来查找 <a href="fb:name">fb:name</a> 元素   |
+  | <strong>#id</strong>                                          | 使用元素 id 定位，例如 #logo                                 |
+  | <strong>.class</strong>                                       | 使用元素的 class 属性定位，例如 .head                        |
+  | <strong>[attribute]</strong>                                  | 使用元素的属性进行定位，例如 [href] 表示检索具有 href 属性的所有元素 |
+  | <strong>[^attr]</strong>                                      | 使用元素的属性名前缀进行定位，例如 [^data-] 用来查找 HTML5 的 dataset 属性 |
+  | <strong>[attr=value]</strong>                                 | 使用属性值进行定位，例如 [width=500] 定位所有 width 属性值为 500 的元素 |
+  | <strong>[attr^=value], [attr$=value], [attr*=value]</strong> | 这三个语法分别代表，属性以 value 开头、结尾以及包含          |
+  | <strong>[attr~=regex]</strong>                                | 使用正则表达式进行属性值的过滤，例如 img[src~=(?i).(png|jpe?g)] |
+  | *****                                            | 定位所有元素                                                 |</p>
+
+<ul>
+<li>组合用法</li>
+</ul>
+
+<p>| el#id                   | 定位 id 值某个元素，例如 a#logo -&gt; <a id=logo href= … >      |
+  | &mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&ndash; | &mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash; |
+  | <strong>el.class</strong>            | 定位 class 为指定值的元素，例如 div.head -&gt; <div class=head>xxxx</div> |
+  | <strong>el[attr]</strong>            | 定位所有定义了某属性的元素，例如 a[href]                     |
+  | <strong>以上三个任意组合</strong>    | 例如 a[href]#logo 、a[name].outerlink                        |
+  | <strong>ancestor child</strong>      | 这五种都是元素之间组合关系的选择器语法，其中包括父子关系、合并关系和层次关系。 |
+  | <strong>parent &gt; child</strong>      |                                                              |
+  | <strong>siblingA + siblingB</strong> |                                                              |
+  | <strong>siblingA ~ siblingX</strong> |                                                              |
+  | <strong>el, el, el</strong>          |                                                              |</p>
+
+<ul>
+<li>表达式(使用表达式进行元素过滤选择)</li>
+</ul>
+
+<p>| :lt(n)                 | 例如 td:lt(3) 表示 小于三列                              |
+  | &mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;- | &mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&ndash; |
+  | <strong>:gt(n)</strong>             | div p:gt(2) 表示 div 中包含 2 个以上的 p                 |
+  | <strong>:eq(n)</strong>             | form input:eq(1) 表示只包含一个 input 的表单             |
+  | <strong>:has(seletor)</strong>      | div:has(p) 表示包含了 p 元素的 div                       |
+  | <strong>:not(selector)</strong>     | div:not(.logo) 表示不包含 class=logo 元素的所有 div 列表 |
+  | <strong>:contains(text)</strong>    | 包含某文本的元素，不区分大小写，例如 p:contains(oschina) |
+  | <strong>:containsOwn(text)</strong> | 文本信息完全等于指定条件的过滤                           |
+  | <strong>:matches(regex)</strong>    | 使用正则表达式进行文本过滤：div:matches((?i)login)       |
+  | <strong>:matchesOwn(regex)</strong> | 使用正则表达式找到自身的文本                             |</p>
+
+<h3 id="爬虫遇到的坑">爬虫遇到的坑</h3>
+
+<ol>
+<li>div的id是动态的,如何取到对应div的element?</li>
+</ol>
+
+<p>前缀匹配属性名: div[class^=cell from_]</p>
+
+<p>正则匹配属性名: div[class~=cell from_\d\d\d\d\d\d]</p>
+
+<p>匹配到的div有多个(Elements),遍历得到Element,再使用选择器获取div内部的元素</p>
+
+<ol>
+<li>选择器解析html可以不用从根DOM节点开始解析，可以直接找有特殊属性的节点</li>
+</ol>
+
+<p><code>body &gt; div[id=wrapper] &gt; div.content &gt; div[id=Rightbar] &gt; div[id=TopicsHot] &gt;div.cell &gt;span</code></p>
+
+<p><code>div[id=TopicsHot] &gt;div.cell &gt;span</code></p>
+
+<ol>
+<li><p>选择器解析html时要按照dom树的层级进行选择，不能越级</p></li>
+
+<li><p>动态生成的数据（js，jq，ajax）无法获取</p></li>
+</ol>
+
+<p>找到对应异步请求的url，再次发送请求获取需要的数据</p>
+
+<p><strong>ps：</strong>下载图片时可能会遇到HTTP 403 Forbidden错误（表示资源不可用）</p>
+
+<p>原因：网站验证用户了是从哪个页面转来的，直接访问会被拒绝；抓包可以看到http请求头中的Referer字段，可以防止盗链</p>
+
+<p>解决方法：下载图片时，伪造Referer字段</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java">   <span class="n">URL</span> <span class="n">url</span> <span class="o">=</span> <span class="k">new</span> <span class="n">URL</span><span class="o">(</span><span class="n">imgUrl</span><span class="o">);</span>
+   <span class="n">URLConnection</span> <span class="n">urlConnection</span> <span class="o">=</span> <span class="n">url</span><span class="o">.</span><span class="na">openConnection</span><span class="o">();</span>
+   <span class="n">urlConnection</span><span class="o">.</span><span class="na">setRequestProperty</span><span class="o">(</span><span class="s">&#34;Referer&#34;</span><span class="o">,</span><span class="s">&#34;https://www.xxxx.com&#34;</span><span class="o">);</span>
+   <span class="n">bufferedInputStream</span> <span class="o">=</span> <span class="k">new</span> <span class="n">BufferedInputStream</span><span class="o">(</span><span class="n">urlConnection</span><span class="o">.</span><span class="na">getInputStream</span><span class="o">());</span></code></pre></td></tr></table>
+</div>
+</div>
+<p><a href="https://www.jb51.net/article/113502.htm">https://www.jb51.net/article/113502.htm</a></p>
+
+<p><a href="https://www.iteye.com/problems/102500">https://www.iteye.com/problems/102500</a></p>
+
+<h3 id="参考资料">参考资料</h3>
+
+<p><a href="https://jsoup.org/apidocs/org/jsoup/select/Selector.html">jsoup官方API</a></p>
+
+<p><a href="https://www.ibm.com/developerworks/cn/java/j-lo-jsouphtml/">https://www.ibm.com/developerworks/cn/java/j-lo-jsouphtml/</a></p>
+
+<p><a href="https://www.liaoxuefeng.com/wiki/001374738125095c955c1e6d8bb493182103fac9270762a000/001386832260566c26442c671fa489ebc6fe85badda25cd000">正则表达式</a></p>
+
+<p><a href="https://github.com/doocs/spider">爬虫项目参考</a></p>
+
+                </section>
+            </article>
+
+            
+
+            
+
+            
+
+            <footer id="footer">
+    
+    <p class="small">
+    
+       © Copyright 2019 <i class="fa fa-heart" aria-hidden="true"></i> 
+    
+    </p>
+    <p class="small">
+        Powered by <a href="http://www.gohugo.io/">Hugo</a> Theme By <a href="https://github.com/nodejh/hugo-theme-cactus-plus">nodejh</a>
+    </p>
+</footer>
+
+        </section>
+
+        <script src="https://isaacrolo.github.io/js/jquery-3.3.1.min.js"></script>
+<script src="https://isaacrolo.github.io/js/main.js"></script>
+<script src="https://isaacrolo.github.io/js/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+
+
+
+
+
+    </body>
+</html>

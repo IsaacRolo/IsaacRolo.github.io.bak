@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Java on TouchFish</title>
+    <title>Java on Rolo</title>
     <link>https://isaacrolo.github.io/tags/java/</link>
-    <description>Recent content in Java on TouchFish</description>
+    <description>Recent content in Java on Rolo</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <lastBuildDate>Wed, 24 Apr 2019 14:05:11 +0800</lastBuildDate>
@@ -13,11 +13,29 @@
     
     <item>
       <title>Jsoup</title>
+      <link>https://isaacrolo.github.io/post/jsoup/</link>
+      <pubDate>Wed, 24 Apr 2019 14:05:11 +0800</pubDate>
+      
+      <guid>https://isaacrolo.github.io/post/jsoup/</guid>
+      <description>选择器的使用 基本用法 | tagname | 使用标签名来定位，例如 a | | &amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash; | &amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash; | | ns|tag | 使用命名空间的标签定位，例如 fb:name 来查找 fb:name 元素 | | #id | 使用元素 id 定位，例如 #logo</description>
+    </item>
+    
+    <item>
+      <title>Jsoup</title>
       <link>https://isaacrolo.github.io/posts/jsoup/</link>
       <pubDate>Wed, 24 Apr 2019 14:05:11 +0800</pubDate>
       
       <guid>https://isaacrolo.github.io/posts/jsoup/</guid>
       <description>选择器的使用 基本用法 | tagname | 使用标签名来定位，例如 a | | &amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash; | &amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash; | | ns|tag | 使用命名空间的标签定位，例如 fb:name 来查找 fb:name 元素 | | #id | 使用元素 id 定位，例如 #logo</description>
+    </item>
+    
+    <item>
+      <title>垃圾收集器与内存分配策略</title>
+      <link>https://isaacrolo.github.io/post/jvm3/</link>
+      <pubDate>Thu, 28 Mar 2019 20:36:54 +0800</pubDate>
+      
+      <guid>https://isaacrolo.github.io/post/jvm3/</guid>
+      <description>垃圾收集器主要作用于内存的哪部分？ 不考虑回收：程序计数器，虚拟机栈，本地方法栈 原因：方法结束或线程结束时，内存自然会回收 回收：堆，方法区 原因</description>
     </item>
     
     <item>

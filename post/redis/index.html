@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		
+		
+		<meta name="description" content="It&#39;s time to touch fish.">
+		<meta name="generator" content="Hugo 0.54.0" />
+		<title>Redis &middot; Rolo</title>
+		<link rel="shortcut icon" href="https://isaacrolo.github.io/images/favicon.ico">
+		<link rel="stylesheet" href="https://isaacrolo.github.io/css/style.css">
+		<link rel="stylesheet" href="https://isaacrolo.github.io/css/highlight.css">
+
+		
+		<link rel="stylesheet" href="https://isaacrolo.github.io/css/monosocialiconsfont.css">
+		
+
+		
+
+		
+	</head>
+
+    <body>
+       <nav class="main-nav">
+	
+	
+		<a href='https://isaacrolo.github.io/'> <span class="arrow">←</span>Home</a>
+	
+	<a href='https://isaacrolo.github.io/posts'>Archive</a>
+	<a href='https://isaacrolo.github.io/tags'>Tags</a>
+	<a href='https://isaacrolo.github.io/about'>About</a>
+
+	
+
+	
+</nav>
+
+
+        <section id="wrapper" class="post">
+            <article>
+                <header>
+                    <h1>
+                        Redis
+                    </h1>
+                    <h2 class="headline">
+                    Jul 18, 2019 10:55
+                    · 1461 words
+                    · 3 minute read
+                      <span class="tags">
+                      
+                      
+                          
+                              <a href="https://isaacrolo.github.io/tags/redis">Redis</a>
+                          
+                      
+                      
+                      </span>
+                    </h2>
+                </header>
+                
+                <section id="post-body">
+                    
+
+<h3 id="概念">概念</h3>
+
+<h3 id="数据类型">数据类型</h3>
+
+<ul>
+<li>String（字符串）</li>
+</ul>
+
+<p>string是redis最基本的类型，一个key对应一个value。string类型是Redis最基本的数据类型，一个键最大能存储512MB。</p>
+
+<ul>
+<li><p>Hash（哈希）</p></li>
+
+<li><p>List（列表）</p></li>
+
+<li><p>Set（集合）</p></li>
+
+<li><p>zset（sorted set：有序集合）</p></li>
+</ul>
+
+<h3 id="使用场景">使用场景</h3>
+
+<ul>
+<li>作为session缓存服务器，解决分布式系统session共享的问题（读取量大，临时性高）</li>
+<li>存放用户输入密码错误次数，以及锁定状态（临时性高）</li>
+<li>作为计数器，存放浏览量，播放量，商品库存 等数据（实时性，并发性，原子性的自增操作）</li>
+<li>排行榜，如商品销量榜单（zset数据类型）</li>
+<li>共同好友（集合的命令，如求交集、并集、差集）</li>
+<li>到货通知、邮件发送（消息队列，list数据类型）</li>
+</ul>
+
+<h3 id="springboot整合redis">Springboot整合redis</h3>
+
+<h4 id="redistemplate的序列化方式">RedisTemplate的序列化方式</h4>
+
+<hr />
+
+<ul>
+<li>RedisTemplate默认采用的是JDK的序列化策略</li>
+<li>StringRedisTemplate默认采用的是String的序列化策略</li>
+</ul>
+
+<p>Q：使用RedisTemplate 存储后的键出现 \x  十六进制编码</p>
+
+<p>A：修改RedisTemplate默认的序列化策略</p>
+
+<h4 id="spring缓存相关注解">Spring缓存相关注解</h4>
+
+<hr />
+
+<ul>
+<li><strong>@Cacheable</strong></li>
+</ul>
+
+<p>@Cacheable(value=”testcache”,key=”#userName”,condition=”#userName.length()&gt;2”)</p>
+
+<p>主要针对方法配置，能够根据方法的请求参数对其结果进行缓存</p>
+
+<ul>
+<li><strong>@CachePut</strong></li>
+</ul>
+
+<p>主要针对方法配置，能够根据方法的请求参数对其结果进行缓存，和 @Cacheable 不同的是，它每次都会触发真实方法的调用</p>
+
+<ul>
+<li><strong>@CacheEvict</strong></li>
+</ul>
+
+<p>主要针对方法配置，能够根据一定的条件对缓存进行清空</p>
+
+<ul>
+<li><strong>@CacheConfig</strong></li>
+</ul>
+
+<p>统一申明类中方法@Cacheable注解的value属性</p>
+
+<h4 id="集成步骤">集成步骤</h4>
+
+<hr />
+
+<h5 id="依赖">依赖</h5>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-xml" data-lang="xml"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-xml" data-lang="xml"><span class="nt">&lt;dependency&gt;</span>
+    <span class="nt">&lt;groupId&gt;</span>org.springframework.boot<span class="nt">&lt;/groupId&gt;</span>
+    <span class="nt">&lt;artifactId&gt;</span>spring-boot-starter-data-redis<span class="nt">&lt;/artifactId&gt;</span>
+<span class="nt">&lt;/dependency&gt;</span></code></pre></td></tr></table>
+</div>
+</div>
+<h5 id="配置文件">配置文件</h5>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-yaml" data-lang="yaml"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-yaml" data-lang="yaml">spring<span class="p">:</span><span class="w">
+</span><span class="w">  </span>redis<span class="p">:</span><span class="w">
+</span><span class="w">    </span>host<span class="p">:</span><span class="w"> </span><span class="m">192.168</span>.<span class="m">10.202</span><span class="w">
+</span><span class="w">    </span>password<span class="p">:</span><span class="w">
+</span><span class="w">    </span>port<span class="p">:</span><span class="w"> </span><span class="m">6379</span></code></pre></td></tr></table>
+</div>
+</div>
+<h5 id="cache配置类">cache配置类</h5>
+
+<ul>
+<li>使用@EnableCaching注解开启缓存</li>
+<li>替换默认序列化规则</li>
+<li>重写默认的key生成器（避免缓存key冲突）</li>
+<li>配置缓存默认失效时间</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="nd">@EnableCaching</span>
+<span class="nd">@Configuration</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">RedisCacheConfig</span> <span class="kd">extends</span> <span class="n">CachingConfigurerSupport</span> <span class="o">{</span>
+
+    <span class="nd">@Autowired</span>
+    <span class="kd">private</span> <span class="n">JedisConnectionFactory</span> <span class="n">jedisConnectionFactory</span><span class="o">;</span>
+
+    <span class="nd">@Bean</span>
+    <span class="kd">public</span> <span class="n">RedisTemplate</span><span class="o">&lt;</span><span class="n">Object</span><span class="o">,</span> <span class="n">Object</span><span class="o">&gt;</span> <span class="nf">redisTemplate</span><span class="o">(</span><span class="n">RedisConnectionFactory</span> <span class="n">redisConnectionFactory</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">RedisTemplate</span><span class="o">&lt;</span><span class="n">Object</span><span class="o">,</span> <span class="n">Object</span><span class="o">&gt;</span> <span class="n">redisTemplate</span> <span class="o">=</span> <span class="k">new</span> <span class="n">RedisTemplate</span><span class="o">&lt;&gt;();</span>
+        <span class="n">redisTemplate</span><span class="o">.</span><span class="na">setConnectionFactory</span><span class="o">(</span><span class="n">redisConnectionFactory</span><span class="o">);</span>
+        <span class="c1">// 使用Jackson2JsonRedisSerialize 替换默认序列化
+</span><span class="c1"></span>        <span class="n">Jackson2JsonRedisSerializer</span> <span class="n">jackson2JsonRedisSerializer</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Jackson2JsonRedisSerializer</span><span class="o">(</span><span class="n">Object</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
+        <span class="n">ObjectMapper</span> <span class="n">objectMapper</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ObjectMapper</span><span class="o">();</span>
+        <span class="n">objectMapper</span><span class="o">.</span><span class="na">setVisibility</span><span class="o">(</span><span class="n">PropertyAccessor</span><span class="o">.</span><span class="na">ALL</span><span class="o">,</span> <span class="n">JsonAutoDetect</span><span class="o">.</span><span class="na">Visibility</span><span class="o">.</span><span class="na">ANY</span><span class="o">);</span>
+        <span class="n">objectMapper</span><span class="o">.</span><span class="na">enableDefaultTyping</span><span class="o">(</span><span class="n">ObjectMapper</span><span class="o">.</span><span class="na">DefaultTyping</span><span class="o">.</span><span class="na">NON_FINAL</span><span class="o">);</span>
+        <span class="n">jackson2JsonRedisSerializer</span><span class="o">.</span><span class="na">setObjectMapper</span><span class="o">(</span><span class="n">objectMapper</span><span class="o">);</span>
+        <span class="c1">// 设置value的序列化规则和 key的序列化规则
+</span><span class="c1"></span>        <span class="n">redisTemplate</span><span class="o">.</span><span class="na">setValueSerializer</span><span class="o">(</span><span class="n">jackson2JsonRedisSerializer</span><span class="o">);</span>
+        <span class="n">redisTemplate</span><span class="o">.</span><span class="na">setKeySerializer</span><span class="o">(</span><span class="k">new</span> <span class="n">StringRedisSerializer</span><span class="o">());</span>
+        <span class="n">redisTemplate</span><span class="o">.</span><span class="na">setHashKeySerializer</span><span class="o">(</span><span class="n">jackson2JsonRedisSerializer</span><span class="o">);</span>
+        <span class="n">redisTemplate</span><span class="o">.</span><span class="na">setHashValueSerializer</span><span class="o">(</span><span class="n">jackson2JsonRedisSerializer</span><span class="o">);</span>
+        <span class="n">redisTemplate</span><span class="o">.</span><span class="na">setDefaultSerializer</span><span class="o">(</span><span class="n">jackson2JsonRedisSerializer</span><span class="o">);</span>
+        <span class="n">redisTemplate</span><span class="o">.</span><span class="na">setEnableDefaultSerializer</span><span class="o">(</span><span class="kc">true</span><span class="o">);</span>
+        <span class="n">redisTemplate</span><span class="o">.</span><span class="na">afterPropertiesSet</span><span class="o">();</span>
+        <span class="k">return</span> <span class="n">redisTemplate</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="nd">@Bean</span>
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="n">KeyGenerator</span> <span class="nf">keyGenerator</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="o">(</span><span class="n">target</span><span class="o">,</span> <span class="n">method</span><span class="o">,</span> <span class="n">objects</span><span class="o">)</span> <span class="o">-&gt;</span> <span class="o">{</span>
+            <span class="n">StringBuilder</span> <span class="n">sb</span> <span class="o">=</span> <span class="k">new</span> <span class="n">StringBuilder</span><span class="o">();</span>
+            <span class="n">sb</span><span class="o">.</span><span class="na">append</span><span class="o">(</span><span class="n">target</span><span class="o">.</span><span class="na">getClass</span><span class="o">().</span><span class="na">getName</span><span class="o">());</span>
+            <span class="n">sb</span><span class="o">.</span><span class="na">append</span><span class="o">(</span><span class="s">&#34;::&#34;</span> <span class="o">+</span> <span class="n">method</span><span class="o">.</span><span class="na">getName</span><span class="o">()</span> <span class="o">+</span> <span class="s">&#34;:&#34;</span><span class="o">);</span>
+            <span class="k">for</span> <span class="o">(</span><span class="n">Object</span> <span class="n">obj</span> <span class="o">:</span> <span class="n">objects</span><span class="o">)</span> <span class="o">{</span>
+                <span class="n">sb</span><span class="o">.</span><span class="na">append</span><span class="o">(</span><span class="n">obj</span><span class="o">.</span><span class="na">toString</span><span class="o">());</span>
+            <span class="o">}</span>
+            <span class="k">return</span> <span class="n">sb</span><span class="o">.</span><span class="na">toString</span><span class="o">();</span>
+        <span class="o">};</span>
+    <span class="o">}</span>
+    
+    <span class="nd">@Bean</span>
+    <span class="kd">public</span> <span class="n">CacheManager</span> <span class="nf">cacheManager</span><span class="o">()</span> <span class="o">{</span>
+        <span class="n">String</span><span class="o">[]</span> <span class="n">cacheNames</span> <span class="o">=</span> <span class="o">{</span><span class="s">&#34;app_default&#34;</span><span class="o">,</span> <span class="s">&#34;users&#34;</span><span class="o">,</span> <span class="s">&#34;blogs&#34;</span><span class="o">,</span> <span class="s">&#34;goods&#34;</span><span class="o">,</span> <span class="s">&#34;configs&#34;</span><span class="o">,</span> <span class="s">&#34;info&#34;</span><span class="o">};</span>
+        <span class="n">RedisCacheManager</span> <span class="n">redisCacheManager</span> <span class="o">=</span> <span class="k">new</span> <span class="n">RedisCacheManager</span><span class="o">(</span><span class="n">redisTemplate</span><span class="o">(),</span> <span class="n">Arrays</span><span class="o">.</span><span class="na">asList</span><span class="o">(</span><span class="n">cacheNames</span><span class="o">));</span>
+        <span class="c1">//缓存默认失效时间设为60s
+</span><span class="c1"></span>        <span class="n">redisCacheManager</span><span class="o">.</span><span class="na">setDefaultExpiration</span><span class="o">(</span><span class="n">60</span><span class="o">);</span>
+        <span class="k">return</span> <span class="n">redisCacheManager</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span></code></pre></td></tr></table>
+</div>
+</div>
+<hr />
+
+<p><strong>PS</strong>：当@Cacheable注解不指定缓存的key时，Springboot会使用<code>SimpleKeyGenerator.class</code>生成key</p>
+
+<p>查看<strong>源码</strong>可知，默认的key是使用<strong>方法参数</strong>组合生成。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">SimpleKeyGenerator</span> <span class="kd">implements</span> <span class="n">KeyGenerator</span> <span class="o">{</span>
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="n">Object</span> <span class="nf">generate</span><span class="o">(</span><span class="n">Object</span> <span class="n">target</span><span class="o">,</span> <span class="n">Method</span> <span class="n">method</span><span class="o">,</span> <span class="n">Object</span><span class="o">...</span> <span class="n">params</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">generateKey</span><span class="o">(</span><span class="n">params</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="cm">/**
+</span><span class="cm">     * Generate a key based on the specified parameters.
+</span><span class="cm">     */</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="n">Object</span> <span class="nf">generateKey</span><span class="o">(</span><span class="n">Object</span><span class="o">...</span> <span class="n">params</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">params</span><span class="o">.</span><span class="na">length</span> <span class="o">==</span> <span class="n">0</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">return</span> <span class="n">SimpleKey</span><span class="o">.</span><span class="na">EMPTY</span><span class="o">;</span>
+        <span class="o">}</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">params</span><span class="o">.</span><span class="na">length</span> <span class="o">==</span> <span class="n">1</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">Object</span> <span class="n">param</span> <span class="o">=</span> <span class="n">params</span><span class="o">[</span><span class="n">0</span><span class="o">];</span>
+            <span class="k">if</span> <span class="o">(</span><span class="n">param</span> <span class="o">!=</span> <span class="kc">null</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="n">param</span><span class="o">.</span><span class="na">getClass</span><span class="o">().</span><span class="na">isArray</span><span class="o">())</span> <span class="o">{</span>
+                <span class="k">return</span> <span class="n">param</span><span class="o">;</span>
+            <span class="o">}</span>
+        <span class="o">}</span>
+        <span class="k">return</span> <span class="k">new</span> <span class="n">SimpleKey</span><span class="o">(</span><span class="n">params</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>这样就会导致两个参数相同的方法会命中同一个key的缓存</p>
+
+<p><strong>解决方法</strong>（方法1,2 每个注解都要指定参数，麻烦）</p>
+
+<ul>
+<li>在<code>@Cacheable</code>注解参数中指定key</li>
+<li>自己实现一个<code>KeyGenerator</code>，在<code>@Cacheable</code>注解中指定KeyGenerator</li>
+<li>继承<code>CachingConfigurerSupport</code>并重写<code>keyGenerator()</code>，将默认缓存的key改为包名+方法名+参数列表（见上文cache配置类）</li>
+</ul>
+
+<h3 id="参考">参考</h3>
+
+<p><a href="https://blog.csdn.net/gaogaoshan/article/details/41039581/">redis 五种数据类型的使用场景</a></p>
+
+<p><a href="https://yq.aliyun.com/articles/531067">阿里云Redis开发规范</a></p>
+
+<p><a href="https://www.jianshu.com/p/345b188c7ef8">SpringBoot中使用Redis实现缓存</a></p>
+
+                </section>
+            </article>
+
+            
+
+            
+
+            
+
+            <footer id="footer">
+    
+    <p class="small">
+    
+       © Copyright 2019 <i class="fa fa-heart" aria-hidden="true"></i> 
+    
+    </p>
+    <p class="small">
+        Powered by <a href="http://www.gohugo.io/">Hugo</a> Theme By <a href="https://github.com/nodejh/hugo-theme-cactus-plus">nodejh</a>
+    </p>
+</footer>
+
+        </section>
+
+        <script src="https://isaacrolo.github.io/js/jquery-3.3.1.min.js"></script>
+<script src="https://isaacrolo.github.io/js/main.js"></script>
+<script src="https://isaacrolo.github.io/js/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+
+
+
+
+
+    </body>
+</html>

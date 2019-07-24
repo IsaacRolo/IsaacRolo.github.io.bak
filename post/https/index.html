@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		
+		
+		<meta name="description" content="It&#39;s time to touch fish.">
+		<meta name="generator" content="Hugo 0.54.0" />
+		<title>Https &middot; Rolo</title>
+		<link rel="shortcut icon" href="https://isaacrolo.github.io/images/favicon.ico">
+		<link rel="stylesheet" href="https://isaacrolo.github.io/css/style.css">
+		<link rel="stylesheet" href="https://isaacrolo.github.io/css/highlight.css">
+
+		
+		<link rel="stylesheet" href="https://isaacrolo.github.io/css/monosocialiconsfont.css">
+		
+
+		
+
+		
+	</head>
+
+    <body>
+       <nav class="main-nav">
+	
+	
+		<a href='https://isaacrolo.github.io/'> <span class="arrow">←</span>Home</a>
+	
+	<a href='https://isaacrolo.github.io/posts'>Archive</a>
+	<a href='https://isaacrolo.github.io/tags'>Tags</a>
+	<a href='https://isaacrolo.github.io/about'>About</a>
+
+	
+
+	
+</nav>
+
+
+        <section id="wrapper" class="post">
+            <article>
+                <header>
+                    <h1>
+                        Https
+                    </h1>
+                    <h2 class="headline">
+                    Jul 17, 2019 10:29
+                    · 911 words
+                    · 2 minute read
+                      <span class="tags">
+                      
+                      
+                          
+                              <a href="https://isaacrolo.github.io/tags/%E7%BD%91%E7%BB%9C">网络</a>
+                          
+                      
+                      
+                      </span>
+                    </h2>
+                </header>
+                
+                <section id="post-body">
+                    
+
+<h3 id="https">HTTPS</h3>
+
+<hr />
+
+<p>超文本传输安全协议是一种通过计算机网络进行安全通信的传输协议。HTTPS经由HTTP进行通信，但利用SSL/TLS来加密数据包。HTTPS开发的主要目的，是提供对网站服务器的身份认证，保护交换数据的隐私与完整性。</p>
+
+<h3 id="ssl-tsl">SSL/TSL</h3>
+
+<hr />
+
+<p>传输层安全性协议（英语：Transport Layer Security，缩写：TLS）及其前身安全套接层（英语：Secure Sockets Layer，缩写：SSL）是一种安全协议，目的是为互联网通信提供安全及数据完整性保障。</p>
+
+<p>SSL包含记录层（Record Layer）和传输层，记录层协议确定传输层数据的封装格式。传输层安全协议使用X.509认证，之后利用非对称加密演算来对通信方做身份认证，之后交换对称密钥作为会谈密钥（Session key）。这个会谈密钥是用来将通信两方交换的数据做加密，保证两个应用间通信的保密性和可靠性，使客户与服务器应用之间的通信不被攻击者窃听。</p>
+
+<h3 id="https主要用途">HTTPS主要用途</h3>
+
+<hr />
+
+<ul>
+<li>通过证书信息确认网站的真实性</li>
+<li>加密信息</li>
+<li>验证数据的完整性</li>
+</ul>
+
+<h3 id="https信息传输过程">HTTPS信息传输过程</h3>
+
+<hr />
+
+<p>对称加密+非对称加密+证书</p>
+
+<p>1—5 浏览器访问登录页面</p>
+
+<p>6 浏览器发送登录请求</p>
+
+<ol>
+<li>访问HTTPS站点，获取公钥（证书验证公钥真伪）</li>
+<li>浏览器生成对称加密的密钥（Session key）</li>
+<li>用公钥加密对称密钥，发送给服务端</li>
+<li>服务端用私钥解密对称密钥，并用对称密钥加密网页内容，发送给浏览器</li>
+<li>浏览器用对称密钥解密网页内容</li>
+<li>之后浏览器发送的请求数据由对称密钥加密</li>
+</ol>
+
+<h3 id="申请并配置证书">申请并配置证书</h3>
+
+<hr />
+
+<ul>
+<li>免费证书申请</li>
+</ul>
+
+<p><a href="https://letsencrypt.org/zh-cn/">https://letsencrypt.org/zh-cn/</a></p>
+
+<ul>
+<li>获取证书启用HTTPS</li>
+</ul>
+
+<ol>
+<li>安装Certbot客户端</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">   yum install certbot</code></pre></td></tr></table>
+</div>
+</div>
+<ol>
+<li>获取证书</li>
+</ol>
+
+<p>先停止占用443端口的服务</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">   certbot certonly --standalone -d example.com -d www.example.com</code></pre></td></tr></table>
+</div>
+</div>
+<ol>
+<li>Nginx配置启用HTTPS</li>
+</ol>
+
+<p>监听443端口，启用SSL，并配置SSL的证书路径（公钥，私钥的路径）。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-nginx" data-lang="nginx"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-nginx" data-lang="nginx">       <span class="k">server</span> <span class="p">{</span>
+           <span class="kn">server_name</span> <span class="s">diamondfsd.com</span> <span class="s">www.example.com</span><span class="p">;</span>
+           <span class="kn">listen</span> <span class="mi">443</span><span class="p">;</span>
+           <span class="kn">ssl</span> <span class="no">on</span><span class="p">;</span>
+           <span class="kn">ssl_certificate</span> <span class="s">/etc/letsencrypt/live/example.com/fullchain.pem</span><span class="p">;</span>
+           <span class="kn">ssl_certificate_key</span> <span class="s">/etc/letsencrypt/live/example.com/privkey.pem</span><span class="p">;</span>
+   
+           <span class="kn">location</span> <span class="s">/</span> <span class="p">{</span>
+              <span class="kn">proxy_pass</span> <span class="s">http://127.0.0.1:3999</span><span class="p">;</span>
+              <span class="kn">proxy_http_version</span> <span class="mi">1</span><span class="s">.1</span><span class="p">;</span>
+              <span class="kn">proxy_set_header</span> <span class="s">X_FORWARDED_PROTO</span> <span class="s">https</span><span class="p">;</span>
+              <span class="kn">proxy_set_header</span> <span class="s">X-Real-IP</span> <span class="nv">$remote_addr</span><span class="p">;</span>
+              <span class="kn">proxy_set_header</span> <span class="s">X-Forwarded-For</span> <span class="nv">$remote_addr</span><span class="p">;</span>
+              <span class="kn">proxy_set_header</span> <span class="s">X-Forwarded-For</span> <span class="nv">$proxy_add_x_forwarded_for</span><span class="p">;</span>
+              <span class="kn">proxy_set_header</span> <span class="s">Host</span> <span class="nv">$host</span><span class="p">;</span>
+           <span class="p">}</span>
+   <span class="p">}</span>
+   </code></pre></td></tr></table>
+</div>
+</div>
+<ol>
+<li>自动更新 SSL 证书</li>
+</ol>
+
+<p>Let’s Encrypt 提供的证书只有90天的有效期，必须在证书到期之前，重新获取证书。</p>
+
+<p>执行命令之前，需要先停止占用433端口的服务</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">   certbot renew --dry-run</code></pre></td></tr></table>
+</div>
+</div>
+<p>使用crontab定时任务，实现自动更新证书</p>
+
+<h3 id="参考">参考</h3>
+
+<hr />
+
+<p><a href="https://program-think.blogspot.com/2014/11/https-ssl-tls-2.html">扫盲 HTTPS 和 SSL/TLS 协议2：可靠密钥交换的难点，以及身份认证的必要性</a></p>
+
+<p><a href="https://diamondfsd.com/lets-encrytp-hand-https/">Let&rsquo;s Encrypt 使用教程，免费的SSL证书，让你的网站拥抱 HTTPS</a></p>
+
+                </section>
+            </article>
+
+            
+
+            
+
+            
+
+            <footer id="footer">
+    
+    <p class="small">
+    
+       © Copyright 2019 <i class="fa fa-heart" aria-hidden="true"></i> 
+    
+    </p>
+    <p class="small">
+        Powered by <a href="http://www.gohugo.io/">Hugo</a> Theme By <a href="https://github.com/nodejh/hugo-theme-cactus-plus">nodejh</a>
+    </p>
+</footer>
+
+        </section>
+
+        <script src="https://isaacrolo.github.io/js/jquery-3.3.1.min.js"></script>
+<script src="https://isaacrolo.github.io/js/main.js"></script>
+<script src="https://isaacrolo.github.io/js/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+
+
+
+
+
+    </body>
+</html>
