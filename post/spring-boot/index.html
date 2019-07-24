@@ -1,61 +1,333 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta charset="utf-8">
-		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-		
-		
-		<meta name="description" content="It&#39;s time to touch fish.">
-		<meta name="generator" content="Hugo 0.54.0" />
-		<title>spring &middot; Rolo</title>
-		<link rel="shortcut icon" href="https://isaacrolo.github.io/images/favicon.ico">
-		<link rel="stylesheet" href="https://isaacrolo.github.io/css/style.css">
-		<link rel="stylesheet" href="https://isaacrolo.github.io/css/highlight.css">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>spring - Rolo</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 
-		
-		<link rel="stylesheet" href="https://isaacrolo.github.io/css/monosocialiconsfont.css">
-		
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
 
-		
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
-		
-	</head>
 
-    <body>
-       <nav class="main-nav">
-	
-	
-		<a href='https://isaacrolo.github.io/'> <span class="arrow">←</span>Home</a>
-	
-	<a href='https://isaacrolo.github.io/posts'>Archive</a>
-	<a href='https://isaacrolo.github.io/tags'>Tags</a>
-	<a href='https://isaacrolo.github.io/about'>About</a>
+<meta name="author" content=":)" /><meta name="description" content="一、Spring Boot 入门 1、Spring Boot 简介 简化Spring应用开发的一个框架； 整个Spring技术栈的一个大整合； J2EE开发的一站式解决" /><meta name="keywords" content="Hugo, theme, even" />
 
-	
 
-	
+
+
+
+
+<meta name="generator" content="Hugo 0.54.0 with even 4.0.0" />
+
+
+<link rel="canonical" href="https://isaacrolo.github.io/post/spring-boot/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<link href="/dist/even.c2a46f00.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="spring" />
+<meta property="og:description" content="一、Spring Boot 入门 1、Spring Boot 简介 简化Spring应用开发的一个框架； 整个Spring技术栈的一个大整合； J2EE开发的一站式解决" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://isaacrolo.github.io/post/spring-boot/" />
+<meta property="article:published_time" content="2019-03-01T15:26:53&#43;08:00"/>
+<meta property="article:modified_time" content="2019-03-01T15:26:53&#43;08:00"/>
+
+<meta itemprop="name" content="spring">
+<meta itemprop="description" content="一、Spring Boot 入门 1、Spring Boot 简介 简化Spring应用开发的一个框架； 整个Spring技术栈的一个大整合； J2EE开发的一站式解决">
+
+
+<meta itemprop="datePublished" content="2019-03-01T15:26:53&#43;08:00" />
+<meta itemprop="dateModified" content="2019-03-01T15:26:53&#43;08:00" />
+<meta itemprop="wordCount" content="32239">
+
+
+
+<meta itemprop="keywords" content="" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="spring"/>
+<meta name="twitter:description" content="一、Spring Boot 入门 1、Spring Boot 简介 简化Spring应用开发的一个框架； 整个Spring技术栈的一个大整合； J2EE开发的一站式解决"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">Rolo</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a>
+  </ul>
 </nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">Rolo</a>
+</div>
 
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li>
+  </ul>
+</nav>
+    </header>
 
-        <section id="wrapper" class="post">
-            <article>
-                <header>
-                    <h1>
-                        spring
-                    </h1>
-                    <h2 class="headline">
-                    Mar 1, 2019 15:26
-                    · 32239 words
-                    · 65 minute read
-                      <span class="tags">
-                      
-                      </span>
-                    </h2>
-                </header>
-                
-                <section id="post-body">
-                    
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">spring</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2019-03-01 </span>
+        
+        <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> times read </span>
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Contents</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+<ul>
+<li><a href="#一-spring-boot-入门"><strong>一、</strong>Spring Boot 入门</a>
+<ul>
+<li><a href="#1-spring-boot-简介">1、Spring Boot 简介</a></li>
+<li><a href="#2-微服务">2、微服务</a></li>
+<li><a href="#3-环境准备">3、环境准备</a>
+<ul>
+<li><a href="#1-maven设置">1、MAVEN设置；</a></li>
+<li><a href="#2-idea设置">2、IDEA设置</a></li>
+</ul></li>
+<li><a href="#4-spring-boot-helloworld">4、Spring Boot HelloWorld</a>
+<ul>
+<li><a href="#1-创建一个maven工程-jar">1、创建一个maven工程；（jar）</a></li>
+<li><a href="#2-导入spring-boot相关的依赖">2、导入spring boot相关的依赖</a></li>
+<li><a href="#3-编写一个主程序-启动spring-boot应用">3、编写一个主程序；启动Spring Boot应用</a></li>
+<li><a href="#4-编写相关的controller-service">4、编写相关的Controller、Service</a></li>
+<li><a href="#5-运行主程序测试">5、运行主程序测试</a></li>
+<li><a href="#6-简化部署">6、简化部署</a></li>
+</ul></li>
+<li><a href="#5-hello-world探究">5、Hello World探究</a>
+<ul>
+<li><a href="#1-pom文件">1、POM文件</a>
+<ul>
+<li><a href="#1-父项目">1、父项目</a></li>
+<li><a href="#2-启动器">2、启动器</a></li>
+</ul></li>
+<li><a href="#2-主程序类-主入口类">2、主程序类，主入口类</a></li>
+</ul></li>
+<li><a href="#6-使用spring-initializer快速创建spring-boot项目">6、使用Spring Initializer快速创建Spring Boot项目</a>
+<ul>
+<li><a href="#1-idea-使用-spring-initializer快速创建项目">1、IDEA：使用 Spring Initializer快速创建项目</a></li>
+<li><a href="#2-sts使用-spring-starter-project快速创建项目">2、STS使用 Spring Starter Project快速创建项目</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#二-配置文件">二、配置文件</a>
+<ul>
+<li><a href="#1-配置文件">1、配置文件</a></li>
+<li><a href="#2-yaml语法">2、YAML语法：</a>
+<ul>
+<li><a href="#1-基本语法">1、基本语法</a></li>
+<li><a href="#2-值的写法">2、值的写法</a>
+<ul>
+<li><a href="#字面量-普通的值-数字-字符串-布尔">字面量：普通的值（数字，字符串，布尔）</a></li>
+<li><a href="#对象-map-属性和值-键值对">对象、Map（属性和值）（键值对）：</a></li>
+<li><a href="#数组-list-set">数组（List、Set）：</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#3-配置文件值注入">3、配置文件值注入</a>
+<ul>
+<li>
+<ul>
+<li><a href="#1-properties配置文件在idea中默认utf-8可能会乱码">1、properties配置文件在idea中默认utf-8可能会乱码</a></li>
+<li><a href="#2-value获取值和-configurationproperties获取值比较">2、@Value获取值和@ConfigurationProperties获取值比较</a></li>
+<li><a href="#3-配置文件注入值数据校验">3、配置文件注入值数据校验</a></li>
+<li><a href="#4-propertysource-importresource-bean">4、@PropertySource&amp;@ImportResource&amp;@Bean</a></li>
+</ul></li>
+<li><a href="#1-随机数">1、随机数</a></li>
+<li><a href="#2-占位符获取之前配置的值-如果没有可以是用-指定默认值">2、占位符获取之前配置的值，如果没有可以是用:指定默认值</a></li>
+</ul></li>
+<li><a href="#5-profile">5、Profile</a>
+<ul>
+<li><a href="#1-多profile文件">1、多Profile文件</a></li>
+<li><a href="#2-yml支持多文档块方式">2、yml支持多文档块方式</a></li>
+<li><a href="#3-激活指定profile">3、激活指定profile</a></li>
+</ul></li>
+<li><a href="#6-配置文件加载位置">6、配置文件加载位置</a></li>
+<li><a href="#7-外部配置加载顺序">7、外部配置加载顺序</a></li>
+<li><a href="#8-自动配置原理">8、自动配置原理</a>
+<ul>
+<li><a href="#1-自动配置原理">1、<strong>自动配置原理：</strong></a></li>
+<li><a href="#2-细节">2、细节</a>
+<ul>
+<li><a href="#1-conditional派生注解-spring注解版原生的-conditional作用">1、@Conditional派生注解（Spring注解版原生的@Conditional作用）</a></li>
+</ul></li>
+</ul></li>
+</ul></li>
+<li><a href="#三-日志">三、日志</a>
+<ul>
+<li><a href="#1-日志框架">1、日志框架</a></li>
+<li><a href="#2-slf4j使用">2、SLF4j使用</a>
+<ul>
+<li><a href="#1-如何在系统中使用slf4j-https-www-slf4j-org">1、如何在系统中使用SLF4j   <a href="https://www.slf4j.org">https://www.slf4j.org</a></a></li>
+<li><a href="#2-遗留问题">2、遗留问题</a></li>
+</ul></li>
+<li><a href="#3-springboot日志关系">3、SpringBoot日志关系</a></li>
+<li><a href="#4-日志使用">4、日志使用；</a>
+<ul>
+<li><a href="#1-默认配置">1、默认配置</a></li>
+<li><a href="#2-指定配置">2、指定配置</a></li>
+</ul></li>
+<li><a href="#5-切换日志框架">5、切换日志框架</a></li>
+</ul></li>
+<li><a href="#四-web开发">四、Web开发</a>
+<ul>
+<li><a href="#1-简介">1、简介</a></li>
+<li><a href="#2-springboot对静态资源的映射规则">2、SpringBoot对静态资源的映射规则；</a></li>
+<li><a href="#3-模板引擎">3、模板引擎</a>
+<ul>
+<li><a href="#1-引入thymeleaf">1、引入thymeleaf；</a></li>
+<li><a href="#2-thymeleaf使用">2、Thymeleaf使用</a></li>
+<li><a href="#3-语法规则">3、语法规则</a></li>
+</ul></li>
+<li><a href="#4-springmvc自动配置">4、SpringMVC自动配置</a>
+<ul>
+<li><a href="#1-spring-mvc-auto-configuration">1. Spring MVC auto-configuration</a></li>
+<li><a href="#2-扩展springmvc">2、扩展SpringMVC</a></li>
+<li><a href="#3-全面接管springmvc">3、全面接管SpringMVC；</a></li>
+</ul></li>
+<li><a href="#5-如何修改springboot的默认配置">5、如何修改SpringBoot的默认配置</a></li>
+<li><a href="#6-restfulcrud">6、RestfulCRUD</a>
+<ul>
+<li><a href="#1-默认访问首页">1）、默认访问首页</a></li>
+<li><a href="#2-国际化">2）、国际化</a></li>
+<li><a href="#3-登陆">3）、登陆</a></li>
+<li><a href="#4-拦截器进行登陆检查">4）、拦截器进行登陆检查</a></li>
+<li><a href="#5-crud-员工列表">5）、CRUD-员工列表</a>
+<ul>
+<li><a href="#thymeleaf公共页面元素抽取">thymeleaf公共页面元素抽取</a></li>
+</ul></li>
+<li><a href="#6-crud-员工添加">6）、CRUD-员工添加</a></li>
+<li><a href="#7-crud-员工修改">7）、CRUD-员工修改</a></li>
+<li><a href="#8-crud-员工删除">8）、CRUD-员工删除</a></li>
+</ul></li>
+<li><a href="#7-错误处理机制">7、错误处理机制</a>
+<ul>
+<li><a href="#1-springboot默认的错误处理机制">1）、SpringBoot默认的错误处理机制</a></li>
+<li><a href="#2-如果定制错误响应">2）、如果定制错误响应：</a>
+<ul>
+<li><a href="#1-如何定制错误的页面"><strong>1）、如何定制错误的页面；</strong></a></li>
+<li><a href="#2-如何定制错误的json数据">2）、如何定制错误的json数据；</a></li>
+<li><a href="#3-将我们的定制数据携带出去">3）、将我们的定制数据携带出去；</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#8-配置嵌入式servlet容器">8、配置嵌入式Servlet容器</a>
+<ul>
+<li><a href="#1-如何定制和修改servlet容器的相关配置">1）、如何定制和修改Servlet容器的相关配置；</a></li>
+<li><a href="#2-注册servlet三大组件-servlet-filter-listener">2）、注册Servlet三大组件【Servlet、Filter、Listener】</a></li>
+<li><a href="#3-替换为其他嵌入式servlet容器">3）、替换为其他嵌入式Servlet容器</a></li>
+<li><a href="#4-嵌入式servlet容器自动配置原理">4）、嵌入式Servlet容器自动配置原理；</a></li>
+</ul></li>
+<li><a href="#9-使用外置的servlet容器">9、使用外置的Servlet容器</a>
+<ul>
+<li><a href="#步骤">步骤</a></li>
+<li><a href="#原理">原理</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#五-docker">五、Docker</a>
+<ul>
+<li><a href="#1-简介-1">1、简介</a></li>
+<li><a href="#2-核心概念">2、核心概念</a></li>
+<li><a href="#3-安装docker">3、安装Docker</a>
+<ul>
+<li>
+<ul>
+<li><a href="#1-安装linux虚拟机">1）、安装linux虚拟机</a></li>
+<li><a href="#2-在linux虚拟机上安装docker">2）、在linux虚拟机上安装docker</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#4-docker常用命令-操作">4、Docker常用命令&amp;操作</a>
+<ul>
+<li><a href="#1-镜像操作">1）、镜像操作</a></li>
+<li><a href="#2-容器操作">2）、容器操作</a></li>
+<li><a href="#3-安装mysql示例">3）、安装MySQL示例</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#六-springboot与数据访问">六、SpringBoot与数据访问</a>
+<ul>
+<li><a href="#1-jdbc">1、JDBC</a></li>
+<li><a href="#2-整合druid数据源">2、整合Druid数据源</a></li>
+<li><a href="#3-整合mybatis">3、整合MyBatis</a>
+<ul>
+<li><a href="#4-注解版">4）、注解版</a></li>
+<li><a href="#5-配置文件版">5）、配置文件版</a></li>
+</ul></li>
+<li><a href="#4-整合springdata-jpa">4、整合SpringData JPA</a>
+<ul>
+<li><a href="#1-springdata简介">1）、SpringData简介</a></li>
+<li><a href="#2-整合springdata-jpa">2）、整合SpringData JPA</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#七-启动配置原理">七、启动配置原理</a>
+<ul>
+<li><a href="#1-创建springapplication对象"><strong>1、创建SpringApplication对象</strong></a></li>
+<li><a href="#2-运行run方法">2、运行run方法</a></li>
+<li><a href="#3-事件监听机制">3、事件监听机制</a></li>
+</ul></li>
+<li><a href="#八-自定义starter">八、自定义starter</a></li>
+<li><a href="#更多springboot整合示例">更多SpringBoot整合示例</a></li>
+</ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      
 
 <h1 id="一-spring-boot-入门"><strong>一、</strong>Spring Boot 入门</h1>
 
@@ -6628,33 +6900,91 @@ com.atguigu.springboot.listener.HelloSpringApplicationRunListener</code></pre></
 
 <p><a href="https://github.com/spring-projects/spring-boot/tree/master/spring-boot-samples">https://github.com/spring-projects/spring-boot/tree/master/spring-boot-samples</a></p>
 
-                </section>
-            </article>
+    </div>
 
-            
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">Author</span>
+    <span class="item-content">:)</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">LastMod</span>
+    <span class="item-content">
+        2019-03-01
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      
+      <nav class="post-nav">
+        <a class="prev" href="/post/tableau/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">Tableau集成</span>
+            <span class="prev-text nav-mobile">Prev</span>
+          </a>
+        
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+  
+  
 
-            
+  
 
-            
+      </div>
+    </main>
 
-            <footer id="footer">
-    
-    <p class="small">
-    
-       © Copyright 2019 <i class="fa fa-heart" aria-hidden="true"></i> 
-    
-    </p>
-    <p class="small">
-        Powered by <a href="http://www.gohugo.io/">Hugo</a> Theme By <a href="https://github.com/nodejh/hugo-theme-cactus-plus">nodejh</a>
-    </p>
-</footer>
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:your@email.com" class="iconfont icon-email" title="email"></a>
+      <a href="http://localhost:1313" class="iconfont icon-google" title="google"></a>
+      <a href="https://github.com/IsaacRolo" class="iconfont icon-github" title="github"></a>
+      <a href="http://localhost:1313" class="iconfont icon-weibo" title="weibo"></a>
+      <a href="http://localhost:1313" class="iconfont icon-bilibili" title="bilibili"></a>
+  <a href="https://isaacrolo.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
 
-        </section>
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
 
-        <script src="https://isaacrolo.github.io/js/jquery-3.3.1.min.js"></script>
-<script src="https://isaacrolo.github.io/js/main.js"></script>
-<script src="https://isaacrolo.github.io/js/highlight.min.js"></script>
-<script>hljs.initHighlightingOnLoad();</script>
+  <div class="busuanzi-footer">
+    <span id="busuanzi_container_site_pv"> site pv: <span id="busuanzi_value_site_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> </span>
+      <span class="division">|</span>
+    <span id="busuanzi_container_site_uv"> site uv: <span id="busuanzi_value_site_uv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> </span>
+  </div>
+
+  <span class="copyright-year">
+    &copy; 
+    2019
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">:)</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="/dist/even.26188efa.min.js"></script>
 
 
 
@@ -6662,5 +6992,6 @@ com.atguigu.springboot.listener.HelloSpringApplicationRunListener</code></pre></
 
 
 
-    </body>
+
+</body>
 </html>
