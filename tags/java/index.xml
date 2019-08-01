@@ -1,18 +1,27 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Java on Rolo</title>
+    <title>Java on Rolo&#39;s Note</title>
     <link>https://isaacrolo.github.io/tags/java/</link>
-    <description>Recent content in Java on Rolo</description>
+    <description>Recent content in Java on Rolo&#39;s Note</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Wed, 24 Apr 2019 14:05:11 +0800</lastBuildDate>
+    <lastBuildDate>Fri, 26 Jul 2019 10:40:08 +0800</lastBuildDate>
     
 	<atom:link href="https://isaacrolo.github.io/tags/java/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>Jsoup</title>
+      <title>Java类型传递的思考</title>
+      <link>https://isaacrolo.github.io/post/passby/</link>
+      <pubDate>Fri, 26 Jul 2019 10:40:08 +0800</pubDate>
+      
+      <guid>https://isaacrolo.github.io/post/passby/</guid>
+      <description>值传递（pass by value）：在调用函数时将实际参数拷贝一份传递到函数中，这样在函数中如果对参数进行修改，将不会影响到实际参数。 引用传递（</description>
+    </item>
+    
+    <item>
+      <title>Java爬虫—Jsoup</title>
       <link>https://isaacrolo.github.io/post/jsoup/</link>
       <pubDate>Wed, 24 Apr 2019 14:05:11 +0800</pubDate>
       
@@ -30,7 +39,7 @@
     </item>
     
     <item>
-      <title>垃圾收集器与内存分配策略</title>
+      <title>【深入理解java虚拟机读书笔记】垃圾收集器与内存分配策略</title>
       <link>https://isaacrolo.github.io/post/jvm3/</link>
       <pubDate>Thu, 28 Mar 2019 20:36:54 +0800</pubDate>
       

@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <title>Https - Rolo</title>
+  <title>Https - Rolo&#39;s Note</title>
   <meta name="renderer" content="webkit" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 
@@ -51,7 +51,7 @@
 
 <meta itemprop="datePublished" content="2019-07-17T10:29:31&#43;08:00" />
 <meta itemprop="dateModified" content="2019-07-17T10:29:31&#43;08:00" />
-<meta itemprop="wordCount" content="911">
+<meta itemprop="wordCount" content="993">
 
 
 
@@ -145,6 +145,7 @@
 <li><a href="#ssl-tsl">SSL/TSL</a></li>
 <li><a href="#https主要用途">HTTPS主要用途</a></li>
 <li><a href="#https信息传输过程">HTTPS信息传输过程</a></li>
+<li><a href="#ssl证书类型">SSL证书类型</a></li>
 <li><a href="#申请并配置证书">申请并配置证书</a></li>
 <li><a href="#参考">参考</a></li>
 </ul></li>
@@ -199,29 +200,50 @@
 <li>之后浏览器发送的请求数据由对称密钥加密</li>
 </ol>
 
+<h3 id="ssl证书类型">SSL证书类型</h3>
+
+<hr />
+
+<ul>
+<li><p>域名验证 (DV) 提高网站数据安全性和PR值</p></li>
+
+<li><p>企业验证  (OV) 有用户账户登录，多个域名需要部署</p></li>
+
+<li><p>增强型 (EV) 需要实现在线交易，在线支付功能</p></li>
+</ul>
+
 <h3 id="申请并配置证书">申请并配置证书</h3>
 
 <hr />
 
 <ul>
-<li>免费证书申请</li>
+<li>域名申请</li>
 </ul>
 
-<p><a href="https://letsencrypt.org/zh-cn/">https://letsencrypt.org/zh-cn/</a></p>
+<p>[免费] <a href="https://www.freenom.com/zh/index.html?lang=zh">https://www.freenom.com/zh/index.html?lang=zh</a></p>
+
+<p>[收费] <a href="https://www.name.com/zh-cn/">https://www.name.com/zh-cn/</a></p>
+
+<p><a href="https://www.namesilo.com/">https://www.namesilo.com/</a></p>
 
 <ul>
-<li>获取证书启用HTTPS</li>
+<li>证书申请</li>
 </ul>
+
+<p>[免费] <a href="https://letsencrypt.org/zh-cn/">https://letsencrypt.org/zh-cn/</a></p>
+
+<ul>
+<li><p>获取证书启用HTTPS</p>
 
 <ol>
 <li>安装Certbot客户端</li>
 </ol>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="lnt">1
-</span></code></pre></td>
+<pre class="chroma"><span class="lnt">1
+</span></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell">   yum install certbot</code></pre></td></tr></table>
+<pre class="chroma"> yum install certbot</pre></td></tr></table>
 </div>
 </div>
 <ol>
@@ -234,7 +256,7 @@
 <pre class="chroma"><code class="language-shell" data-lang="shell"><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell">   certbot certonly --standalone -d example.com -d www.example.com</code></pre></td></tr></table>
+<pre class="chroma"><code class="language-shell" data-lang="shell"> certbot certonly --standalone -d example.com -d www.example.com</code></pre></td></tr></table>
 </div>
 </div>
 <ol>
@@ -264,24 +286,24 @@
 </span><span class="lnt">18
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-nginx" data-lang="nginx">       <span class="k">server</span> <span class="p">{</span>
-           <span class="kn">server_name</span> <span class="s">diamondfsd.com</span> <span class="s">www.example.com</span><span class="p">;</span>
-           <span class="kn">listen</span> <span class="mi">443</span><span class="p">;</span>
-           <span class="kn">ssl</span> <span class="no">on</span><span class="p">;</span>
-           <span class="kn">ssl_certificate</span> <span class="s">/etc/letsencrypt/live/example.com/fullchain.pem</span><span class="p">;</span>
-           <span class="kn">ssl_certificate_key</span> <span class="s">/etc/letsencrypt/live/example.com/privkey.pem</span><span class="p">;</span>
-   
-           <span class="kn">location</span> <span class="s">/</span> <span class="p">{</span>
-              <span class="kn">proxy_pass</span> <span class="s">http://127.0.0.1:3999</span><span class="p">;</span>
-              <span class="kn">proxy_http_version</span> <span class="mi">1</span><span class="s">.1</span><span class="p">;</span>
-              <span class="kn">proxy_set_header</span> <span class="s">X_FORWARDED_PROTO</span> <span class="s">https</span><span class="p">;</span>
-              <span class="kn">proxy_set_header</span> <span class="s">X-Real-IP</span> <span class="nv">$remote_addr</span><span class="p">;</span>
-              <span class="kn">proxy_set_header</span> <span class="s">X-Forwarded-For</span> <span class="nv">$remote_addr</span><span class="p">;</span>
-              <span class="kn">proxy_set_header</span> <span class="s">X-Forwarded-For</span> <span class="nv">$proxy_add_x_forwarded_for</span><span class="p">;</span>
-              <span class="kn">proxy_set_header</span> <span class="s">Host</span> <span class="nv">$host</span><span class="p">;</span>
-           <span class="p">}</span>
-   <span class="p">}</span>
-   </code></pre></td></tr></table>
+<pre class="chroma"><code class="language-nginx" data-lang="nginx"> <span class="k">server</span> <span class="p">{</span>
+         <span class="kn">server_name</span> <span class="s">diamondfsd.com</span> <span class="s">www.example.com</span><span class="p">;</span>
+         <span class="kn">listen</span> <span class="mi">443</span><span class="p">;</span>
+         <span class="kn">ssl</span> <span class="no">on</span><span class="p">;</span>
+         <span class="kn">ssl_certificate</span> <span class="s">/etc/letsencrypt/live/example.com/fullchain.pem</span><span class="p">;</span>
+         <span class="kn">ssl_certificate_key</span> <span class="s">/etc/letsencrypt/live/example.com/privkey.pem</span><span class="p">;</span>
+     
+         <span class="kn">location</span> <span class="s">/</span> <span class="p">{</span>
+            <span class="kn">proxy_pass</span> <span class="s">http://127.0.0.1:3999</span><span class="p">;</span>
+            <span class="kn">proxy_http_version</span> <span class="mi">1</span><span class="s">.1</span><span class="p">;</span>
+            <span class="kn">proxy_set_header</span> <span class="s">X_FORWARDED_PROTO</span> <span class="s">https</span><span class="p">;</span>
+            <span class="kn">proxy_set_header</span> <span class="s">X-Real-IP</span> <span class="nv">$remote_addr</span><span class="p">;</span>
+            <span class="kn">proxy_set_header</span> <span class="s">X-Forwarded-For</span> <span class="nv">$remote_addr</span><span class="p">;</span>
+            <span class="kn">proxy_set_header</span> <span class="s">X-Forwarded-For</span> <span class="nv">$proxy_add_x_forwarded_for</span><span class="p">;</span>
+            <span class="kn">proxy_set_header</span> <span class="s">Host</span> <span class="nv">$host</span><span class="p">;</span>
+         <span class="p">}</span>
+ <span class="p">}</span>
+     </code></pre></td></tr></table>
 </div>
 </div>
 <ol>
@@ -296,10 +318,11 @@
 <pre class="chroma"><code class="language-shell" data-lang="shell"><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell">   certbot renew --dry-run</code></pre></td></tr></table>
+<pre class="chroma"><code class="language-shell" data-lang="shell"> certbot renew --dry-run</code></pre></td></tr></table>
 </div>
 </div>
-<p>使用crontab定时任务，实现自动更新证书</p>
+<p>使用crontab定时任务，实现自动更新证书</p></li>
+</ul>
 
 <h3 id="参考">参考</h3>
 
@@ -356,11 +379,8 @@
 
     <footer id="footer" class="footer">
       <div class="social-links">
-      <a href="mailto:your@email.com" class="iconfont icon-email" title="email"></a>
-      <a href="http://localhost:1313" class="iconfont icon-google" title="google"></a>
+      <a href="elrolo@outlook.com" class="iconfont icon-email" title="email"></a>
       <a href="https://github.com/IsaacRolo" class="iconfont icon-github" title="github"></a>
-      <a href="http://localhost:1313" class="iconfont icon-weibo" title="weibo"></a>
-      <a href="http://localhost:1313" class="iconfont icon-bilibili" title="bilibili"></a>
   <a href="https://isaacrolo.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
 </div>
 
