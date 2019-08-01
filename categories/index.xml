@@ -1,176 +1,59 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Rolo&#39;s Note</title>
+    <title>Categories on Rolo&#39;s Note</title>
     <link>https://isaacrolo.github.io/categories/</link>
-    <description>Recent content on Rolo&#39;s Note</description>
+    <description>Recent content in Categories on Rolo&#39;s Note</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Thu, 01 Aug 2019 15:35:00 +0800</lastBuildDate>
+    <lastBuildDate>Thu, 01 Aug 2019 16:11:14 +0800</lastBuildDate>
     
 	<atom:link href="https://isaacrolo.github.io/categories/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>About</title>
-      <link>https://isaacrolo.github.io/post/about/</link>
-      <pubDate>Thu, 01 Aug 2019 15:35:00 +0800</pubDate>
+      <title></title>
+      <link>https://isaacrolo.github.io/categories/</link>
+      <pubDate>Thu, 01 Aug 2019 16:11:14 +0800</pubDate>
       
-      <guid>https://isaacrolo.github.io/post/about/</guid>
-      <description>test</description>
-    </item>
-    
-    <item>
-      <title>不用鼠标玩耍Chrome</title>
-      <link>https://isaacrolo.github.io/post/vimium/</link>
-      <pubDate>Thu, 01 Aug 2019 14:12:19 +0800</pubDate>
-      
-      <guid>https://isaacrolo.github.io/post/vimium/</guid>
-      <description>Chrome插件Vimium Vimium provides keyboard shortcuts for navigation and control in the spirit of Vim. 常用快捷键 ？ 帮助页面，快捷键列表 h,j,k,l 移动光标左，下，上，右 gg , G 页面顶部，页面底部 J,K 切换</description>
-    </item>
-    
-    <item>
-      <title>Java类型传递的思考</title>
-      <link>https://isaacrolo.github.io/post/passby/</link>
-      <pubDate>Fri, 26 Jul 2019 10:40:08 +0800</pubDate>
-      
-      <guid>https://isaacrolo.github.io/post/passby/</guid>
-      <description>值传递（pass by value）：在调用函数时将实际参数拷贝一份传递到函数中，这样在函数中如果对参数进行修改，将不会影响到实际参数。 引用传递（</description>
-    </item>
-    
-    <item>
-      <title>MQ</title>
-      <link>https://isaacrolo.github.io/post/mq/</link>
-      <pubDate>Thu, 25 Jul 2019 14:41:47 +0800</pubDate>
-      
-      <guid>https://isaacrolo.github.io/post/mq/</guid>
+      <guid>https://isaacrolo.github.io/categories/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>Timeline</title>
-      <link>https://isaacrolo.github.io/post/timeline/</link>
-      <pubDate>Wed, 24 Jul 2019 14:24:33 +0800</pubDate>
+      <title>Informatica</title>
+      <link>https://isaacrolo.github.io/categories/informatica/</link>
+      <pubDate>Thu, 28 Mar 2019 15:08:08 +0800</pubDate>
       
-      <guid>https://isaacrolo.github.io/post/timeline/</guid>
-      <description>2019 7 [x] xxx书 [ ] xxx书 8</description>
+      <guid>https://isaacrolo.github.io/categories/informatica/</guid>
+      <description></description>
     </item>
     
     <item>
-      <title>Redis</title>
-      <link>https://isaacrolo.github.io/post/redis/</link>
-      <pubDate>Thu, 18 Jul 2019 10:55:08 +0800</pubDate>
+      <title>Java</title>
+      <link>https://isaacrolo.github.io/categories/java/</link>
+      <pubDate>Thu, 28 Mar 2019 20:36:54 +0800</pubDate>
       
-      <guid>https://isaacrolo.github.io/post/redis/</guid>
-      <description>概念 数据类型 String（字符串） string是redis最基本的类型，一个key对应一个value。string类型是Redis最基本的数</description>
+      <guid>https://isaacrolo.github.io/categories/java/</guid>
+      <description></description>
     </item>
     
     <item>
-      <title>Https</title>
-      <link>https://isaacrolo.github.io/post/https/</link>
-      <pubDate>Wed, 17 Jul 2019 10:29:31 +0800</pubDate>
+      <title>Spring Cloud</title>
+      <link>https://isaacrolo.github.io/categories/spring-cloud/</link>
+      <pubDate>Wed, 20 Mar 2019 13:46:10 +0800</pubDate>
       
-      <guid>https://isaacrolo.github.io/post/https/</guid>
-      <description>HTTPS 超文本传输安全协议是一种通过计算机网络进行安全通信的传输协议。HTTPS经由HTTP进行通信，但利用SSL/TLS来加密数据包。HTTPS</description>
+      <guid>https://isaacrolo.github.io/categories/spring-cloud/</guid>
+      <description></description>
     </item>
     
     <item>
-      <title>Elasticsearch</title>
-      <link>https://isaacrolo.github.io/post/elasticsearch/</link>
-      <pubDate>Thu, 04 Jul 2019 10:52:11 +0800</pubDate>
+      <title>web</title>
+      <link>https://isaacrolo.github.io/categories/web/</link>
+      <pubDate>Mon, 20 May 2019 19:30:33 +0800</pubDate>
       
-      <guid>https://isaacrolo.github.io/post/elasticsearch/</guid>
-      <description>MongoDB和Elasticsearch的对比 https://leriou.github.io/2019-01-09-mongodb-compareto-elasticsearch/ Elasticsearch 2.x中文文档 https://www.elastic.co/guide/cn/elasticsearch/guide/cn/_add-an-index.html ES java api的选择 TransportClient【ES7.0废弃】 RestClient Java Low Level</description>
-    </item>
-    
-    <item>
-      <title>Elasticsearch</title>
-      <link>https://isaacrolo.github.io/posts/elasticsearch/</link>
-      <pubDate>Thu, 04 Jul 2019 10:52:11 +0800</pubDate>
-      
-      <guid>https://isaacrolo.github.io/posts/elasticsearch/</guid>
-      <description>MongoDB和Elasticsearch的对比 https://leriou.github.io/2019-01-09-mongodb-compareto-elasticsearch/ Elasticsearch 2.x中文文档 https://www.elastic.co/guide/cn/elasticsearch/guide/cn/_add-an-index.html ES java api的选择 TransportClient【ES7.0废弃】 RestClient Java Low Level</description>
-    </item>
-    
-    <item>
-      <title>DateFormat</title>
-      <link>https://isaacrolo.github.io/post/dateformat/</link>
-      <pubDate>Tue, 02 Jul 2019 16:37:56 +0800</pubDate>
-      
-      <guid>https://isaacrolo.github.io/post/dateformat/</guid>
-      <description>日期按月分段【yyyy-MM】 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 String start=&amp;#34;2019-02&amp;#34;; String end=&amp;#34;2019-07&amp;#34;; Date startDate = null; Date endDate=null; SimpleDateFormat simpleDateFormat = new SimpleDateFormat(&amp;#34;yyyy-MM&amp;#34;); try { startDate = simpleDateFormat.parse(start); endDate = simpleDateFormat.parse(end); } catch (ParseException e) { e.printStackTrace(); }</description>
-    </item>
-    
-    <item>
-      <title>DateFormat</title>
-      <link>https://isaacrolo.github.io/posts/dateformat/</link>
-      <pubDate>Tue, 02 Jul 2019 16:37:56 +0800</pubDate>
-      
-      <guid>https://isaacrolo.github.io/posts/dateformat/</guid>
-      <description>日期按月分段【yyyy-MM】 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 String start=&amp;#34;2019-02&amp;#34;; String end=&amp;#34;2019-07&amp;#34;; Date startDate = null; Date endDate=null; SimpleDateFormat simpleDateFormat = new SimpleDateFormat(&amp;#34;yyyy-MM&amp;#34;); try { startDate = simpleDateFormat.parse(start); endDate = simpleDateFormat.parse(end); } catch (ParseException e) { e.printStackTrace(); }</description>
-    </item>
-    
-    <item>
-      <title>Java8</title>
-      <link>https://isaacrolo.github.io/posts/java8/</link>
-      <pubDate>Wed, 12 Jun 2019 16:46:30 +0800</pubDate>
-      
-      <guid>https://isaacrolo.github.io/posts/java8/</guid>
-      <description>使用Lambda的List排序 https://my.oschina.net/HJCui/blog/1573344 遍历map 1 2 3 4 //传统方式 for (Map.Entry&amp;lt;String,Object&amp;gt; entry:sourceAsMap.entrySet()){ System.out.println(&amp;#34;Item : &amp;#34; + entry.getKey() + &amp;#34; Count : &amp;#34; + entry.getValue()); } 1 2 3 4 //lambda sourceAsMap.forEach((k,v)-&amp;gt;{ System.out.println(&amp;#34;k &amp;#34;+k+&amp;#34;;v &amp;#34;+v); }); 项目问题 JAVA反射功能，</description>
-    </item>
-    
-    <item>
-      <title>AOP</title>
-      <link>https://isaacrolo.github.io/post/aop/</link>
-      <pubDate>Fri, 31 May 2019 10:13:29 +0800</pubDate>
-      
-      <guid>https://isaacrolo.github.io/post/aop/</guid>
-      <description>spring aop后切如何获取目标方法中的某个局部变量值 https://bbs.csdn.net/topics/390215163 https://mrbird.cc/Spring-Boot-AOP%20log.html https://www.iteye.com/problems/70913</description>
-    </item>
-    
-    <item>
-      <title>AOP</title>
-      <link>https://isaacrolo.github.io/posts/aop/</link>
-      <pubDate>Fri, 31 May 2019 10:13:29 +0800</pubDate>
-      
-      <guid>https://isaacrolo.github.io/posts/aop/</guid>
-      <description>spring aop后切如何获取目标方法中的某个局部变量值 https://bbs.csdn.net/topics/390215163 https://mrbird.cc/Spring-Boot-AOP%20log.html https://www.iteye.com/problems/70913</description>
-    </item>
-    
-    <item>
-      <title>Springboot Note</title>
-      <link>https://isaacrolo.github.io/post/springboot-note/</link>
-      <pubDate>Thu, 25 Apr 2019 15:16:43 +0800</pubDate>
-      
-      <guid>https://isaacrolo.github.io/post/springboot-note/</guid>
-      <description>创建多个yml配置文件时，需要用到@PropertySource注解，但是该注解却不支持解析yml配置文件（默认支持解析properties</description>
-    </item>
-    
-    <item>
-      <title>Springboot Note</title>
-      <link>https://isaacrolo.github.io/posts/springboot-note/</link>
-      <pubDate>Thu, 25 Apr 2019 15:16:43 +0800</pubDate>
-      
-      <guid>https://isaacrolo.github.io/posts/springboot-note/</guid>
-      <description>创建多个yml配置文件时，需要用到@PropertySource注解，但是该注解却不支持解析yml配置文件（默认支持解析properties</description>
-    </item>
-    
-    <item>
-      <title>Java爬虫—Jsoup</title>
-      <link>https://isaacrolo.github.io/post/jsoup/</link>
-      <pubDate>Wed, 24 Apr 2019 14:05:11 +0800</pubDate>
-      
-      <guid>https://isaacrolo.github.io/post/jsoup/</guid>
-      <description>选择器的使用 基本用法 | tagname | 使用标签名来定位，例如 a | | &amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash; | &amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash; | | ns|tag | 使用命名空间的标签定位，例如 fb:name 来查找 fb:name 元素 | | #id | 使用元素 id 定位，例如 #logo</description>
-    </item>
-    
-    <item>
-      <title>Jsoup</title>
-      <link>https://isaacrolo.github.io/posts/jsoup/</link>
-      <pubDate>Wed, 24 Apr 2019 14:05:11 +0800</pubDate>
-      
-      <guid>https://isaacrolo.github.io/posts/jsoup/</guid>
-      <description>选择器的使用 基本用法 | tagname | 使用标签名来定位，例如 a | | &amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash; | &amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash; | | ns|tag | 使用命名空间的标签定位，例如 fb:name 来查找 fb:name 元素 | | #id | 使用元素 id 定位，例如 #logo</description>
+      <guid>https://isaacrolo.github.io/categories/web/</guid>
+      <description></description>
     </item>
     
   </channel>
