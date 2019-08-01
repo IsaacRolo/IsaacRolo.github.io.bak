@@ -6,19 +6,10 @@
     <description>Recent content on Rolo&#39;s Note</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Thu, 01 Aug 2019 16:11:14 +0800</lastBuildDate>
+    <lastBuildDate>Thu, 01 Aug 2019 14:12:19 +0800</lastBuildDate>
     
 	<atom:link href="https://isaacrolo.github.io/index.xml" rel="self" type="application/rss+xml" />
     
-    
-    <item>
-      <title>About</title>
-      <link>https://isaacrolo.github.io/about/</link>
-      <pubDate>Thu, 01 Aug 2019 16:11:14 +0800</pubDate>
-      
-      <guid>https://isaacrolo.github.io/about/</guid>
-      <description>😉</description>
-    </item>
     
     <item>
       <title>不用鼠标玩耍Chrome</title>
@@ -315,6 +306,15 @@
       
       <guid>https://isaacrolo.github.io/posts/spring-boot/</guid>
       <description>一、Spring Boot 入门 1、Spring Boot 简介 简化Spring应用开发的一个框架； 整个Spring技术栈的一个大整合； J2EE开发的一站式解决</description>
+    </item>
+    
+    <item>
+      <title>about</title>
+      <link>https://isaacrolo.github.io/about/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://isaacrolo.github.io/about/</guid>
+      <description>😀</description>
     </item>
     
   </channel>
