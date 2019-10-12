@@ -3,22 +3,22 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://isaacrolo.github.io/post/restful/</loc>
+    <lastmod>2019-08-06T16:46:11+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://isaacrolo.github.io/post/tensorflow/</loc>
+    <lastmod>2019-08-06T10:22:08+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
     <loc>https://isaacrolo.github.io/post/vimium/</loc>
     <lastmod>2019-08-01T14:12:19+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://isaacrolo.github.io/post/passby/</loc>
-    <lastmod>2019-07-26T10:40:08+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://isaacrolo.github.io/post/mq/</loc>
-    <lastmod>2019-07-25T14:41:47+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
@@ -59,13 +59,6 @@
   </url>
   
   <url>
-    <loc>https://isaacrolo.github.io/post/dateformat/</loc>
-    <lastmod>2019-07-02T16:37:56+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
     <loc>https://isaacrolo.github.io/posts/dateformat/</loc>
     <lastmod>2019-07-02T16:37:56+08:00</lastmod>
     <changefreq>weekly</changefreq>
@@ -75,13 +68,6 @@
   <url>
     <loc>https://isaacrolo.github.io/posts/java8/</loc>
     <lastmod>2019-06-12T16:46:30+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://isaacrolo.github.io/post/aop/</loc>
-    <lastmod>2019-05-31T10:13:29+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
@@ -103,13 +89,6 @@
   <url>
     <loc>https://isaacrolo.github.io/posts/cookie_session/</loc>
     <lastmod>2019-05-20T19:30:33+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://isaacrolo.github.io/post/springboot-note/</loc>
-    <lastmod>2019-04-25T15:16:43+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
@@ -192,6 +171,13 @@
   </url>
   
   <url>
+    <loc>https://isaacrolo.github.io/post/springboot-transfer/</loc>
+    <lastmod>2019-03-19T13:50:30+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
     <loc>https://isaacrolo.github.io/post/hystrixdashboard/</loc>
     <lastmod>2019-03-19T11:32:32+08:00</lastmod>
     <changefreq>weekly</changefreq>
@@ -249,14 +235,21 @@
   
   <url>
     <loc>https://isaacrolo.github.io/categories/</loc>
-    <lastmod>2019-07-26T10:40:08+08:00</lastmod>
+    <lastmod>2019-07-24T14:24:33+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://isaacrolo.github.io/categories/</loc>
-    <lastmod>2019-07-26T10:40:08+08:00</lastmod>
+    <lastmod>2019-07-24T14:24:33+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://isaacrolo.github.io/tags/elasticsearch/</loc>
+    <lastmod>2019-07-04T10:52:11+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0</priority>
   </url>
@@ -277,7 +270,7 @@
   
   <url>
     <loc>https://isaacrolo.github.io/tags/java/</loc>
-    <lastmod>2019-07-26T10:40:08+08:00</lastmod>
+    <lastmod>2019-04-24T14:05:11+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0</priority>
   </url>
@@ -291,7 +284,7 @@
   
   <url>
     <loc>https://isaacrolo.github.io/post/</loc>
-    <lastmod>2019-08-01T14:12:19+08:00</lastmod>
+    <lastmod>2019-08-06T16:46:11+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0</priority>
   </url>
@@ -312,7 +305,7 @@
   
   <url>
     <loc>https://isaacrolo.github.io/</loc>
-    <lastmod>2019-08-01T14:12:19+08:00</lastmod>
+    <lastmod>2019-08-06T16:46:11+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0</priority>
   </url>
@@ -353,6 +346,13 @@
   </url>
   
   <url>
+    <loc>https://isaacrolo.github.io/tags/tensorflow/</loc>
+    <lastmod>2019-08-06T10:22:08+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>https://isaacrolo.github.io/about/</loc>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
@@ -360,7 +360,7 @@
   
   <url>
     <loc>https://isaacrolo.github.io/tags/web/</loc>
-    <lastmod>2019-05-20T19:30:33+08:00</lastmod>
+    <lastmod>2019-08-06T16:46:11+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0</priority>
   </url>

@@ -51,11 +51,11 @@
 
 <meta itemprop="datePublished" content="2019-07-04T10:52:11&#43;08:00" />
 <meta itemprop="dateModified" content="2019-07-04T10:52:11&#43;08:00" />
-<meta itemprop="wordCount" content="709">
+<meta itemprop="wordCount" content="932">
 
 
 
-<meta itemprop="keywords" content="," />
+<meta itemprop="keywords" content="Elasticsearch," />
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Elasticsearch"/>
 <meta name="twitter:description" content="MongoDB和Elasticsearch的对比 https://leriou.github.io/2019-01-09-mongodb-compareto-elasticsearch/ Elasticsearch 2.x中文文档 https://www.elastic.co/guide/cn/elasticsearch/guide/cn/_add-an-index.html ES java api的选择 TransportClient【ES7.0废弃】 RestClient Java Low Level"/>
@@ -211,7 +211,7 @@
 <p>在索引建立的时候就已经确定了主分片数，但是副本分片数可以随时修改。</p>
 
 <ul>
-<li>映射Mapping</li>
+<li>映射 Mapping</li>
 </ul>
 
 <p>Elasticsearch 需要知道每个域中数据的类型。这个信息包含在映射中。</p>
@@ -223,8 +223,61 @@
 <li>整数 : <code>byte</code>, <code>short</code>, <code>integer</code>, <code>long</code></li>
 <li>浮点数: <code>float</code>, <code>double</code></li>
 <li>布尔型: <code>boolean</code></li>
-<li>日期: <code>date</code></li>
+
+<li><p>日期: <code>date</code></p></li>
+
+<li><p>多个域 fields</p></li>
 </ul>
+
+<p>通过不同的方法索引相同的域通常非常有用。这也是多域的目的。例如，一个字符串域可以映射为text域用于全文本搜索，也可以映射为keyword域用于排序或聚合。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-json" data-lang="json"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-json" data-lang="json">  <span class="err">PUT</span> <span class="err">my_index</span>
+  <span class="p">{</span>
+    <span class="nt">&#34;mappings&#34;</span><span class="p">:</span> <span class="p">{</span>
+      <span class="nt">&#34;properties&#34;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="nt">&#34;city&#34;</span><span class="p">:</span> <span class="p">{</span>
+          <span class="nt">&#34;type&#34;</span><span class="p">:</span> <span class="s2">&#34;text&#34;</span><span class="p">,</span>
+          <span class="nt">&#34;fields&#34;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="nt">&#34;raw&#34;</span><span class="p">:</span> <span class="p">{</span> 
+              <span class="nt">&#34;type&#34;</span><span class="p">:</span>  <span class="s2">&#34;keyword&#34;</span>
+            <span class="p">}</span>
+          <span class="p">}</span>
+        <span class="p">}</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+  <span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
+<ul>
+<li><p>分析</p>
+
+<ul>
+<li>首先，将一块文本分成适合于倒排索引的独立的词条 ，</li>
+<li>之后，将这些词条统一化为标准格式以提高它们的“可搜索性”，或者 <em>recall</em></li>
+</ul></li>
+
+<li><p>分析器</p></li>
+</ul>
+
+<p>在一个包里面组合了三种函数的一个包装器， 三种函数按照顺序被执行: <strong>字符过滤器</strong>，<strong>分词器</strong>，<strong>词单元过滤器</strong></p>
 
 <h3 id="在docker中安装es">在docker中安装ES</h3>
 
@@ -345,7 +398,7 @@ curl -XPUT -u elastic <span class="s1">&#39;http://localhost:9200/_xpack/securit
 </div>
 <footer class="post-footer">
       <div class="post-tags">
-          <a href="/tags//"></a>
+          <a href="/tags/elasticsearch/">Elasticsearch</a>
           </div>
       <nav class="post-nav">
         <a class="prev" href="/post/https/">
@@ -353,8 +406,8 @@ curl -XPUT -u elastic <span class="s1">&#39;http://localhost:9200/_xpack/securit
             <span class="prev-text nav-default">Https</span>
             <span class="prev-text nav-mobile">Prev</span>
           </a>
-        <a class="next" href="/post/dateformat/">
-            <span class="next-text nav-default">DateFormat</span>
+        <a class="next" href="/post/cookie_session/">
+            <span class="next-text nav-default">Cookie_session</span>
             <span class="next-text nav-mobile">Next</span>
             <i class="iconfont icon-right"></i>
           </a>

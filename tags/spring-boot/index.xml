@@ -13,15 +13,6 @@
     
     <item>
       <title>Springboot Note</title>
-      <link>https://isaacrolo.github.io/post/springboot-note/</link>
-      <pubDate>Thu, 25 Apr 2019 15:16:43 +0800</pubDate>
-      
-      <guid>https://isaacrolo.github.io/post/springboot-note/</guid>
-      <description>创建多个yml配置文件时，需要用到@PropertySource注解，但是该注解却不支持解析yml配置文件（默认支持解析properties</description>
-    </item>
-    
-    <item>
-      <title>Springboot Note</title>
       <link>https://isaacrolo.github.io/posts/springboot-note/</link>
       <pubDate>Thu, 25 Apr 2019 15:16:43 +0800</pubDate>
       
@@ -45,6 +36,15 @@
       
       <guid>https://isaacrolo.github.io/posts/resttemplate/</guid>
       <description>RestTemplate 1 2 3 4 5 6 7 8 9 10 11 12 @Test public void restTemplatePost() { String url = &amp;#34;http://127.0.0.1/trusted&amp;#34;; RestTemplate restTemplate = new RestTemplate(); HttpHeaders headers = new HttpHeaders(); headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED); MultiValueMap&amp;lt;String, String&amp;gt; params = new LinkedMultiValueMap&amp;lt;&amp;gt;(); params.add(&amp;#34;username&amp;#34;, &amp;#34;admin&amp;#34;); HttpEntity&amp;lt;MultiValueMap&amp;lt;String, String&amp;gt;&amp;gt; requestEntity = new HttpEntity&amp;lt;&amp;gt;(params, headers); String result = restTemplate.postForObject(url, requestEntity, String.class); System.out.println(result); } HttpClient 普通的post请求 1 2 3 4</description>
+    </item>
+    
+    <item>
+      <title>SpringBoot 迁移</title>
+      <link>https://isaacrolo.github.io/post/springboot-transfer/</link>
+      <pubDate>Tue, 19 Mar 2019 13:50:30 +0800</pubDate>
+      
+      <guid>https://isaacrolo.github.io/post/springboot-transfer/</guid>
+      <description>SpringBoot使用jsp作为模板引擎 Maven构建的多module SpringBoot服务打包方式 不应该给 parent 项目添加 spring-boot-maven-plugin 构建插件（该插件</description>
     </item>
     
   </channel>
