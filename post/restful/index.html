@@ -51,7 +51,7 @@
 
 <meta itemprop="datePublished" content="2019-08-06T16:46:11&#43;08:00" />
 <meta itemprop="dateModified" content="2019-08-06T16:46:11&#43;08:00" />
-<meta itemprop="wordCount" content="294">
+<meta itemprop="wordCount" content="395">
 
 
 
@@ -211,6 +211,19 @@
   <span class="p">}</span></code></pre></td></tr></table>
 </div>
 </div>
+<p>实际开发中遇到的问题：</p>
+
+<ul>
+<li><p>get和delete请求没有请求体，能否使用@RequestBody来传值？</p></li>
+
+<li><p>Restful API 关于批量删除接口怎么设计？</p>
+
+<ul>
+<li>delete /users/1,2,3,4  使用逗号做分隔符</li>
+<li>DELETE方法，一般不建议在请求时添加消息体body</li>
+</ul></li>
+</ul>
+
 <h3 id="format">Format</h3>
 
 <p>只用以下常见的3种body format：</p>
@@ -348,7 +361,11 @@
           <a href="/tags/web/">web</a>
           </div>
       <nav class="post-nav">
-        
+        <a class="prev" href="/post/hadoop/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">Hadoop</span>
+            <span class="prev-text nav-mobile">Prev</span>
+          </a>
         <a class="next" href="/post/tensorflow/">
             <span class="next-text nav-default">TensorFlow入门</span>
             <span class="next-text nav-mobile">Next</span>
@@ -392,7 +409,8 @@
 
   <span class="copyright-year">
     &copy; 
-    2019
+    2019 - 
+    2020
     <span class="heart">
       <i class="iconfont icon-heart"></i>
     </span>

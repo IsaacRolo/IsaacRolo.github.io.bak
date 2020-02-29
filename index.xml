@@ -6,10 +6,64 @@
     <description>Recent content on Rolo&#39;s Note</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Tue, 06 Aug 2019 16:46:11 +0800</lastBuildDate>
+    <lastBuildDate>Sun, 19 Jan 2020 15:42:05 +0800</lastBuildDate>
     
 	<atom:link href="https://isaacrolo.github.io/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>路由器拆机刷机记录</title>
+      <link>https://isaacrolo.github.io/post/breed/</link>
+      <pubDate>Sun, 19 Jan 2020 15:42:05 +0800</pubDate>
+      
+      <guid>https://isaacrolo.github.io/post/breed/</guid>
+      <description>拆机刷breed教程参考 老毛子固件资源 遇到的坑 k2路由器版本是22.6.532.231，必须拆机才能刷机 买了CH341A才发现以前改门禁卡时</description>
+    </item>
+    
+    <item>
+      <title>常用设计模式小结</title>
+      <link>https://isaacrolo.github.io/post/pattern/</link>
+      <pubDate>Mon, 13 Jan 2020 13:48:05 +0800</pubDate>
+      
+      <guid>https://isaacrolo.github.io/post/pattern/</guid>
+      <description>总览 设计模式分类，共23种 创建型模式【对象】 单例；工厂；抽象工厂；原型；建造者 结构型模式【类结构】 适配器；桥接；装饰；组合；外观；享元；代理</description>
+    </item>
+    
+    <item>
+      <title>池化技术的思考</title>
+      <link>https://isaacrolo.github.io/post/pool/</link>
+      <pubDate>Thu, 14 Nov 2019 10:12:22 +0800</pubDate>
+      
+      <guid>https://isaacrolo.github.io/post/pool/</guid>
+      <description>当我们频繁的使用一个资源对象时，特别是在高并发的情况下都可以考虑使用资源池的模式 资源池主要提供以下几个功能 提供资源对象 归还资源对象 销毁过期的</description>
+    </item>
+    
+    <item>
+      <title>魅族16s使用半年有感</title>
+      <link>https://isaacrolo.github.io/post/16s/</link>
+      <pubDate>Thu, 31 Oct 2019 09:49:13 +0800</pubDate>
+      
+      <guid>https://isaacrolo.github.io/post/16s/</guid>
+      <description>本人于4月23日以3199的价格购入16s 当时选择16s看重的是他的非异形屏，横向线性马达，双扬声器，和小而美的flyme 但在半年的实际使用</description>
+    </item>
+    
+    <item>
+      <title>关于防止sql注入的思考</title>
+      <link>https://isaacrolo.github.io/post/sqlinjection/</link>
+      <pubDate>Wed, 30 Oct 2019 13:44:55 +0800</pubDate>
+      
+      <guid>https://isaacrolo.github.io/post/sqlinjection/</guid>
+      <description>首先思考以下几个问题 preparedstatement一定能够防止sql注入吗？ preparedstatement防止sql注入的原理是什么</description>
+    </item>
+    
+    <item>
+      <title>Hadoop</title>
+      <link>https://isaacrolo.github.io/post/hadoop/</link>
+      <pubDate>Thu, 17 Oct 2019 11:22:14 +0800</pubDate>
+      
+      <guid>https://isaacrolo.github.io/post/hadoop/</guid>
+      <description>Hadoop生态 计算框架 - Spark MapReduce 持久化存储 hdfs hbase 列式nosql数据库，存储结构化数据 适合大数据的实时查询 基于hadoop和zookeeper 只提</description>
+    </item>
     
     <item>
       <title>如何设计Restful API</title>
@@ -39,12 +93,12 @@
     </item>
     
     <item>
-      <title>Timeline</title>
-      <link>https://isaacrolo.github.io/post/timeline/</link>
+      <title>MyGameList</title>
+      <link>https://isaacrolo.github.io/post/mygamelist/</link>
       <pubDate>Wed, 24 Jul 2019 14:24:33 +0800</pubDate>
       
-      <guid>https://isaacrolo.github.io/post/timeline/</guid>
-      <description>2019 7 [x] xxx书 [ ] xxx书 8 a task list item list syntax required normal formatting, @mentions, #1234 refs incomplete completed</description>
+      <guid>https://isaacrolo.github.io/post/mygamelist/</guid>
+      <description>2019 2 P5 4 MHW 9 Borderlands 3 异度之刃2 11 Pokemon Shield 2020 2 Fire Emblem 风花雪月 6 P5S</description>
     </item>
     
     <item>
@@ -102,6 +156,15 @@
     </item>
     
     <item>
+      <title>关于lambda表达式和Stream API的思考</title>
+      <link>https://isaacrolo.github.io/post/java8/</link>
+      <pubDate>Wed, 12 Jun 2019 16:46:30 +0800</pubDate>
+      
+      <guid>https://isaacrolo.github.io/post/java8/</guid>
+      <description>Lambda表达式 语法格式 （抽象方法的参数列表）-&amp;gt; {抽象方法的实现} 首先来看看我们能在什么地方使用lambda表达式？ 任何需要函数式</description>
+    </item>
+    
+    <item>
       <title>AOP</title>
       <link>https://isaacrolo.github.io/posts/aop/</link>
       <pubDate>Fri, 31 May 2019 10:13:29 +0800</pubDate>
@@ -156,21 +219,21 @@
     </item>
     
     <item>
-      <title>【深入理解java虚拟机读书笔记】垃圾收集器与内存分配策略</title>
-      <link>https://isaacrolo.github.io/post/jvm3/</link>
-      <pubDate>Thu, 28 Mar 2019 20:36:54 +0800</pubDate>
-      
-      <guid>https://isaacrolo.github.io/post/jvm3/</guid>
-      <description>垃圾收集器主要作用于内存的哪部分？ 不考虑回收：程序计数器，虚拟机栈，本地方法栈 原因：方法结束或线程结束时，内存自然会回收 回收：堆，方法区 原因</description>
-    </item>
-    
-    <item>
       <title>垃圾收集器与内存分配策略</title>
       <link>https://isaacrolo.github.io/posts/jvm3/</link>
       <pubDate>Thu, 28 Mar 2019 20:36:54 +0800</pubDate>
       
       <guid>https://isaacrolo.github.io/posts/jvm3/</guid>
       <description>垃圾收集器主要作用于内存的哪部分？ 不考虑回收：程序计数器，虚拟机栈，本地方法栈 原因：方法结束或线程结束时，内存自然会回收 回收：堆，方法区 原因</description>
+    </item>
+    
+    <item>
+      <title>深入理解java虚拟机读书笔记</title>
+      <link>https://isaacrolo.github.io/post/jvm/</link>
+      <pubDate>Thu, 28 Mar 2019 20:36:54 +0800</pubDate>
+      
+      <guid>https://isaacrolo.github.io/post/jvm/</guid>
+      <description>垃圾收集器与内存分配策略 垃圾收集器主要作用于内存的哪部分？ 不考虑回收：程序计数器，虚拟机栈，本地方法栈 原因：方法结束或线程结束时，内存自然会</description>
     </item>
     
     <item>
@@ -274,15 +337,6 @@
     
     <item>
       <title>spring</title>
-      <link>https://isaacrolo.github.io/post/spring-boot/</link>
-      <pubDate>Fri, 01 Mar 2019 15:26:53 +0800</pubDate>
-      
-      <guid>https://isaacrolo.github.io/post/spring-boot/</guid>
-      <description>一、Spring Boot 入门 1、Spring Boot 简介 简化Spring应用开发的一个框架； 整个Spring技术栈的一个大整合； J2EE开发的一站式解决</description>
-    </item>
-    
-    <item>
-      <title>spring</title>
       <link>https://isaacrolo.github.io/posts/spring-boot/</link>
       <pubDate>Fri, 01 Mar 2019 15:26:53 +0800</pubDate>
       
@@ -291,12 +345,21 @@
     </item>
     
     <item>
+      <title>反射</title>
+      <link>https://isaacrolo.github.io/post/reflection/</link>
+      <pubDate>Sat, 19 Jan 2019 12:38:12 +0800</pubDate>
+      
+      <guid>https://isaacrolo.github.io/post/reflection/</guid>
+      <description>反射的理解 允许程序在运行期间获取任何类的内部信息，且能直接操作对象的内部属性和方法 反射的动态性 运行时才确定需要创建的类 1 2 3 4 public class Object(String classpath){ Class clazz=Class.forName(classpath); return</description>
+    </item>
+    
+    <item>
       <title>about</title>
       <link>https://isaacrolo.github.io/about/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://isaacrolo.github.io/about/</guid>
-      <description>😀</description>
+      <description>&amp;lt;😶&amp;gt; &amp;lt;普通码农/&amp;gt; &amp;lt;电子产品发烧/&amp;gt; &amp;lt;爱折腾/&amp;gt; &amp;lt;佛系追番/&amp;gt; &amp;lt;云游戏玩</description>
     </item>
     
   </channel>

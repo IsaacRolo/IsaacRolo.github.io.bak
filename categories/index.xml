@@ -6,18 +6,45 @@
     <description>Recent content on Rolo&#39;s Note</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Wed, 24 Jul 2019 14:24:33 +0800</lastBuildDate>
+    <lastBuildDate>Thu, 31 Oct 2019 09:49:13 +0800</lastBuildDate>
     
 	<atom:link href="https://isaacrolo.github.io/categories/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>Timeline</title>
-      <link>https://isaacrolo.github.io/post/timeline/</link>
+      <title>魅族16s使用半年有感</title>
+      <link>https://isaacrolo.github.io/post/16s/</link>
+      <pubDate>Thu, 31 Oct 2019 09:49:13 +0800</pubDate>
+      
+      <guid>https://isaacrolo.github.io/post/16s/</guid>
+      <description>本人于4月23日以3199的价格购入16s 当时选择16s看重的是他的非异形屏，横向线性马达，双扬声器，和小而美的flyme 但在半年的实际使用</description>
+    </item>
+    
+    <item>
+      <title>关于防止sql注入的思考</title>
+      <link>https://isaacrolo.github.io/post/sqlinjection/</link>
+      <pubDate>Wed, 30 Oct 2019 13:44:55 +0800</pubDate>
+      
+      <guid>https://isaacrolo.github.io/post/sqlinjection/</guid>
+      <description>首先思考以下几个问题 preparedstatement一定能够防止sql注入吗？ preparedstatement防止sql注入的原理是什么</description>
+    </item>
+    
+    <item>
+      <title>Hadoop</title>
+      <link>https://isaacrolo.github.io/post/hadoop/</link>
+      <pubDate>Thu, 17 Oct 2019 11:22:14 +0800</pubDate>
+      
+      <guid>https://isaacrolo.github.io/post/hadoop/</guid>
+      <description>Hadoop生态 计算框架 - Spark MapReduce 持久化存储 hdfs hbase 列式nosql数据库，存储结构化数据 适合大数据的实时查询 基于hadoop和zookeeper 只提</description>
+    </item>
+    
+    <item>
+      <title>MyGameList</title>
+      <link>https://isaacrolo.github.io/post/mygamelist/</link>
       <pubDate>Wed, 24 Jul 2019 14:24:33 +0800</pubDate>
       
-      <guid>https://isaacrolo.github.io/post/timeline/</guid>
-      <description>2019 7 [x] xxx书 [ ] xxx书 8 a task list item list syntax required normal formatting, @mentions, #1234 refs incomplete completed</description>
+      <guid>https://isaacrolo.github.io/post/mygamelist/</guid>
+      <description>2019 2 P5 4 MHW 9 Borderlands 3 异度之刃2 11 Pokemon Shield 2020 2 Fire Emblem 风花雪月 6 P5S</description>
     </item>
     
     <item>
@@ -75,6 +102,15 @@
     </item>
     
     <item>
+      <title>关于lambda表达式和Stream API的思考</title>
+      <link>https://isaacrolo.github.io/post/java8/</link>
+      <pubDate>Wed, 12 Jun 2019 16:46:30 +0800</pubDate>
+      
+      <guid>https://isaacrolo.github.io/post/java8/</guid>
+      <description>Lambda表达式 语法格式 （抽象方法的参数列表）-&amp;gt; {抽象方法的实现} 首先来看看我们能在什么地方使用lambda表达式？ 任何需要函数式</description>
+    </item>
+    
+    <item>
       <title>AOP</title>
       <link>https://isaacrolo.github.io/posts/aop/</link>
       <pubDate>Fri, 31 May 2019 10:13:29 +0800</pubDate>
@@ -108,6 +144,15 @@
       
       <guid>https://isaacrolo.github.io/posts/jsoup/</guid>
       <description>选择器的使用 基本用法 | tagname | 使用标签名来定位，例如 a | | &amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash; | &amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash; | | ns|tag | 使用命名空间的标签定位，例如 fb:name 来查找 fb:name 元素 | | #id | 使用元素 id 定位，例如 #logo</description>
+    </item>
+    
+    <item>
+      <title>反射</title>
+      <link>https://isaacrolo.github.io/post/reflection/</link>
+      <pubDate>Sat, 19 Jan 2019 12:38:12 +0800</pubDate>
+      
+      <guid>https://isaacrolo.github.io/post/reflection/</guid>
+      <description>反射的理解 允许程序在运行期间获取任何类的内部信息，且能直接操作对象的内部属性和方法 反射的动态性 运行时才确定需要创建的类 1 2 3 4 public class Object(String classpath){ Class clazz=Class.forName(classpath); return</description>
     </item>
     
   </channel>

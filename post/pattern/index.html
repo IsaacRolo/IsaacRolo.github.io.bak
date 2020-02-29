@@ -1,0 +1,1231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>常用设计模式小结 - Rolo&#39;s Note</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="Rolo" /><meta name="description" content="总览 设计模式分类，共23种 创建型模式【对象】 单例；工厂；抽象工厂；原型；建造者 结构型模式【类结构】 适配器；桥接；装饰；组合；外观；享元；代理" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.54.0 with even 4.0.0" />
+
+
+<link rel="canonical" href="https://isaacrolo.github.io/post/pattern/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<link href="/dist/even.c2a46f00.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="常用设计模式小结" />
+<meta property="og:description" content="总览 设计模式分类，共23种 创建型模式【对象】 单例；工厂；抽象工厂；原型；建造者 结构型模式【类结构】 适配器；桥接；装饰；组合；外观；享元；代理" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://isaacrolo.github.io/post/pattern/" />
+<meta property="article:published_time" content="2020-01-13T13:48:05&#43;08:00"/>
+<meta property="article:modified_time" content="2020-01-13T13:48:05&#43;08:00"/>
+
+<meta itemprop="name" content="常用设计模式小结">
+<meta itemprop="description" content="总览 设计模式分类，共23种 创建型模式【对象】 单例；工厂；抽象工厂；原型；建造者 结构型模式【类结构】 适配器；桥接；装饰；组合；外观；享元；代理">
+
+
+<meta itemprop="datePublished" content="2020-01-13T13:48:05&#43;08:00" />
+<meta itemprop="dateModified" content="2020-01-13T13:48:05&#43;08:00" />
+<meta itemprop="wordCount" content="3291">
+
+
+
+<meta itemprop="keywords" content="," />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="常用设计模式小结"/>
+<meta name="twitter:description" content="总览 设计模式分类，共23种 创建型模式【对象】 单例；工厂；抽象工厂；原型；建造者 结构型模式【类结构】 适配器；桥接；装饰；组合；外观；享元；代理"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">[√] [×]</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">About</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">[√] [×]</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">About</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">常用设计模式小结</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2020-01-13 </span>
+        <div class="post-category">
+            <a href="/categories/java/"> Java </a>
+            </div>
+        <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> times read </span>
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Contents</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+<ul>
+<li><a href="#总览">总览</a></li>
+<li><a href="#单例模式">单例模式</a>
+<ul>
+<li>
+<ul>
+<li><a href="#8种写法">8种写法</a></li>
+<li><a href="#应用场景">应用场景</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#工厂模式">工厂模式</a>
+<ul>
+<li>
+<ul>
+<li><a href="#工厂模式的意义">工厂模式的意义：</a></li>
+<li><a href="#简单工厂模式">简单工厂模式</a></li>
+<li><a href="#工厂方法模式">工厂方法模式</a></li>
+<li><a href="#抽象工厂模式">抽象工厂模式</a></li>
+<li><a href="#改进抽象工厂模式">改进抽象工厂模式</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#装饰者模式">装饰者模式</a></li>
+<li><a href="#代理模式">代理模式</a>
+<ul>
+<li>
+<ul>
+<li><a href="#静态代理">静态代理</a></li>
+<li><a href="#动态代理">动态代理</a></li>
+<li><a href="#代理模式应用场景">代理模式应用场景</a></li>
+</ul></li>
+</ul></li>
+</ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      
+
+<h1 id="总览">总览</h1>
+
+<p>设计模式分类，共23种</p>
+
+<ul>
+<li>创建型模式【对象】</li>
+</ul>
+
+<p><strong>单例</strong>；<strong>工厂</strong>；<strong>抽象工厂</strong>；原型；建造者</p>
+
+<ul>
+<li>结构型模式【类结构】</li>
+</ul>
+
+<p><strong>适配器</strong>；桥接；<strong>装饰</strong>；组合；外观；享元；<strong>代理</strong></p>
+
+<ul>
+<li>行为型模式【方法】</li>
+</ul>
+
+<p>模板方法；命令；访问者；迭代器；<strong>观察者</strong>；中介者；备忘录；解释器；状态；<strong>策略</strong>；职责链</p>
+
+<h1 id="单例模式">单例模式</h1>
+
+<p>整个系统中，对某个类只能存在<strong>一个对象实例</strong>，且该类只提供一个获取其对象实例的方法</p>
+
+<h3 id="8种写法">8种写法</h3>
+
+<ul>
+<li>饿汉式【静态常量】
+
+<ul>
+<li>类装载时完成实例化，避免线程同步问题</li>
+<li>若不使用其实例，可能存在内存浪费</li>
+</ul></li>
+<li>饿汉式【静态代码块】</li>
+<li>懒汉式【线程不安全】</li>
+<li>懒汉式【线程安全，同步方法】</li>
+<li>懒汉式【线程安全，同步代码块】</li>
+<li>双重检查</li>
+<li>静态内部类</li>
+<li>枚举</li>
+</ul>
+
+<h3 id="应用场景">应用场景</h3>
+
+<p>频繁创建销毁的对象；耗时或耗资源较多又常用的对象；工具类对象；频繁访问数据库或文件的对象</p>
+
+<ul>
+<li>Hibernate中的数据源代理SessionFactory</li>
+<li>Runtime【运行时数据区】类</li>
+<li>数据源Datasource</li>
+</ul>
+
+<h1 id="工厂模式">工厂模式</h1>
+
+<h3 id="工厂模式的意义">工厂模式的意义：</h3>
+
+<ul>
+<li><p>将<strong>创建对象</strong>的代码提取出来，统一在<strong>工厂接口【抽象类】</strong>中管理</p></li>
+
+<li><p>解耦，扩展性和维护性的提升</p></li>
+
+<li><p>满足依赖抽象原则</p></li>
+</ul>
+
+<h3 id="简单工厂模式">简单工厂模式</h3>
+
+<ul>
+<li>一个工厂负责所有对象的创建</li>
+<li>对象种类较少时可以使用</li>
+<li>当新增对象类型时，需要修改工厂内部的逻辑代码，不符合开闭原则</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="c1">//抽象产品  
+</span><span class="c1"></span><span class="kd">abstract</span> <span class="kd">class</span> <span class="nc">Car</span><span class="o">{</span>  
+    <span class="kd">private</span> <span class="n">String</span> <span class="n">name</span><span class="o">;</span>  
+      
+    <span class="kd">public</span> <span class="kd">abstract</span> <span class="kt">void</span> <span class="nf">drive</span><span class="o">();</span>  
+      
+    <span class="kd">public</span> <span class="n">String</span> <span class="nf">getName</span><span class="o">()</span> <span class="o">{</span>  
+        <span class="k">return</span> <span class="n">name</span><span class="o">;</span>  
+    <span class="o">}</span>  
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setName</span><span class="o">(</span><span class="n">String</span> <span class="n">name</span><span class="o">)</span> <span class="o">{</span>  
+        <span class="k">this</span><span class="o">.</span><span class="na">name</span> <span class="o">=</span> <span class="n">name</span><span class="o">;</span>  
+    <span class="o">}</span>  
+<span class="o">}</span>  
+<span class="c1">//具体产品  
+</span><span class="c1"></span><span class="kd">class</span> <span class="nc">Benz</span> <span class="kd">extends</span> <span class="n">Car</span><span class="o">{</span>  
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">drive</span><span class="o">(){</span>  
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="k">this</span><span class="o">.</span><span class="na">getName</span><span class="o">()+</span><span class="s">&#34;----go-----------------------&#34;</span><span class="o">);</span>  
+    <span class="o">}</span>  
+<span class="o">}</span>  
+  
+<span class="kd">class</span> <span class="nc">Bmw</span> <span class="kd">extends</span> <span class="n">Car</span><span class="o">{</span>  
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">drive</span><span class="o">(){</span>  
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="k">this</span><span class="o">.</span><span class="na">getName</span><span class="o">()+</span><span class="s">&#34;----go-----------------------&#34;</span><span class="o">);</span>  
+    <span class="o">}</span>  
+<span class="o">}</span>  
+  
+<span class="c1">//简单工厂  
+</span><span class="c1"></span><span class="kd">class</span> <span class="nc">Driver</span><span class="o">{</span>  
+    <span class="kd">public</span> <span class="kd">static</span> <span class="n">Car</span> <span class="nf">createCar</span><span class="o">(</span><span class="n">String</span> <span class="n">car</span><span class="o">){</span>  
+        <span class="n">Car</span> <span class="n">c</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>  
+        <span class="k">if</span><span class="o">(</span><span class="s">&#34;Benz&#34;</span><span class="o">.</span><span class="na">equalsIgnoreCase</span><span class="o">(</span><span class="n">car</span><span class="o">))</span>  
+            <span class="n">c</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Benz</span><span class="o">();</span>  
+        <span class="k">else</span> <span class="k">if</span><span class="o">(</span><span class="s">&#34;Bmw&#34;</span><span class="o">.</span><span class="na">equalsIgnoreCase</span><span class="o">(</span><span class="n">car</span><span class="o">))</span>  
+            <span class="n">c</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Bmw</span><span class="o">();</span>  
+        <span class="k">return</span> <span class="n">c</span><span class="o">;</span>  
+    <span class="o">}</span>  
+<span class="o">}</span>  
+  
+<span class="c1">//main方法  
+</span><span class="c1"></span><span class="kd">public</span> <span class="kd">class</span> <span class="nc">BossSimplyFactory</span> <span class="o">{</span>  
+  
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">IOException</span> <span class="o">{</span>  
+        <span class="n">Car</span> <span class="n">car</span> <span class="o">=</span> <span class="n">Driver</span><span class="o">.</span><span class="na">createCar</span><span class="o">(</span><span class="s">&#34;benz&#34;</span><span class="o">);</span>  
+        <span class="n">car</span><span class="o">.</span><span class="na">setName</span><span class="o">(</span><span class="s">&#34;benz&#34;</span><span class="o">);</span>  
+        <span class="n">car</span><span class="o">.</span><span class="na">drive</span><span class="o">();</span>  
+    <span class="o">}</span>  </code></pre></td></tr></table>
+</div>
+</div>
+<h3 id="工厂方法模式">工厂方法模式</h3>
+
+<ul>
+<li>将工厂分为 抽象工厂+具体工厂</li>
+<li>每个具体工厂负责一种对象的创建</li>
+<li>当新增对象类型时，只需要新增一个具体工厂来继承抽象工厂，不会修改已有工厂的内部代码，符合开闭原则</li>
+<li>但是当对象种类特别多的时候，则需要创建许多的具体工厂类，若对象能划分为<strong>对象族</strong>的话可以使用抽象工厂模式来优化，以免创建过多的具体工厂类</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="c1">//抽象产品  
+</span><span class="c1"></span><span class="kd">abstract</span> <span class="kd">class</span> <span class="nc">Car</span><span class="o">{</span>  
+    <span class="kd">private</span> <span class="n">String</span> <span class="n">name</span><span class="o">;</span>  
+      
+    <span class="kd">public</span> <span class="kd">abstract</span> <span class="kt">void</span> <span class="nf">drive</span><span class="o">();</span>  
+      
+    <span class="kd">public</span> <span class="n">String</span> <span class="nf">getName</span><span class="o">()</span> <span class="o">{</span>  
+        <span class="k">return</span> <span class="n">name</span><span class="o">;</span>  
+    <span class="o">}</span>  
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setName</span><span class="o">(</span><span class="n">String</span> <span class="n">name</span><span class="o">)</span> <span class="o">{</span>  
+        <span class="k">this</span><span class="o">.</span><span class="na">name</span> <span class="o">=</span> <span class="n">name</span><span class="o">;</span>  
+    <span class="o">}</span>  
+<span class="o">}</span>  
+<span class="c1">//具体产品  
+</span><span class="c1"></span><span class="kd">class</span> <span class="nc">Benz</span> <span class="kd">extends</span> <span class="n">Car</span><span class="o">{</span>  
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">drive</span><span class="o">(){</span>  
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="k">this</span><span class="o">.</span><span class="na">getName</span><span class="o">()+</span><span class="s">&#34;----go-----------------------&#34;</span><span class="o">);</span>  
+    <span class="o">}</span>  
+<span class="o">}</span>  
+<span class="kd">class</span> <span class="nc">Bmw</span> <span class="kd">extends</span> <span class="n">Car</span><span class="o">{</span>  
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">drive</span><span class="o">(){</span>  
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="k">this</span><span class="o">.</span><span class="na">getName</span><span class="o">()+</span><span class="s">&#34;----go-----------------------&#34;</span><span class="o">);</span>  
+    <span class="o">}</span>  
+<span class="o">}</span>  
+  
+  
+<span class="c1">//抽象工厂  
+</span><span class="c1"></span><span class="kd">abstract</span> <span class="kd">class</span> <span class="nc">Driver</span><span class="o">{</span>  
+    <span class="kd">public</span> <span class="kd">abstract</span> <span class="n">Car</span> <span class="nf">createCar</span><span class="o">(</span><span class="n">String</span> <span class="n">car</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">Exception</span><span class="o">;</span>  
+<span class="o">}</span>  
+<span class="c1">//具体工厂（每个具体工厂负责一个具体产品）  
+</span><span class="c1"></span><span class="kd">class</span> <span class="nc">BenzDriver</span> <span class="kd">extends</span> <span class="n">Driver</span><span class="o">{</span>  
+    <span class="kd">public</span> <span class="n">Car</span> <span class="nf">createCar</span><span class="o">(</span><span class="n">String</span> <span class="n">car</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">Exception</span> <span class="o">{</span>  
+        <span class="k">return</span> <span class="k">new</span> <span class="n">Benz</span><span class="o">();</span>  
+    <span class="o">}</span>  
+<span class="o">}</span>  
+<span class="kd">class</span> <span class="nc">BmwDriver</span> <span class="kd">extends</span> <span class="n">Driver</span><span class="o">{</span>  
+    <span class="kd">public</span> <span class="n">Car</span> <span class="nf">createCar</span><span class="o">(</span><span class="n">String</span> <span class="n">car</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">Exception</span> <span class="o">{</span>  
+        <span class="k">return</span> <span class="k">new</span> <span class="n">Bmw</span><span class="o">();</span>  
+    <span class="o">}</span>  
+<span class="o">}</span>  
+  
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Boss</span><span class="o">{</span> 
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">Exception</span> <span class="o">{</span>  
+        <span class="n">Driver</span> <span class="n">d</span> <span class="o">=</span> <span class="k">new</span> <span class="n">BenzDriver</span><span class="o">();</span>  
+        <span class="n">Car</span> <span class="n">c</span> <span class="o">=</span> <span class="n">d</span><span class="o">.</span><span class="na">createCar</span><span class="o">(</span><span class="s">&#34;benz&#34;</span><span class="o">);</span>   
+        <span class="n">c</span><span class="o">.</span><span class="na">setName</span><span class="o">(</span><span class="s">&#34;benz&#34;</span><span class="o">);</span>  
+        <span class="n">c</span><span class="o">.</span><span class="na">drive</span><span class="o">();</span>  
+    <span class="o">}</span>  
+<span class="o">}</span>  </code></pre></td></tr></table>
+</div>
+</div>
+<h3 id="抽象工厂模式">抽象工厂模式</h3>
+
+<ul>
+<li>抽象工厂模式=简单工厂+工厂方法 【和工厂方法模式一样将工厂分为 抽象工厂+具体工厂】</li>
+<li>将工厂方法模式里的抽象工厂抽象为多个产品族</li>
+<li>目的是减少具体工厂的数量</li>
+<li>抽象工厂模式的使用前提
+
+<ul>
+<li>系统中有多个产品族</li>
+<li>系统一次只可能消费其中一族产品</li>
+</ul></li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="c1">//抽象工厂  
+</span><span class="c1"></span><span class="kd">abstract</span> <span class="kd">class</span> <span class="nc">Driver3</span><span class="o">{</span> 
+    
+    <span class="c1">//产品树1
+</span><span class="c1"></span>    <span class="kd">public</span> <span class="kd">abstract</span> <span class="n">BenzCar</span> <span class="nf">createBenzCar</span><span class="o">(</span><span class="n">String</span> <span class="n">car</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">Exception</span><span class="o">;</span>  
+    
+    <span class="c1">//产品树2
+</span><span class="c1"></span>    <span class="kd">public</span> <span class="kd">abstract</span> <span class="n">BmwCar</span> <span class="nf">createBmwCar</span><span class="o">(</span><span class="n">String</span> <span class="n">car</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">Exception</span><span class="o">;</span>  
+    
+    <span class="c1">//产品树3
+</span><span class="c1"></span>    <span class="kd">public</span> <span class="kd">abstract</span> <span class="n">AudiCar</span> <span class="nf">createAudiCar</span><span class="o">(</span><span class="n">String</span> <span class="n">car</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">Exception</span><span class="o">;</span>  
+<span class="o">}</span>  
+<span class="c1">//具体工厂【产品族1】  
+</span><span class="c1"></span><span class="kd">class</span> <span class="nc">SportDriver</span> <span class="kd">extends</span> <span class="n">Driver3</span><span class="o">{</span>  
+    <span class="kd">public</span> <span class="n">BenzCar</span> <span class="nf">createBenzCar</span><span class="o">(</span><span class="n">String</span> <span class="n">car</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">Exception</span> <span class="o">{</span>  
+        <span class="k">return</span> <span class="k">new</span> <span class="n">BenzSportCar</span><span class="o">();</span>  
+    <span class="o">}</span>  
+    <span class="kd">public</span> <span class="n">BmwCar</span> <span class="nf">createBmwCar</span><span class="o">(</span><span class="n">String</span> <span class="n">car</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">Exception</span> <span class="o">{</span>  
+        <span class="k">return</span> <span class="k">new</span> <span class="n">BmwSportCar</span><span class="o">();</span>  
+    <span class="o">}</span>  
+    <span class="kd">public</span> <span class="n">AudiCar</span> <span class="nf">createAudiCar</span><span class="o">(</span><span class="n">String</span> <span class="n">car</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">Exception</span> <span class="o">{</span>  
+        <span class="k">return</span> <span class="k">new</span> <span class="n">AudiSportCar</span><span class="o">();</span>  
+    <span class="o">}</span>  
+<span class="o">}</span>  
+<span class="c1">//【产品族2】  
+</span><span class="c1"></span><span class="kd">class</span> <span class="nc">BusinessDriver</span> <span class="kd">extends</span> <span class="n">Driver3</span><span class="o">{</span>  
+    <span class="kd">public</span> <span class="n">BenzCar</span> <span class="nf">createBenzCar</span><span class="o">(</span><span class="n">String</span> <span class="n">car</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">Exception</span> <span class="o">{</span>  
+        <span class="k">return</span> <span class="k">new</span> <span class="n">BenzBusinessCar</span><span class="o">();</span>  
+    <span class="o">}</span>  
+    <span class="kd">public</span> <span class="n">BmwCar</span> <span class="nf">createBmwCar</span><span class="o">(</span><span class="n">String</span> <span class="n">car</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">Exception</span> <span class="o">{</span>  
+        <span class="k">return</span> <span class="k">new</span> <span class="n">BmwBusinessCar</span><span class="o">();</span>  
+    <span class="o">}</span>  
+    <span class="kd">public</span> <span class="n">AudiCar</span> <span class="nf">createAudiCar</span><span class="o">(</span><span class="n">String</span> <span class="n">car</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">Exception</span> <span class="o">{</span>  
+        <span class="k">return</span> <span class="k">new</span> <span class="n">AudiBusinessCar</span><span class="o">();</span>  
+    <span class="o">}</span>  
+<span class="o">}</span>  
+  
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">BossAbstractFactory</span> <span class="o">{</span>  
+  
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">Exception</span> <span class="o">{</span>    
+        <span class="n">Driver3</span> <span class="n">d</span> <span class="o">=</span> <span class="k">new</span> <span class="n">BusinessDriver</span><span class="o">();</span>  
+        <span class="n">AudiCar</span> <span class="n">car</span> <span class="o">=</span> <span class="n">d</span><span class="o">.</span><span class="na">createAudiCar</span><span class="o">(</span><span class="s">&#34;&#34;</span><span class="o">);</span>  
+        <span class="n">car</span><span class="o">.</span><span class="na">drive</span><span class="o">();</span>  
+    <span class="o">}</span>  
+<span class="o">}</span>  </code></pre></td></tr></table>
+</div>
+</div>
+<h3 id="改进抽象工厂模式">改进抽象工厂模式</h3>
+
+<p>抽象工厂模式的缺点</p>
+
+<ul>
+<li>如果需要增加新的产品树，那么就要新产品类，并且要修改三个工厂类</li>
+<li>可以用<strong>简单工厂</strong>配合<strong>反射</strong>来改进抽象工厂</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">class</span> <span class="nc">Driver3</span><span class="o">{</span>  
+    <span class="kd">public</span> <span class="kd">static</span> <span class="n">BenzCar</span> <span class="nf">createBenzCar</span><span class="o">(</span><span class="n">String</span> <span class="n">car</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">Exception</span> <span class="o">{</span>  
+        <span class="k">return</span> <span class="o">(</span><span class="n">BenzCar</span><span class="o">)</span> <span class="n">Class</span><span class="o">.</span><span class="na">forName</span><span class="o">(</span><span class="n">car</span><span class="o">).</span><span class="na">newInstance</span><span class="o">();</span>  
+    <span class="o">}</span>  
+      
+    <span class="kd">public</span> <span class="kd">static</span> <span class="n">BmwCar</span> <span class="nf">createBmwCar</span><span class="o">(</span><span class="n">String</span> <span class="n">car</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">Exception</span> <span class="o">{</span>  
+        <span class="k">return</span> <span class="o">(</span><span class="n">BmwCar</span><span class="o">)</span> <span class="n">Class</span><span class="o">.</span><span class="na">forName</span><span class="o">(</span><span class="n">car</span><span class="o">).</span><span class="na">newInstance</span><span class="o">();</span>  
+    <span class="o">}</span>  
+      
+    <span class="kd">public</span> <span class="kd">static</span> <span class="n">AudiCar</span> <span class="nf">createAudiCar</span><span class="o">(</span><span class="n">String</span> <span class="n">car</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">Exception</span> <span class="o">{</span>  
+        <span class="k">return</span> <span class="o">(</span><span class="n">AudiCar</span><span class="o">)</span> <span class="n">Class</span><span class="o">.</span><span class="na">forName</span><span class="o">(</span><span class="n">car</span><span class="o">).</span><span class="na">newInstance</span><span class="o">();</span>  
+    <span class="o">}</span>  
+<span class="o">}</span>  
+<span class="c1">//客户端  
+</span><span class="c1"></span><span class="kd">public</span> <span class="kd">class</span> <span class="nc">SimpleAndAbstractFactory</span> <span class="o">{</span>  
+  
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">Exception</span> <span class="o">{</span>  
+  
+        <span class="n">AudiCar</span> <span class="n">car</span> <span class="o">=</span> <span class="n">Driver3</span><span class="o">.</span><span class="na">createAudiCar</span><span class="o">(</span><span class="s">&#34;com.java.pattendesign.factory.AudiSportCar&#34;</span><span class="o">);</span>  
+        <span class="n">car</span><span class="o">.</span><span class="na">drive</span><span class="o">();</span>  
+    <span class="o">}</span>  
+<span class="o">}</span>  </code></pre></td></tr></table>
+</div>
+</div>
+<p>参考：<a href="https://www.jianshu.com/p/6d447cea14c7">https://www.jianshu.com/p/6d447cea14c7</a></p>
+
+<h1 id="装饰者模式">装饰者模式</h1>
+
+<p>动态给对象添加一些额外的属性或行为</p>
+
+<ul>
+<li>装饰着模式和静态代理模式的区别？</li>
+</ul>
+
+<p>两者都是对类的方法进行扩展，但装饰器模式强调的是增强自身，在被装饰之后你能够在被增强的类上使用增强后的功能。而代理模式则强调要让别人帮你去做一些本身与你业务没有太多关系的职责（记录日志、设置缓存）</p>
+
+<ul>
+<li>装饰者模式相比于继承有什么优势？</li>
+</ul>
+
+<p>添加新的行为时，继承需要在原有方法里<strong>修改代码</strong>；而装饰者模式可以通过<strong>创建装饰者类</strong>来实现，遵循类的开闭原则</p>
+
+<ul>
+<li>使用场景：IO类</li>
+</ul>
+
+<p>FileOutputStream增强了OutputStream的功能</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java">  <span class="k">new</span> <span class="n">ObjectOutputStream</span><span class="o">(</span><span class="k">new</span> <span class="n">BufferedOutputStream</span><span class="o">(</span><span class="k">new</span> <span class="n">FileOutputStream</span><span class="o">(</span> <span class="s">&#34;io.txt&#34;</span> <span class="o">)));</span></code></pre></td></tr></table>
+</div>
+</div>
+<ul>
+<li>实例</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span><span class="lnt">63
+</span><span class="lnt">64
+</span><span class="lnt">65
+</span><span class="lnt">66
+</span><span class="lnt">67
+</span><span class="lnt">68
+</span><span class="lnt">69
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java">  <span class="kd">public</span> <span class="kd">abstract</span> <span class="kd">class</span> <span class="nc">Sweet</span> <span class="o">{</span>
+      <span class="n">String</span> <span class="n">description</span> <span class="o">=</span> <span class="s">&#34;Sweet&#34;</span><span class="o">;</span>
+  
+      <span class="kd">public</span> <span class="n">String</span> <span class="nf">getDescription</span><span class="o">()</span> <span class="o">{</span>
+          <span class="k">return</span> <span class="n">description</span><span class="o">;</span>
+      <span class="o">}</span>
+  
+      <span class="kd">public</span> <span class="kd">abstract</span> <span class="kt">double</span> <span class="nf">cost</span><span class="o">();</span>
+  <span class="o">}</span>
+  <span class="kd">public</span> <span class="kd">class</span> <span class="nc">Cake</span> <span class="kd">extends</span> <span class="n">Sweet</span> <span class="o">{</span>
+      <span class="nd">@Override</span>
+      <span class="kd">public</span> <span class="n">String</span> <span class="nf">getDescription</span><span class="o">()</span> <span class="o">{</span>
+          <span class="k">return</span> <span class="s">&#34;一个蛋糕&#34;</span><span class="o">;</span>
+      <span class="o">}</span>
+  
+      <span class="nd">@Override</span>
+      <span class="kd">public</span> <span class="kt">double</span> <span class="nf">cost</span><span class="o">()</span> <span class="o">{</span>
+          <span class="k">return</span> <span class="n">66</span><span class="o">;</span>
+      <span class="o">}</span>
+  <span class="o">}</span>
+  <span class="kd">public</span> <span class="kd">abstract</span> <span class="kd">class</span> <span class="nc">Decorator</span> <span class="kd">extends</span> <span class="n">Sweet</span> <span class="o">{</span>
+      <span class="kd">public</span> <span class="kd">abstract</span> <span class="n">String</span> <span class="nf">getDescription</span><span class="o">();</span>
+  <span class="o">}</span>
+  <span class="kd">public</span> <span class="kd">class</span> <span class="nc">FruitDecorator</span> <span class="kd">extends</span> <span class="n">Decorator</span> <span class="o">{</span>
+      <span class="n">Sweet</span> <span class="n">sweet</span><span class="o">;</span>
+  
+      <span class="kd">public</span> <span class="nf">FruitDecorator</span><span class="o">(</span><span class="n">Sweet</span> <span class="n">sweet</span><span class="o">)</span> <span class="o">{</span>
+          <span class="k">this</span><span class="o">.</span><span class="na">sweet</span> <span class="o">=</span> <span class="n">sweet</span><span class="o">;</span>
+      <span class="o">}</span>
+  
+      <span class="nd">@Override</span>
+      <span class="kd">public</span> <span class="n">String</span> <span class="nf">getDescription</span><span class="o">()</span> <span class="o">{</span>
+          <span class="k">return</span> <span class="n">sweet</span><span class="o">.</span><span class="na">getDescription</span><span class="o">()</span> <span class="o">+</span> <span class="s">&#34;，水果&#34;</span><span class="o">;</span>
+      <span class="o">}</span>
+  
+      <span class="nd">@Override</span>
+      <span class="kd">public</span> <span class="kt">double</span> <span class="nf">cost</span><span class="o">()</span> <span class="o">{</span>
+          <span class="k">return</span> <span class="n">sweet</span><span class="o">.</span><span class="na">cost</span><span class="o">()</span> <span class="o">+</span> <span class="n">10</span><span class="o">;</span>
+      <span class="o">}</span>
+  <span class="o">}</span>
+  <span class="kd">public</span> <span class="kd">class</span> <span class="nc">CandleDecorator</span> <span class="kd">extends</span> <span class="n">Decorator</span> <span class="o">{</span>
+      <span class="n">Sweet</span> <span class="n">sweet</span><span class="o">;</span>
+  
+      <span class="kd">public</span> <span class="nf">CandleDecorator</span><span class="o">(</span><span class="n">Sweet</span> <span class="n">sweet</span><span class="o">)</span> <span class="o">{</span>
+          <span class="k">this</span><span class="o">.</span><span class="na">sweet</span> <span class="o">=</span> <span class="n">sweet</span><span class="o">;</span>
+      <span class="o">}</span>
+  
+      <span class="nd">@Override</span>
+      <span class="kd">public</span> <span class="n">String</span> <span class="nf">getDescription</span><span class="o">()</span> <span class="o">{</span>
+          <span class="k">return</span> <span class="n">sweet</span><span class="o">.</span><span class="na">getDescription</span><span class="o">()</span> <span class="o">+</span> <span class="s">&#34;，蜡烛&#34;</span><span class="o">;</span>
+      <span class="o">}</span>
+  
+      <span class="nd">@Override</span>
+      <span class="kd">public</span> <span class="kt">double</span> <span class="nf">cost</span><span class="o">()</span> <span class="o">{</span>
+          <span class="k">return</span> <span class="n">sweet</span><span class="o">.</span><span class="na">cost</span><span class="o">()</span> <span class="o">+</span> <span class="n">10</span><span class="o">;</span>
+      <span class="o">}</span>
+  <span class="o">}</span>
+  <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+  
+      <span class="n">Cake</span> <span class="n">cake</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Cake</span><span class="o">();</span>
+      <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">cake</span><span class="o">.</span><span class="na">getDescription</span><span class="o">()</span> <span class="o">+</span> <span class="s">&#34;总共花费&#34;</span> <span class="o">+</span> <span class="n">cake</span><span class="o">.</span><span class="na">cost</span><span class="o">());</span>
+  
+      <span class="n">FruitDecorator</span> <span class="n">fruitDecorator</span> <span class="o">=</span> <span class="k">new</span> <span class="n">FruitDecorator</span><span class="o">(</span><span class="n">cake</span><span class="o">);</span>
+      <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">fruitDecorator</span><span class="o">.</span><span class="na">getDescription</span><span class="o">()</span> <span class="o">+</span> <span class="s">&#34;总共花费&#34;</span> <span class="o">+</span> <span class="n">fruitDecorator</span><span class="o">.</span><span class="na">cost</span><span class="o">());</span>
+  
+      <span class="n">CandleDecorator</span> <span class="n">candleDecorator</span> <span class="o">=</span> <span class="k">new</span> <span class="n">CandleDecorator</span><span class="o">(</span><span class="n">fruitDecorator</span><span class="o">);</span>
+      <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">candleDecorator</span><span class="o">.</span><span class="na">getDescription</span><span class="o">()</span> <span class="o">+</span> <span class="s">&#34;总共花费&#34;</span> <span class="o">+</span> <span class="n">candleDecorator</span><span class="o">.</span><span class="na">cost</span><span class="o">());</span>
+  
+      <span class="o">}</span></code></pre></td></tr></table>
+</div>
+</div>
+<h1 id="代理模式">代理模式</h1>
+
+<p>通过代理对象访问目标对象</p>
+
+<h3 id="静态代理">静态代理</h3>
+
+<ul>
+<li>实例：使用实现Runnable接口的方式创建线程【为什么要通过Thread对象来创建线程？】</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java">  <span class="kd">class</span> <span class="nc">MyThread</span> <span class="kd">implements</span> <span class="n">Runnable</span><span class="o">{</span>
+  
+      <span class="nd">@Override</span>
+      <span class="kd">public</span> <span class="kt">void</span> <span class="nf">run</span><span class="o">()</span> <span class="o">{</span>
+          <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;Thread1&#34;</span><span class="o">);</span>
+      <span class="o">}</span>
+  <span class="o">}</span>
+  
+  
+  <span class="kd">public</span> <span class="kd">class</span> <span class="nc">StaticProxyThread</span> <span class="o">{</span>
+      <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+          <span class="c1">//myThread 被代理对象
+</span><span class="c1"></span>          <span class="n">MyThread</span> <span class="n">myThread</span> <span class="o">=</span> <span class="k">new</span> <span class="n">MyThread</span><span class="o">();</span>
+          <span class="c1">//thread 代理对象，调用Thread类的run方法相当于调用MyThread类的run方法
+</span><span class="c1"></span>          <span class="c1">//    @Override
+</span><span class="c1"></span>          <span class="c1">//    public void run() {
+</span><span class="c1"></span>          <span class="c1">//        if (target != null) {
+</span><span class="c1"></span>          <span class="c1">//            target.run();
+</span><span class="c1"></span>          <span class="c1">//        }
+</span><span class="c1"></span>          <span class="c1">//    }
+</span><span class="c1"></span>          <span class="n">Thread</span> <span class="n">thread</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Thread</span><span class="o">(</span><span class="n">myThread</span><span class="o">);</span>
+          <span class="c1">//线程处于就绪状态，并没有运行，一旦得到cpu时间片，就开始执行Thread类的run()方法
+</span><span class="c1"></span>          <span class="n">thread</span><span class="o">.</span><span class="na">start</span><span class="o">();</span>
+  
+          <span class="k">new</span> <span class="n">Thread</span><span class="o">(</span><span class="k">new</span> <span class="n">Runnable</span><span class="o">()</span> <span class="o">{</span>
+              <span class="nd">@Override</span>
+              <span class="kd">public</span> <span class="kt">void</span> <span class="nf">run</span><span class="o">()</span> <span class="o">{</span>
+                  <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;Thread2&#34;</span><span class="o">);</span>
+              <span class="o">}</span>
+          <span class="o">}).</span><span class="na">start</span><span class="o">();</span>
+  
+          <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;Thread Main&#34;</span><span class="o">);</span>
+      <span class="o">}</span>
+  <span class="o">}</span></code></pre></td></tr></table>
+</div>
+</div>
+<ul>
+<li><p>静态代理的缺点</p>
+
+<ul>
+<li>代理类和被代理类都是在编译期间确定，不利于扩展</li>
+</ul>
+
+<p>【若被代理类新增一个方法，代理类也需要进行修改，即不利于扩展】</p>
+
+<ul>
+<li>每个代理类都只为一个接口服务，多个接口就需要创建多个代理类</li>
+</ul>
+
+<p>【代理类过多】</p></li>
+</ul>
+
+<h3 id="动态代理">动态代理</h3>
+
+<ul>
+<li><p>代理对象是在运行时动态创建的</p></li>
+
+<li><p>动态代理是通过<code>Proxy</code>创建代理对象，然后将接口方法“代理”给<code>InvocationHandler</code>完成的</p></li>
+
+<li><p>动态代理的本质：JDK在运行期动态创建class字节码并加载的过程</p></li>
+
+<li><p>JDK动态代理实例【使用了JDK的反射API；被代理对象必须实现接口】</p></li>
+</ul>
+
+<p>JDK动态代理的被代理对象为何必须实现接口？</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java">  <span class="kd">interface</span> <span class="nc">PhoneFactory</span><span class="o">{</span>
+      <span class="kt">void</span> <span class="nf">salePhone</span><span class="o">();</span>
+      <span class="kt">void</span> <span class="nf">getPhoneName</span><span class="o">(</span><span class="n">String</span> <span class="n">name</span><span class="o">);</span>
+  <span class="o">}</span>
+  
+  <span class="c1">//被代理类
+</span><span class="c1"></span>  <span class="kd">class</span> <span class="nc">NokiaPhoneFactory</span> <span class="kd">implements</span> <span class="n">PhoneFactory</span><span class="o">{</span>
+  
+      <span class="nd">@Override</span>
+      <span class="kd">public</span> <span class="kt">void</span> <span class="nf">salePhone</span><span class="o">()</span> <span class="o">{</span>
+          <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;sale Nokia&#34;</span><span class="o">);</span>
+      <span class="o">}</span>
+  
+      <span class="nd">@Override</span>
+      <span class="kd">public</span> <span class="kt">void</span> <span class="nf">getPhoneName</span><span class="o">(</span><span class="n">String</span> <span class="n">name</span><span class="o">)</span> <span class="o">{</span>
+          <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;Phone name is &#34;</span><span class="o">+</span><span class="n">name</span><span class="o">);</span>
+      <span class="o">}</span>
+  
+  <span class="o">}</span>
+  
+  <span class="c1">//反射获取代理对象[代理的是类的所有方法]
+</span><span class="c1"></span>  <span class="kd">class</span> <span class="nc">DynamicProxyUtil</span><span class="o">{</span>
+  
+      <span class="kd">public</span> <span class="kd">static</span> <span class="n">Object</span> <span class="nf">getProxyInstance</span><span class="o">(</span><span class="n">Object</span> <span class="n">object</span><span class="o">){</span>
+          <span class="k">return</span> <span class="n">Proxy</span><span class="o">.</span><span class="na">newProxyInstance</span><span class="o">(</span><span class="n">object</span><span class="o">.</span><span class="na">getClass</span><span class="o">().</span><span class="na">getClassLoader</span><span class="o">(),</span> <span class="n">object</span><span class="o">.</span><span class="na">getClass</span><span class="o">().</span><span class="na">getInterfaces</span><span class="o">(),</span> <span class="k">new</span> <span class="n">InvocationHandler</span><span class="o">()</span> <span class="o">{</span>
+              <span class="nd">@Override</span>
+              <span class="kd">public</span> <span class="n">Object</span> <span class="nf">invoke</span><span class="o">(</span><span class="n">Object</span> <span class="n">proxy</span><span class="o">,</span> <span class="n">Method</span> <span class="n">method</span><span class="o">,</span> <span class="n">Object</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">Throwable</span> <span class="o">{</span>
+                  <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;log before&#34;</span><span class="o">);</span>
+                  <span class="n">Object</span> <span class="n">returnValue</span> <span class="o">=</span> <span class="n">method</span><span class="o">.</span><span class="na">invoke</span><span class="o">(</span><span class="n">object</span><span class="o">,</span> <span class="n">args</span><span class="o">);</span>
+                  <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;log after&#34;</span><span class="o">);</span>
+                  <span class="k">return</span> <span class="n">returnValue</span><span class="o">;</span>
+              <span class="o">}</span>
+          <span class="o">});</span>
+      <span class="o">}</span>
+  <span class="o">}</span>
+  
+  
+  <span class="kd">public</span> <span class="kd">class</span> <span class="nc">DynamicProxyTest</span> <span class="o">{</span>
+  
+      <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+          <span class="n">PhoneFactory</span> <span class="n">nokiaPhoneFactory</span> <span class="o">=</span> <span class="k">new</span> <span class="n">NokiaPhoneFactory</span><span class="o">();</span>
+          <span class="n">PhoneFactory</span> <span class="n">proxyInstance</span> <span class="o">=</span> <span class="o">(</span><span class="n">PhoneFactory</span><span class="o">)</span> <span class="n">DynamicProxyUtil</span><span class="o">.</span><span class="na">getProxyInstance</span><span class="o">(</span><span class="n">nokiaPhoneFactory</span><span class="o">);</span>
+          <span class="n">proxyInstance</span><span class="o">.</span><span class="na">salePhone</span><span class="o">();</span>
+          <span class="n">proxyInstance</span><span class="o">.</span><span class="na">getPhoneName</span><span class="o">(</span><span class="s">&#34;Nokia&#34;</span><span class="o">);</span>
+      <span class="o">}</span>
+  <span class="o">}</span></code></pre></td></tr></table>
+</div>
+</div>
+<ul>
+<li>CGLIB动态代理实例【针对被代理的类, 动态生成一个子类, 然后子类覆盖被代理类中的方法】</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java">  <span class="kd">public</span> <span class="kd">class</span> <span class="nc">Engineer</span> <span class="o">{</span>
+      <span class="c1">// 可以被代理
+</span><span class="c1"></span>      <span class="kd">public</span> <span class="kt">void</span> <span class="nf">eat</span><span class="o">()</span> <span class="o">{</span>
+          <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;工程师正在吃饭&#34;</span><span class="o">);</span>
+      <span class="o">}</span>
+  
+      <span class="c1">// final 方法不会被生成的字类覆盖
+</span><span class="c1"></span>      <span class="kd">public</span> <span class="kd">final</span> <span class="kt">void</span> <span class="nf">work</span><span class="o">()</span> <span class="o">{</span>
+          <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;工程师正在工作&#34;</span><span class="o">);</span>
+      <span class="o">}</span>
+  
+      <span class="c1">// private 方法不会被生成的字类覆盖
+</span><span class="c1"></span>      <span class="kd">private</span> <span class="kt">void</span> <span class="nf">play</span><span class="o">()</span> <span class="o">{</span>
+          <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;this engineer is playing game&#34;</span><span class="o">);</span>
+      <span class="o">}</span>
+  <span class="o">}</span>
+  
+  <span class="kd">public</span> <span class="kd">class</span> <span class="nc">CglibProxy</span> <span class="kd">implements</span> <span class="n">MethodInterceptor</span> <span class="o">{</span>
+      <span class="kd">private</span> <span class="n">Object</span> <span class="n">target</span><span class="o">;</span>
+  
+      <span class="kd">public</span> <span class="nf">CglibProxy</span><span class="o">(</span><span class="n">Object</span> <span class="n">target</span><span class="o">)</span> <span class="o">{</span>
+          <span class="k">this</span><span class="o">.</span><span class="na">target</span> <span class="o">=</span> <span class="n">target</span><span class="o">;</span>
+      <span class="o">}</span>
+  
+      <span class="nd">@Override</span>
+      <span class="kd">public</span> <span class="n">Object</span> <span class="nf">intercept</span><span class="o">(</span><span class="n">Object</span> <span class="n">o</span><span class="o">,</span> <span class="n">Method</span> <span class="n">method</span><span class="o">,</span> <span class="n">Object</span><span class="o">[]</span> <span class="n">objects</span><span class="o">,</span> <span class="n">MethodProxy</span> <span class="n">methodProxy</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">Throwable</span> <span class="o">{</span>
+          <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;###   before invocation&#34;</span><span class="o">);</span>
+          <span class="n">Object</span> <span class="n">result</span> <span class="o">=</span> <span class="n">method</span><span class="o">.</span><span class="na">invoke</span><span class="o">(</span><span class="n">target</span><span class="o">,</span> <span class="n">objects</span><span class="o">);</span>
+          <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;###   end invocation&#34;</span><span class="o">);</span>
+          <span class="k">return</span> <span class="n">result</span><span class="o">;</span>
+      <span class="o">}</span>
+  
+      <span class="kd">public</span> <span class="kd">static</span> <span class="n">Object</span> <span class="nf">getProxy</span><span class="o">(</span><span class="n">Object</span> <span class="n">target</span><span class="o">)</span> <span class="o">{</span>
+          <span class="n">Enhancer</span> <span class="n">enhancer</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Enhancer</span><span class="o">();</span>
+          <span class="c1">// 设置需要代理的对象
+</span><span class="c1"></span>          <span class="n">enhancer</span><span class="o">.</span><span class="na">setSuperclass</span><span class="o">(</span><span class="n">target</span><span class="o">.</span><span class="na">getClass</span><span class="o">());</span>
+          <span class="c1">// 设置代理人
+</span><span class="c1"></span>          <span class="n">enhancer</span><span class="o">.</span><span class="na">setCallback</span><span class="o">(</span><span class="k">new</span> <span class="n">CglibProxy</span><span class="o">(</span><span class="n">target</span><span class="o">));</span>
+          <span class="k">return</span> <span class="n">enhancer</span><span class="o">.</span><span class="na">create</span><span class="o">();</span>
+      <span class="o">}</span>
+  <span class="o">}</span>
+  
+  <span class="kd">public</span> <span class="kd">class</span> <span class="nc">CglibMainTest</span> <span class="o">{</span>
+      <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+          <span class="c1">// 生成 Cglib 代理类
+</span><span class="c1"></span>          <span class="n">Engineer</span> <span class="n">engineerProxy</span> <span class="o">=</span> <span class="o">(</span><span class="n">Engineer</span><span class="o">)</span> <span class="n">CglibProxy</span><span class="o">.</span><span class="na">getProxy</span><span class="o">(</span><span class="k">new</span> <span class="n">Engineer</span><span class="o">());</span>
+          <span class="c1">// 调用相关方法
+</span><span class="c1"></span>          <span class="n">engineerProxy</span><span class="o">.</span><span class="na">eat</span><span class="o">();</span>
+      <span class="o">}</span>
+  <span class="o">}</span></code></pre></td></tr></table>
+</div>
+</div>
+<h3 id="代理模式应用场景">代理模式应用场景</h3>
+
+<ul>
+<li>用来控制真实对象访问时的权限，一般用于对象应该有不同的访问权限的时候</li>
+<li>延迟加载，用代理模式实现延迟加载的一个经典应用就在 Hibernate 框架里面。当 Hibernate 加载实体 bean 时，并不会一次性将数据库所有的数据都装载。使用代理拦截原有的 getter 方法，在真正使用对象数据时才去数据库或者其他第三方组件加载实际的数据，从而提升系统性能。</li>
+</ul>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">Author</span>
+    <span class="item-content">Rolo</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">LastMod</span>
+    <span class="item-content">
+        2020-01-13
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags//"></a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/breed/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">路由器拆机刷机记录</span>
+            <span class="prev-text nav-mobile">Prev</span>
+          </a>
+        <a class="next" href="/post/pool/">
+            <span class="next-text nav-default">池化技术的思考</span>
+            <span class="next-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+  
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="elrolo@outlook.com" class="iconfont icon-email" title="email"></a>
+      <a href="https://github.com/IsaacRolo" class="iconfont icon-github" title="github"></a>
+  <a href="https://isaacrolo.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  <div class="busuanzi-footer">
+    <span id="busuanzi_container_site_pv"> site pv: <span id="busuanzi_value_site_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> </span>
+      <span class="division">|</span>
+    <span id="busuanzi_container_site_uv"> site uv: <span id="busuanzi_value_site_uv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> </span>
+  </div>
+
+  <span class="copyright-year">
+    &copy; 
+    2019 - 
+    2020
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">Rolo</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="/dist/even.26188efa.min.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

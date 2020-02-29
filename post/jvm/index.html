@@ -1,0 +1,704 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>深入理解java虚拟机读书笔记 - Rolo&#39;s Note</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="Rolo" /><meta name="description" content="垃圾收集器与内存分配策略 垃圾收集器主要作用于内存的哪部分？ 不考虑回收：程序计数器，虚拟机栈，本地方法栈 原因：方法结束或线程结束时，内存自然会" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.54.0 with even 4.0.0" />
+
+
+<link rel="canonical" href="https://isaacrolo.github.io/post/jvm/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<link href="/dist/even.c2a46f00.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="深入理解java虚拟机读书笔记" />
+<meta property="og:description" content="垃圾收集器与内存分配策略 垃圾收集器主要作用于内存的哪部分？ 不考虑回收：程序计数器，虚拟机栈，本地方法栈 原因：方法结束或线程结束时，内存自然会" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://isaacrolo.github.io/post/jvm/" />
+<meta property="article:published_time" content="2019-03-28T20:36:54&#43;08:00"/>
+<meta property="article:modified_time" content="2019-03-28T20:36:54&#43;08:00"/>
+
+<meta itemprop="name" content="深入理解java虚拟机读书笔记">
+<meta itemprop="description" content="垃圾收集器与内存分配策略 垃圾收集器主要作用于内存的哪部分？ 不考虑回收：程序计数器，虚拟机栈，本地方法栈 原因：方法结束或线程结束时，内存自然会">
+
+
+<meta itemprop="datePublished" content="2019-03-28T20:36:54&#43;08:00" />
+<meta itemprop="dateModified" content="2019-03-28T20:36:54&#43;08:00" />
+<meta itemprop="wordCount" content="2588">
+
+
+
+<meta itemprop="keywords" content="Java," />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="深入理解java虚拟机读书笔记"/>
+<meta name="twitter:description" content="垃圾收集器与内存分配策略 垃圾收集器主要作用于内存的哪部分？ 不考虑回收：程序计数器，虚拟机栈，本地方法栈 原因：方法结束或线程结束时，内存自然会"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">[√] [×]</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">About</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">[√] [×]</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">About</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">深入理解java虚拟机读书笔记</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2019-03-28 </span>
+        <div class="post-category">
+            <a href="/categories/java/"> Java </a>
+            </div>
+        <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> times read </span>
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Contents</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+<ul>
+<li><a href="#垃圾收集器与内存分配策略">垃圾收集器与内存分配策略</a>
+<ul>
+<li>
+<ul>
+<li>
+<ul>
+<li><a href="#垃圾收集器主要作用于内存的哪部分">垃圾收集器主要作用于内存的哪部分？</a></li>
+<li><a href="#如何判断对象是否已死">如何判断对象是否已死？</a>
+<ul>
+<li><a href="#引用计数算法">引用计数算法</a></li>
+<li><a href="#可达性分析算法">可达性分析算法</a></li>
+</ul></li>
+<li><a href="#引用有哪几种类型">引用有哪几种类型？</a></li>
+<li><a href="#什么时候对象被回收-finalize方法">什么时候对象被回收（finalize方法）？</a></li>
+<li><a href="#垃圾收集算法有哪些">垃圾收集算法有哪些？</a></li>
+<li><a href="#hotspot虚拟机是如何实现存活判定和垃圾收集算法的">HotSpot虚拟机是如何实现存活判定和垃圾收集算法的？</a></li>
+<li><a href="#垃圾收集器有哪些">垃圾收集器有哪些？</a></li>
+<li><a href="#内存回收与分配策略">内存回收与分配策略</a></li>
+</ul></li>
+</ul></li>
+</ul></li>
+<li><a href="#类加载子系统">类加载子系统</a>
+<ul>
+<li><a href="#jvm生命周期">JVM生命周期</a></li>
+<li><a href="#类加载子系统-1">类加载子系统</a></li>
+<li><a href="#类加载过程">类加载过程</a>
+<ul>
+<li><a href="#加载">加载</a></li>
+<li><a href="#链接">链接</a></li>
+<li><a href="#初始化">初始化</a></li>
+</ul></li>
+<li><a href="#类加载器">类加载器</a></li>
+<li><a href="#双亲委派机制">双亲委派机制</a></li>
+</ul></li>
+<li><a href="#运行时数据区">运行时数据区</a>
+<ul>
+<li><a href="#pc寄存器">PC寄存器</a></li>
+<li><a href="#虚拟机栈">虚拟机栈</a>
+<ul>
+<li><a href="#栈帧的内部结构">栈帧的内部结构</a>
+<ul>
+<li><a href="#局部变量表">局部变量表</a></li>
+<li><a href="#操作数栈">操作数栈</a></li>
+<li><a href="#动态链接-指向运行时常量池方法的引用">动态链接【指向运行时常量池方法的引用】</a></li>
+<li><a href="#方法返回地址">方法返回地址</a></li>
+<li><a href="#附加信息">附加信息</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#本地方法栈">本地方法栈</a></li>
+</ul></li>
+<li><a href="#执行引擎">执行引擎</a></li>
+</ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      
+
+<h1 id="垃圾收集器与内存分配策略">垃圾收集器与内存分配策略</h1>
+
+<h4 id="垃圾收集器主要作用于内存的哪部分">垃圾收集器主要作用于内存的哪部分？</h4>
+
+<p><strong>不考虑回收</strong>：程序计数器，虚拟机栈，本地方法栈</p>
+
+<p>原因：方法结束或线程结束时，内存自然会回收</p>
+
+<p><strong>回收</strong>：堆，方法区</p>
+
+<p>原因：程序运行期间才知道会创建哪些对象，内存的分配和回收是动态的</p>
+
+<h4 id="如何判断对象是否已死">如何判断对象是否已死？</h4>
+
+<h5 id="引用计数算法">引用计数算法</h5>
+
+<h5 id="可达性分析算法">可达性分析算法</h5>
+
+<h4 id="引用有哪几种类型">引用有哪几种类型？</h4>
+
+<p>强引用</p>
+
+<p>软引用</p>
+
+<p>弱引用</p>
+
+<p>虚引用</p>
+
+<h4 id="什么时候对象被回收-finalize方法">什么时候对象被回收（finalize方法）？</h4>
+
+<p>对象需要经过2次的<strong>标记</strong>过程后才被回收</p>
+
+<p>第一次标记（不可达）——&gt;筛选（是否要执行finalize方法，有必要执行则执行，对象进入待回收的队列，等待第二次标记）——&gt;第二次标记（finalize方法中将对象重新与引用链连接，则不会被回收）——&gt;对象被回收</p>
+
+<p><strong>对象是否有必要执行finalize方法？</strong></p>
+
+<p>没有重写finalize方法 || finalize方法已经被虚拟机调用过  则没有必要执行</p>
+
+<h4 id="垃圾收集算法有哪些">垃圾收集算法有哪些？</h4>
+
+<p>标记-清除算法</p>
+
+<p>复制算法</p>
+
+<p>标记-整理算法</p>
+
+<p>分代收集算法</p>
+
+<h4 id="hotspot虚拟机是如何实现存活判定和垃圾收集算法的">HotSpot虚拟机是如何实现存活判定和垃圾收集算法的？</h4>
+
+<h4 id="垃圾收集器有哪些">垃圾收集器有哪些？</h4>
+
+<h4 id="内存回收与分配策略">内存回收与分配策略</h4>
+
+<h1 id="类加载子系统">类加载子系统</h1>
+
+<p><img src="https://s2.ax1x.com/2020/01/20/1PgEPH.png" alt="1PgEPH.png" /></p>
+
+<h2 id="jvm生命周期">JVM生命周期</h2>
+
+<ul>
+<li>启动</li>
+</ul>
+
+<p>bootstrap classloader创建一个初始类</p>
+
+<ul>
+<li>执行</li>
+</ul>
+
+<p>执行java虚拟机的进程</p>
+
+<ul>
+<li>退出</li>
+</ul>
+
+<p>System和Runtime队应的方法</p>
+
+<h2 id="类加载子系统-1">类加载子系统</h2>
+
+<p><img src="https://s2.ax1x.com/2020/01/20/1PRTKI.png" alt="1PRTKI.png" /></p>
+
+<ul>
+<li>类加载子系统负责将<strong>Class文件</strong>从文件系统或网络加载到<strong>内存</strong></li>
+<li>Class文件开头有特定的文件标识</li>
+<li>加载的<strong>类信息</strong>存放在<strong>方法区</strong>【还会存放运行时常量池信息】的内存空间</li>
+</ul>
+
+<h2 id="类加载过程">类加载过程</h2>
+
+<ul>
+<li><h3 id="加载">加载</h3>
+
+<p>主要作用是<strong>在内存中生成Class实例</strong>【Class对象=class类】</p>
+
+<ul>
+<li>通过类的全限定名获取定义该类的二进制字节流</li>
+<li>字节流 转化为 方法区中运行时数据结构</li>
+<li>内存中生成代表该类的<strong>java.lang.Class</strong>【反射】<strong>对象</strong>，作为方法区的访问入口</li>
+<li>加载的.class文件的来源：</li>
+<li>网络；</li>
+<li>压缩包jar；</li>
+<li>运行时生成【动态代理】；</li>
+<li>其他文件生成jsp；</li>
+</ul></li>
+
+<li><h3 id="链接">链接</h3>
+
+<ul>
+<li>#### 验证</li>
+</ul>
+
+<p>验证字节码文件包含的信息是否符虚拟机的规范【CA FE BA BE】</p>
+
+<ul>
+<li>#### 准备</li>
+</ul>
+
+<blockquote>
+<p>成员变量 【使用前都经过默认初始化赋值】</p>
+
+<ul>
+<li>类变量【prepare阶段默认赋值】</li>
+<li>实例变量【在堆空间中分配实例变量空间，并默认赋值】</li>
+</ul>
+
+<p>局部变量【使用前必须显式赋值】</p>
+</blockquote>
+
+<p>为变量分配内存，设置初始值，零值</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="c1">//prepare阶段 赋值为0；initial阶段 初始化为1
+</span><span class="c1"></span><span class="kd">private</span> <span class="kd">static</span> <span class="kt">int</span> <span class="n">a</span><span class="o">=</span><span class="n">1</span><span class="o">;</span>
+<span class="c1">//常量在编译的时候就会被初始化；prepare阶段会显式初始化为2
+</span><span class="c1"></span><span class="kd">private</span> <span class="kd">final</span> <span class="kd">static</span> <span class="n">b</span><span class="o">=</span><span class="n">2</span><span class="o">;</span></code></pre></td></tr></table>
+</div>
+</div>
+<ul>
+<li>#### 解析</li>
+</ul>
+
+<p>将常量池中的符号引用转化为直接引用</p></li>
+
+<li><h3 id="初始化">初始化</h3>
+
+<ul>
+<li><p>执行类构造器<code>&lt;clinit&gt;( )</code>方法的过程</p></li>
+
+<li><p><code>&lt;clinit&gt;( )</code>方法由javac编译器自动生成，<strong>类变量</strong>赋值+静态代码块中的初始化</p></li>
+
+<li><p><code>&lt;clinit&gt;( )</code>方法中的指令按代码顺序执行</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">ClassInit</span><span class="o">{</span>
+    <span class="kd">static</span><span class="o">{</span>
+        <span class="n">num</span><span class="o">=</span><span class="n">2</span>
+    <span class="o">}</span>
+    <span class="c1">//linking的prepare阶段赋值为0；initial阶段初始化为1
+</span><span class="c1"></span>    <span class="kd">private</span> <span class="kd">static</span> <span class="kt">int</span> <span class="n">num</span><span class="o">=</span><span class="n">1</span><span class="o">;</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">){</span>
+        <span class="n">sout</span><span class="o">(</span><span class="n">ClassInit</span><span class="o">.</span><span class="na">num</span><span class="o">);</span><span class="c1">//1
+</span><span class="c1"></span>    <span class="o">}</span>
+<span class="o">}</span></code></pre></td></tr></table>
+</div>
+</div></li>
+
+<li><p>一个类在只会被加载进内存中一次，<code>&lt;clinit&gt;( )</code>方法在多线程下会被同步加锁</p></li>
+</ul></li>
+</ul>
+
+<h2 id="类加载器">类加载器</h2>
+
+<ul>
+<li>BootstrapClassLoader【引导类加载器】
+
+<ul>
+<li>在JVM内部，使用C/C++实现</li>
+<li>加载java的核心类库</li>
+</ul></li>
+<li>ExtClassLoader【扩展类加载器】
+
+<ul>
+<li>加载 jre/lib/ext 下的类库</li>
+<li>父类加载器：BootstrapClassLoader</li>
+</ul></li>
+<li>AppClassLoader【系统类加载器】
+
+<ul>
+<li>程序默认的类加载器，加载自定义类</li>
+<li>父类加载器：ExtClassLoader</li>
+</ul></li>
+</ul>
+
+<h2 id="双亲委派机制">双亲委派机制</h2>
+
+<p><img src="https://s2.ax1x.com/2020/01/22/1AiZxU.png" alt="1AiZxU.png" /></p>
+
+<p>优点：</p>
+
+<ul>
+<li>避免类的重复加载【已经加载过的类就不会委托其他加载器加载】</li>
+<li>保护程序安全，防止核心API被篡改【java.lang.String】</li>
+</ul>
+
+<h1 id="运行时数据区">运行时数据区</h1>
+
+<p><img src="https://s2.ax1x.com/2020/01/20/1PgVGd.png" alt="1PgVGd.png" /></p>
+
+<h2 id="pc寄存器">PC寄存器</h2>
+
+<p><img src="https://s2.ax1x.com/2020/01/24/1VjE6J.png" alt="1VjE6J.png" /></p>
+
+<ul>
+<li>作用：存储指向下一条指令的地址，由执行引擎读取下一条指令</li>
+<li>为什么要专门使用PC寄存器来存储下一条指令的地址？【多线程切换】</li>
+<li>线程私有；不会发生OOM；不GC</li>
+</ul>
+
+<h2 id="虚拟机栈">虚拟机栈</h2>
+
+<ul>
+<li>是什么？</li>
+</ul>
+
+<p>线程创建时会创建虚拟机栈，内部储存多个栈帧，每个栈帧对应方法的调用</p>
+
+<ul>
+<li>有什么用？</li>
+</ul>
+
+<p>负责程序的运行，保存方法的局部变量【8种基本数据类型，对象的引用地址】，部分结果，参与方法的调用和返回</p>
+
+<ul>
+<li><p>线程私有；发生OOM；不GC</p></li>
+
+<li><p>虚拟机栈可能出现的异常</p>
+
+<ul>
+<li>StackOverflowError</li>
+</ul>
+
+<p>虚拟机栈容量固定，线程分配的栈容量 超过 虚拟机栈最大容量【-Xss 最大栈空间，决定可达深度】</p>
+
+<ul>
+<li>OutOfMemoryError</li>
+</ul>
+
+<p>虚拟机栈容量动态扩展，扩展时无法申请到足够的内存</p></li>
+
+<li><h3 id="栈帧的内部结构">栈帧的内部结构</h3></li>
+</ul>
+
+<p><img src="https://s2.ax1x.com/2020/01/27/1nDxmj.png" alt="1nDxmj.png" /></p>
+
+<ul>
+<li><h4 id="局部变量表">局部变量表</h4>
+
+<ul>
+<li><p>数字<strong>数组</strong>，存储<strong>方法参数</strong>和定义在方法体内的<strong>局部变量</strong></p></li>
+
+<li><p>数据类型包括：基本数据类型，对象引用，returnAddress类型</p></li>
+
+<li><p>局部变量表的容量在编译期间确定，运行期间不会改变</p></li>
+
+<li><p>字节码中局部变量表的分析【静态方法main的局部变量表】</p></li>
+</ul>
+
+<p><img src="https://s2.ax1x.com/2020/01/27/1nsfZd.png" alt="1nsfZd.png" /></p>
+
+<ul>
+<li><p>局部变量表中的变量是GC的根节点</p></li>
+
+<li><p>变量槽<strong>slot</strong></p>
+
+<ul>
+<li>是什么？
+<br /></li>
+</ul>
+
+<p>局部变量表的基本储存单元</p>
+
+<ul>
+<li><p>32位类型占用一个slot；64位类型【long和double】占用两个slot</p></li>
+
+<li><p>局部变量表内部存储方式</p></li>
+</ul>
+
+<p><img src="https://s2.ax1x.com/2020/01/27/1n213t.png" alt="1n213t.png" /></p>
+
+<ul>
+<li><strong>构造方法</strong>或<strong>实例方法</strong>创建的帧，对象引用的this会存放在index为0的slot处
+<br /></li>
+</ul></li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java">  <span class="kd">class</span> <span class="nc">Slot</span><span class="o">{</span>
+      <span class="kd">private</span> <span class="kt">int</span> <span class="n">num</span><span class="o">=</span><span class="n">1</span><span class="o">;</span>
+      <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">slotTest</span><span class="o">(){</span>
+          <span class="c1">//this变量不存在于当前方法的局部变量表中
+</span><span class="c1"></span>          <span class="k">this</span><span class="o">.</span><span class="na">num</span><span class="c1">//this为什么会报错？
+</span><span class="c1"></span>      <span class="o">}</span>
+  <span class="o">}</span></code></pre></td></tr></table>
+</div>
+</div>
+<ul>
+<li>局部变量过了作用域，其slot可以被重复使用，以达到节省空间的目的
+<br /></li>
+</ul></li>
+
+<li><h4 id="操作数栈">操作数栈</h4>
+
+<ul>
+<li><p>在方法执行的过程中，根据字节码指令，往栈帧中写入或提取数据【入栈，出栈】</p></li>
+
+<li><p>主要用于保存计算过程的中间结果</p></li>
+
+<li><p>当前方法的返回值也会被压入当前栈帧的操作数栈中</p></li>
+
+<li><p>操作数栈&amp;局部变量表的关系</p></li>
+</ul>
+
+<p><img src="https://s2.ax1x.com/2020/01/28/1KSHBT.png" alt="1KSHBT.png" /></p></li>
+
+<li><h4 id="动态链接-指向运行时常量池方法的引用">动态链接【指向运行时常量池方法的引用】</h4>
+
+<ul>
+<li>什么是动态链接？
+<br /></li>
+</ul>
+
+<p>java文件编译到字节码文件中时，所有的变量和方法引用都保存到class文件的<strong>常量池</strong>中</p>
+
+<p><img src="https://s2.ax1x.com/2020/01/29/1MRgDP.png" alt="1MRgDP.png" /></p>
+
+<p>动态链接就是指向<strong>运行时常量池</strong>的符号引用</p>
+
+<ul>
+<li><p>面向对象的语言具备<strong>多态</strong>的特性， 导致  符号引用转化为直接引用的过程  分为<strong>早期绑定</strong>和<strong>晚期绑定</strong>两种方式</p></li>
+
+<li><p>字节码方法调用指令</p>
+
+<ul>
+<li>invokestatic  调用静态方法【编译期确定唯一方法】</li>
+<li>invokespecial  调用<init>方法，私有方法，父类方法【编译期确定唯一方法】</li>
+<li>invokevirtual  调用所有虚方法，finial修饰的方法</li>
+<li>invokeintetface  调用接口方法</li>
+<li>invokedynamic  动态解析出需要调用的方法，然后执行（<strong>使用Lambda表达式时调用此指令</strong>）【赋予Java动态语言特性的支持，Java是静态类型语言，类型是通过变量的类型类判断；JS是通过值来判断类型】
+<br /></li>
+</ul></li>
+
+<li><p>虚方法表</p>
+
+<ul>
+<li>为了提高动态绑定的效率，在方法区建立虚方法表</li>
+<li>每个类中都有一个虚方法表，表中存放各个方法的实际入口</li>
+<li>虚方法表在类加载-链接阶段 创建和初始化
+<br /></li>
+</ul></li>
+</ul></li>
+
+<li><h4 id="方法返回地址">方法返回地址</h4>
+
+<p>存放调用者PC寄存器的值</p></li>
+
+<li><h4 id="附加信息">附加信息</h4></li>
+</ul>
+
+<h2 id="本地方法栈">本地方法栈</h2>
+
+<ul>
+<li><p>管理本地方法的调用</p></li>
+
+<li><p>部分虚拟机不区分本地方法栈</p></li>
+</ul>
+
+<h1 id="执行引擎">执行引擎</h1>
+
+<p><img src="https://s2.ax1x.com/2020/01/20/1PgZRA.png" alt="1PgZRA.png" /></p>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">Author</span>
+    <span class="item-content">Rolo</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">LastMod</span>
+    <span class="item-content">
+        2019-03-28
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/java/">Java</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/jsoup/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">Java爬虫—Jsoup</span>
+            <span class="prev-text nav-mobile">Prev</span>
+          </a>
+        <a class="next" href="/post/informatica/">
+            <span class="next-text nav-default">ETL工具Informatica实战</span>
+            <span class="next-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+  
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="elrolo@outlook.com" class="iconfont icon-email" title="email"></a>
+      <a href="https://github.com/IsaacRolo" class="iconfont icon-github" title="github"></a>
+  <a href="https://isaacrolo.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  <div class="busuanzi-footer">
+    <span id="busuanzi_container_site_pv"> site pv: <span id="busuanzi_value_site_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> </span>
+      <span class="division">|</span>
+    <span id="busuanzi_container_site_uv"> site uv: <span id="busuanzi_value_site_uv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> </span>
+  </div>
+
+  <span class="copyright-year">
+    &copy; 
+    2019 - 
+    2020
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">Rolo</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="/dist/even.26188efa.min.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

@@ -6,18 +6,27 @@
     <description>Recent content in Java on Rolo&#39;s Note</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Thu, 28 Mar 2019 20:36:54 +0800</lastBuildDate>
+    <lastBuildDate>Mon, 13 Jan 2020 13:48:05 +0800</lastBuildDate>
     
 	<atom:link href="https://isaacrolo.github.io/categories/java/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>【深入理解java虚拟机读书笔记】垃圾收集器与内存分配策略</title>
-      <link>https://isaacrolo.github.io/post/jvm3/</link>
-      <pubDate>Thu, 28 Mar 2019 20:36:54 +0800</pubDate>
+      <title>常用设计模式小结</title>
+      <link>https://isaacrolo.github.io/post/pattern/</link>
+      <pubDate>Mon, 13 Jan 2020 13:48:05 +0800</pubDate>
       
-      <guid>https://isaacrolo.github.io/post/jvm3/</guid>
-      <description>垃圾收集器主要作用于内存的哪部分？ 不考虑回收：程序计数器，虚拟机栈，本地方法栈 原因：方法结束或线程结束时，内存自然会回收 回收：堆，方法区 原因</description>
+      <guid>https://isaacrolo.github.io/post/pattern/</guid>
+      <description>总览 设计模式分类，共23种 创建型模式【对象】 单例；工厂；抽象工厂；原型；建造者 结构型模式【类结构】 适配器；桥接；装饰；组合；外观；享元；代理</description>
+    </item>
+    
+    <item>
+      <title>池化技术的思考</title>
+      <link>https://isaacrolo.github.io/post/pool/</link>
+      <pubDate>Thu, 14 Nov 2019 10:12:22 +0800</pubDate>
+      
+      <guid>https://isaacrolo.github.io/post/pool/</guid>
+      <description>当我们频繁的使用一个资源对象时，特别是在高并发的情况下都可以考虑使用资源池的模式 资源池主要提供以下几个功能 提供资源对象 归还资源对象 销毁过期的</description>
     </item>
     
     <item>
@@ -27,6 +36,15 @@
       
       <guid>https://isaacrolo.github.io/posts/jvm3/</guid>
       <description>垃圾收集器主要作用于内存的哪部分？ 不考虑回收：程序计数器，虚拟机栈，本地方法栈 原因：方法结束或线程结束时，内存自然会回收 回收：堆，方法区 原因</description>
+    </item>
+    
+    <item>
+      <title>深入理解java虚拟机读书笔记</title>
+      <link>https://isaacrolo.github.io/post/jvm/</link>
+      <pubDate>Thu, 28 Mar 2019 20:36:54 +0800</pubDate>
+      
+      <guid>https://isaacrolo.github.io/post/jvm/</guid>
+      <description>垃圾收集器与内存分配策略 垃圾收集器主要作用于内存的哪部分？ 不考虑回收：程序计数器，虚拟机栈，本地方法栈 原因：方法结束或线程结束时，内存自然会</description>
     </item>
     
   </channel>

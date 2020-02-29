@@ -51,7 +51,7 @@
 
 <meta itemprop="datePublished" content="2019-03-20T13:46:10&#43;08:00" />
 <meta itemprop="dateModified" content="2019-03-20T13:46:10&#43;08:00" />
-<meta itemprop="wordCount" content="2773">
+<meta itemprop="wordCount" content="3121">
 
 
 
@@ -151,7 +151,8 @@
 <li><a href="#zuul的4种过滤器">Zuul的4种过滤器</a></li>
 </ul></li>
 <li><a href="#springcloud-zuul-整合shiro实现权限认证">SpringCloud zuul 整合shiro实现权限认证</a></li>
-<li><a href="#参考">参考：</a></li>
+<li><a href="#关于前后端分离项目权限控制的思考">关于前后端分离项目权限控制的思考</a></li>
+<li><a href="#参考">参考</a></li>
 </ul></li>
 </ul></li>
 </ul></li>
@@ -541,7 +542,51 @@
 
 <p>没有实践过</p>
 
-<h4 id="参考">参考：</h4>
+<h4 id="关于前后端分离项目权限控制的思考">关于前后端分离项目权限控制的思考</h4>
+
+<hr />
+
+<p>技术背景</p>
+
+<ul>
+<li><p>前后端分离项目</p></li>
+
+<li><p>前端为静态html页面，DOM存为JS变量再动态生成</p></li>
+</ul>
+
+<p>没有使用前端框架生成页面【前端工程组件化】；没有使用模板引擎如JSP【后端渲染】</p>
+
+<p>权限的控制主要分为登录权限；页面路由权限；接口数据权限</p>
+
+<ul>
+<li>登录权限</li>
+</ul>
+
+<p>登录权限可独立出来，方便以后扩展</p>
+
+<ul>
+<li>页面路由权限</li>
+</ul>
+
+<p>页面权限包括 <strong>菜单</strong>功能权限；<strong>按钮</strong>级别功能权限；</p>
+
+<p>正常流程：登录时查询出该用户的所有页面权限，前端根据查询出的权限来生成页面
+  异常流程：用户自己输入菜单 URL，但是 API 调用时，后台会进行 角色校验如果没有对应 API 权限，会返回异常</p>
+
+<p>实现思路：</p>
+
+<ul>
+<li>登录成功，获取用户所有的功能权限</li>
+<li>根据菜单功能权限来生成菜单</li>
+
+<li><p>在访问某些细粒度权限控制的页面时，查询其按钮级别功能权限，动态生成页面按钮</p></li>
+
+<li><p>接口数据权限</p></li>
+</ul>
+
+<p><a href="https://www.v2ex.com/t/416757#;">前后端分离项目，你们是怎么控制权限的？</a></p>
+
+<h4 id="参考">参考</h4>
 
 <hr />
 
@@ -623,7 +668,8 @@
 
   <span class="copyright-year">
     &copy; 
-    2019
+    2019 - 
+    2020
     <span class="heart">
       <i class="iconfont icon-heart"></i>
     </span>

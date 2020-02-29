@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>折腾 on Rolo&#39;s Note</title>
+    <link>https://isaacrolo.github.io/tags/%E6%8A%98%E8%85%BE/</link>
+    <description>Recent content in 折腾 on Rolo&#39;s Note</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Sun, 19 Jan 2020 15:42:05 +0800</lastBuildDate>
+    
+	<atom:link href="https://isaacrolo.github.io/tags/%E6%8A%98%E8%85%BE/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>路由器拆机刷机记录</title>
+      <link>https://isaacrolo.github.io/post/breed/</link>
+      <pubDate>Sun, 19 Jan 2020 15:42:05 +0800</pubDate>
+      
+      <guid>https://isaacrolo.github.io/post/breed/</guid>
+      <description>拆机刷breed教程参考 老毛子固件资源 遇到的坑 k2路由器版本是22.6.532.231，必须拆机才能刷机 买了CH341A才发现以前改门禁卡时</description>
+    </item>
+    
+  </channel>
+</rss>

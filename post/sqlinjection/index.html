@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>关于防止sql注入的思考 - Rolo&#39;s Note</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="Rolo" /><meta name="description" content="首先思考以下几个问题 preparedstatement一定能够防止sql注入吗？ preparedstatement防止sql注入的原理是什么" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.54.0 with even 4.0.0" />
+
+
+<link rel="canonical" href="https://isaacrolo.github.io/post/sqlinjection/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<link href="/dist/even.c2a46f00.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="关于防止sql注入的思考" />
+<meta property="og:description" content="首先思考以下几个问题 preparedstatement一定能够防止sql注入吗？ preparedstatement防止sql注入的原理是什么" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://isaacrolo.github.io/post/sqlinjection/" />
+<meta property="article:published_time" content="2019-10-30T13:44:55&#43;08:00"/>
+<meta property="article:modified_time" content="2019-10-30T13:44:55&#43;08:00"/>
+
+<meta itemprop="name" content="关于防止sql注入的思考">
+<meta itemprop="description" content="首先思考以下几个问题 preparedstatement一定能够防止sql注入吗？ preparedstatement防止sql注入的原理是什么">
+
+
+<meta itemprop="datePublished" content="2019-10-30T13:44:55&#43;08:00" />
+<meta itemprop="dateModified" content="2019-10-30T13:44:55&#43;08:00" />
+<meta itemprop="wordCount" content="1452">
+
+
+
+<meta itemprop="keywords" content="," />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="关于防止sql注入的思考"/>
+<meta name="twitter:description" content="首先思考以下几个问题 preparedstatement一定能够防止sql注入吗？ preparedstatement防止sql注入的原理是什么"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">[√] [×]</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">About</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">[√] [×]</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">About</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">关于防止sql注入的思考</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2019-10-30 </span>
+        <div class="post-category">
+            <a href="/categories//">  </a>
+            </div>
+        <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> times read </span>
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Contents</h2>
+  <div class="post-toc-content always-active">
+    
+  </div>
+</div>
+    <div class="post-content">
+      <p>首先思考以下几个问题</p>
+
+<ul>
+<li>preparedstatement一定能够防止sql注入吗？</li>
+<li>preparedstatement防止sql注入的原理是什么？</li>
+<li>使用框架【Mybatis,JPA】访问数据库，能防止sql注入吗？是怎样防止的？</li>
+</ul>
+
+<p>原生JDBC</p>
+
+<p>使用<code>PreparedStatement</code>代替<code>Statement</code>，使用<strong>参数化查询</strong>代替sql字符串拼接，如</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="c1">//String sql = &#34;SELECT * FROM users WHERE name =&#39;&#34;+ name + &#34;&#39;&#34;;
+</span><span class="c1"></span><span class="n">String</span> <span class="n">sql</span> <span class="o">=</span> <span class="s">&#34;SELECT * FROM users WHERE name= ? &#34;</span><span class="o">;</span>
+<span class="n">PreparedStatement</span> <span class="n">ps</span> <span class="o">=</span> <span class="n">connection</span><span class="o">.</span><span class="na">prepareStatement</span><span class="o">(</span><span class="n">sql</span><span class="o">);</span>
+<span class="n">ps</span><span class="o">.</span><span class="na">setString</span><span class="o">(</span><span class="n">1</span><span class="o">,</span> <span class="n">name</span><span class="o">);</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>PreparedStatement相较于Statement有以下好处：</p>
+
+<ul>
+<li>预编译，性能较好</li>
+<li>不用拼接，易编写易读懂</li>
+<li>防止SQL注入，提高安全性</li>
+</ul>
+
+<p>但是使用PreparedSatement就一定能防止sql注入吗？答案是否定的</p>
+
+<p>在某些特殊情况下还是会发生sql注入，</p>
+
+<ul>
+<li>使用PreparedSatement的同时，拼接sql</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java">  <span class="n">String</span> <span class="n">sql</span> <span class="o">=</span> <span class="s">&#34;SELECT * FROM users WHERE name =&#39;&#34;</span><span class="o">+</span> <span class="n">name</span> <span class="o">+</span> <span class="s">&#34;&#39;&#34;</span><span class="o">;</span>
+  <span class="n">PreparedStatement</span> <span class="n">ps</span> <span class="o">=</span> <span class="n">connection</span><span class="o">.</span><span class="na">prepareStatement</span><span class="o">(</span><span class="n">sql</span><span class="o">);</span></code></pre></td></tr></table>
+</div>
+</div>
+<ul>
+<li>使用通配符<code>%</code>作为参数，使用PreparedSatement后发现sql注入成功</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java">  <span class="n">String</span> <span class="n">sql</span> <span class="o">=</span> <span class="s">&#34;select * from users where name like ?&#34;</span><span class="o">;</span>
+  <span class="n">st</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="na">prepareStatement</span><span class="o">(</span><span class="n">sql</span><span class="o">);</span>
+  <span class="c1">//用户输入的参数包含百分号
+</span><span class="c1"></span>  <span class="n">st</span><span class="o">.</span><span class="na">setString</span><span class="o">(</span><span class="n">1</span><span class="o">,</span> <span class="s">&#34;%王%&#34;</span> <span class="o">+</span> <span class="s">&#34;%&#34;</span><span class="o">);</span>
+  <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">st</span><span class="o">.</span><span class="na">toString</span><span class="o">());</span> <span class="o">//</span><span class="n">com</span><span class="o">.</span><span class="na">mysql</span><span class="o">.</span><span class="na">jdbc</span><span class="o">.</span><span class="na">JDBC4PreparedStatement</span><span class="nd">@8543aa</span><span class="o">:</span> <span class="n">select</span> <span class="o">*</span> <span class="n">from</span> <span class="n">users</span> <span class="n">where</span> <span class="n">name</span> <span class="n">like</span> <span class="err">&#39;</span><span class="o">%</span><span class="n">王</span><span class="o">%%</span><span class="err">&#39;</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>虽然这种SQL注入危害不大，但在表中数据量较多的时候，会进行全表模糊查询，严重情况下会导致DOS【拒绝服务攻击】</p>
+
+<p>解决方法需要对用户的输入进行过滤，不允许有通配符</p>
+
+<p>为什么会出现这种情况呢【百分号PreparedStatement不会转义】，这就要看看PreparedSatement防止sql注入的原理了</p>
+
+<p>preparedstatement是如何防止sql注入的？</p>
+
+<p>之所以PreparedStatement能防止注入，是因为它把单引号转义了，变成了\&lsquo;，这样一来，就无法截断SQL语句，进而无法拼接SQL语句，基本上没有办法注入了。</p>
+
+<p>如果不用PreparedStatement，又想防止注入，最简单粗暴的办法就是过滤单引号，过滤之后，单纯从SQL的角度，无法进行任何注入。</p>
+
+<p>Mybatis</p>
+
+<p>MyBatis 避免了几乎所有的 JDBC 代码和手动设置参数以及获取结果集。</p>
+
+<p>可以使用简单的 XML 或注解，将原生类型、接口和POJO映射到数据库中的记录。</p>
+
+<p>先来看看mybatis的基本用法</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="c1">//xml方式
+</span><span class="c1"></span><span class="kd">public</span> <span class="kd">interface</span> <span class="nc">UserMapper</span> <span class="o">{</span>
+    <span class="n">User</span> <span class="nf">getById</span><span class="o">(</span><span class="kt">int</span> <span class="n">id</span><span class="o">);</span>
+<span class="o">}</span>
+<span class="o">&lt;</span><span class="n">select</span> <span class="n">id</span><span class="o">=</span><span class="s">&#34;getById&#34;</span> <span class="n">resultType</span><span class="o">=</span><span class="s">&#34;org.example.User&#34;</span><span class="o">&gt;</span>
+    <span class="n">SELECT</span> <span class="o">*</span> <span class="n">FROM</span> <span class="n">user</span> <span class="n">WHERE</span> <span class="n">id</span> <span class="o">=</span> <span class="err">#</span><span class="o">{</span><span class="n">id</span><span class="o">}</span>
+<span class="o">&lt;/</span><span class="n">select</span><span class="o">&gt;</span>
+
+<span class="c1">//注解方式
+</span><span class="c1"></span><span class="kd">public</span> <span class="kd">interface</span> <span class="nc">UserMapper</span> <span class="o">{</span>
+    <span class="nd">@Select</span><span class="o">(</span><span class="s">&#34;SELECT * FROM user WHERE id= #{id}&#34;</span><span class="o">)</span>
+    <span class="n">User</span> <span class="nf">getById</span><span class="o">(</span><span class="nd">@Param</span><span class="o">(</span><span class="s">&#34;id&#34;</span><span class="o">)</span> <span class="kt">int</span> <span class="n">id</span><span class="o">);</span>
+<span class="o">}</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>Mybatis参数替换使用的是<code>#{}</code>和<code>${}</code></p>
+
+<ul>
+<li>使用 <code>#{}</code> 语法时，MyBatis 会自动生成 <code>PreparedStatement</code> ，使用参数绑定 (<code>?</code>) 的方式来设置值</li>
+<li>使用 <code>${}</code> 语法时，MyBatis 会直接注入原始字符串，即相当于拼接字符串，因而会导致 SQL 注入</li>
+</ul>
+
+<p>看一个Mybatis发生sql注入问题的实际例子</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-xml" data-lang="xml"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-xml" data-lang="xml"><span class="nt">&lt;select</span> <span class="na">id=</span><span class="s">&#34;getUser&#34;</span> <span class="na">parameterType=</span><span class="s">&#34;Model&#34;</span> <span class="na">resultMap=</span><span class="s">&#34;Map&#34;</span><span class="nt">&gt;</span>
+    select  
+    user.uuid,
+    user.name
+    from user
+    <span class="nt">&lt;where&gt;</span>
+        <span class="nt">&lt;if</span> <span class="na">test=</span><span class="s">&#34;name!=null &amp;amp;&amp;amp; name!=&#39;&#39;&#34;</span><span class="nt">&gt;</span>
+            and user.name like &#39;%${name}%&#39;
+        <span class="nt">&lt;/if&gt;</span>   
+    <span class="nt">&lt;/where&gt;</span>
+<span class="nt">&lt;/select&gt;</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>由于使用的是${}，相当于拼接sql，将传入的name参数替换为 <code>admin%' or 1 like '</code></p>
+
+<p>就可以查询到所有用户信息，数据可能会被轻易盗取</p>
+
+<p>那么是不是 <code>${}</code> 语法就毫无用处了呢？</p>
+
+<p>举个例子，</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="n">SELECT</span> <span class="o">*</span> <span class="n">FROM</span> <span class="n">user</span> <span class="n">order</span> <span class="n">by</span> <span class="err">#</span><span class="o">{</span><span class="n">param</span><span class="o">}</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>参数替换之后会变成<code>order by &quot;name&quot;</code>，即以字符串来排序而非字段</p>
+
+<p>这时候就需要使用 <code>${}</code> 语法了，但是需要自行过滤参数来防止sql注入，如：限制 param允许的值，只能为 <code>name</code>, <code>id</code>等字段</p>
+
+<p>JPA</p>
+
+<p>spring data jpa的基本用法有以下2种，都使用了参数绑定</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">interface</span> <span class="nc">UserRepository</span> <span class="kd">extends</span> <span class="n">JpaRepository</span><span class="o">&lt;</span><span class="n">User</span><span class="o">,</span> <span class="n">Long</span><span class="o">&gt;</span> <span class="o">{</span>
+  <span class="c1">//注解默认写法
+</span><span class="c1"></span>  <span class="nd">@Query</span><span class="o">(</span><span class="s">&#34;select u from User u where u.emailAddress = ?1&#34;</span><span class="o">)</span>
+  <span class="n">User</span> <span class="nf">findByEmailAddress</span><span class="o">(</span><span class="n">String</span> <span class="n">emailAddress</span><span class="o">);</span>
+  <span class="c1">//使用命名参数
+</span><span class="c1"></span>  <span class="nd">@Query</span><span class="o">(</span><span class="s">&#34;select u from User u where u.firstname = :firstname or u.lastname = :lastname&#34;</span><span class="o">)</span>
+  <span class="n">User</span> <span class="nf">findByLastnameOrFirstname</span><span class="o">(</span><span class="nd">@Param</span><span class="o">(</span><span class="s">&#34;lastname&#34;</span><span class="o">)</span> <span class="n">String</span> <span class="n">lastname</span><span class="o">,</span>
+                                 <span class="nd">@Param</span><span class="o">(</span><span class="s">&#34;firstname&#34;</span><span class="o">)</span> <span class="n">String</span> <span class="n">firstname</span><span class="o">);</span>
+<span class="o">}</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>如果不使用参数绑定，而是拼接sql，如</p>
+
+<p><code>String sql = &quot;select * from user where name = '&quot; + name + &quot;'&quot;;</code></p>
+
+<p>也会导致sql注入，原理和JDBC相同</p>
+
+<p><a href="https://www.cnblogs.com/iyangyuan/p/4809494.html">https://www.cnblogs.com/iyangyuan/p/4809494.html</a></p>
+
+<p><a href="https://b1ngz.github.io/java-sql-injection-note/">https://b1ngz.github.io/java-sql-injection-note/</a></p>
+
+<p><a href="https://docs.spring.io/spring-data/jpa/docs/2.2.0.RELEASE/reference/html/#jpa.query-methods">https://docs.spring.io/spring-data/jpa/docs/2.2.0.RELEASE/reference/html/#jpa.query-methods</a></p>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">Author</span>
+    <span class="item-content">Rolo</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">LastMod</span>
+    <span class="item-content">
+        2019-10-30
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags//"></a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/16s/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">魅族16s使用半年有感</span>
+            <span class="prev-text nav-mobile">Prev</span>
+          </a>
+        <a class="next" href="/post/hadoop/">
+            <span class="next-text nav-default">Hadoop</span>
+            <span class="next-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+  
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="elrolo@outlook.com" class="iconfont icon-email" title="email"></a>
+      <a href="https://github.com/IsaacRolo" class="iconfont icon-github" title="github"></a>
+  <a href="https://isaacrolo.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  <div class="busuanzi-footer">
+    <span id="busuanzi_container_site_pv"> site pv: <span id="busuanzi_value_site_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> </span>
+      <span class="division">|</span>
+    <span id="busuanzi_container_site_uv"> site uv: <span id="busuanzi_value_site_uv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> </span>
+  </div>
+
+  <span class="copyright-year">
+    &copy; 
+    2019 - 
+    2020
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">Rolo</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="/dist/even.26188efa.min.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>
