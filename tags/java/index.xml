@@ -6,18 +6,36 @@
     <description>Recent content in Java on Rolo&#39;s Note</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Thu, 14 Nov 2019 10:12:22 +0800</lastBuildDate>
+    <lastBuildDate>Sat, 29 Feb 2020 19:22:15 +0800</lastBuildDate>
     
 	<atom:link href="https://isaacrolo.github.io/tags/java/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>池化技术的思考</title>
+      <title>常用树结构总结</title>
+      <link>https://isaacrolo.github.io/post/tree/</link>
+      <pubDate>Sat, 29 Feb 2020 19:22:15 +0800</pubDate>
+      
+      <guid>https://isaacrolo.github.io/post/tree/</guid>
+      <description>AVL树 性质 高度平衡树，任一节点对应的两棵子树的最大高度差为1 用途 基于二分法的策略提高数据的查找速度 时间复杂度 插入 O(log n) 查找 O(log n) 红黑树 性质 一种</description>
+    </item>
+    
+    <item>
+      <title>池化技术</title>
       <link>https://isaacrolo.github.io/post/pool/</link>
       <pubDate>Thu, 14 Nov 2019 10:12:22 +0800</pubDate>
       
       <guid>https://isaacrolo.github.io/post/pool/</guid>
       <description>当我们频繁的使用一个资源对象时，特别是在高并发的情况下都可以考虑使用资源池的模式 资源池主要提供以下几个功能 提供资源对象 归还资源对象 销毁过期的</description>
+    </item>
+    
+    <item>
+      <title>JVM性能监控工具</title>
+      <link>https://isaacrolo.github.io/post/jvmtools/</link>
+      <pubDate>Wed, 19 Jun 2019 19:40:01 +0800</pubDate>
+      
+      <guid>https://isaacrolo.github.io/post/jvmtools/</guid>
+      <description>JDK命令行工具 工具 命令 作用 jps jps -l 列出正在执行的虚拟机进程 jstat jstat -class -gc -compiler 收集虚拟机运行时数据；运行期定位虚拟机性能问题 jinfo jinfo -flag 查看虚拟机参数 jmap jmap -dump</description>
     </item>
     
     <item>

@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>常用树结构总结 - Rolo&#39;s Note</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="Rolo" /><meta name="description" content="AVL树 性质 高度平衡树，任一节点对应的两棵子树的最大高度差为1 用途 基于二分法的策略提高数据的查找速度 时间复杂度 插入 O(log n) 查找 O(log n) 红黑树 性质 一种" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.54.0 with even 4.0.0" />
+
+
+<link rel="canonical" href="https://isaacrolo.github.io/post/tree/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<link href="/dist/even.c2a46f00.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="常用树结构总结" />
+<meta property="og:description" content="AVL树 性质 高度平衡树，任一节点对应的两棵子树的最大高度差为1 用途 基于二分法的策略提高数据的查找速度 时间复杂度 插入 O(log n) 查找 O(log n) 红黑树 性质 一种" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://isaacrolo.github.io/post/tree/" />
+<meta property="article:published_time" content="2020-02-29T19:22:15&#43;08:00"/>
+<meta property="article:modified_time" content="2020-02-29T19:22:15&#43;08:00"/>
+
+<meta itemprop="name" content="常用树结构总结">
+<meta itemprop="description" content="AVL树 性质 高度平衡树，任一节点对应的两棵子树的最大高度差为1 用途 基于二分法的策略提高数据的查找速度 时间复杂度 插入 O(log n) 查找 O(log n) 红黑树 性质 一种">
+
+
+<meta itemprop="datePublished" content="2020-02-29T19:22:15&#43;08:00" />
+<meta itemprop="dateModified" content="2020-02-29T19:22:15&#43;08:00" />
+<meta itemprop="wordCount" content="1099">
+
+
+
+<meta itemprop="keywords" content="Java," />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="常用树结构总结"/>
+<meta name="twitter:description" content="AVL树 性质 高度平衡树，任一节点对应的两棵子树的最大高度差为1 用途 基于二分法的策略提高数据的查找速度 时间复杂度 插入 O(log n) 查找 O(log n) 红黑树 性质 一种"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">[√] [×]</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">About</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">[√] [×]</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">About</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">常用树结构总结</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2020-02-29 </span>
+        <div class="post-category">
+            <a href="/categories//">  </a>
+            </div>
+        <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> times read </span>
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Contents</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+<ul>
+<li><a href="#avl树">AVL树</a>
+<ul>
+<li>
+<ul>
+<li>
+<ul>
+<li><a href="#性质">性质</a></li>
+<li><a href="#用途">用途</a></li>
+<li><a href="#时间复杂度">时间复杂度</a></li>
+</ul></li>
+</ul></li>
+</ul></li>
+<li><a href="#红黑树">红黑树</a>
+<ul>
+<li>
+<ul>
+<li>
+<ul>
+<li><a href="#性质-1">性质</a></li>
+<li><a href="#用途-1">用途</a></li>
+<li><a href="#操作">操作</a></li>
+</ul></li>
+</ul></li>
+</ul></li>
+<li><a href="#b树">B树</a>
+<ul>
+<li>
+<ul>
+<li>
+<ul>
+<li><a href="#性质-2">性质</a></li>
+<li><a href="#用途-2">用途</a></li>
+</ul></li>
+</ul></li>
+</ul></li>
+<li><a href="#b-树">B+树</a>
+<ul>
+<li>
+<ul>
+<li>
+<ul>
+<li><a href="#性质-3">性质</a></li>
+<li><a href="#用途-3">用途</a></li>
+</ul></li>
+</ul></li>
+</ul></li>
+<li><a href="#b树和b-树对比">B树和B+树对比</a></li>
+<li><a href="#innodb聚簇索引的实现原理">innodb聚簇索引的实现原理</a>
+<ul>
+<li>
+<ul>
+<li>
+<ul>
+<li><a href="#参考">参考</a></li>
+</ul></li>
+</ul></li>
+</ul></li>
+</ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      
+
+<h1 id="avl树">AVL树</h1>
+
+<h4 id="性质">性质</h4>
+
+<p>高度平衡树，任一节点对应的两棵子树的最大高度差为1</p>
+
+<h4 id="用途">用途</h4>
+
+<p>基于二分法的策略提高数据的查找速度</p>
+
+<h4 id="时间复杂度">时间复杂度</h4>
+
+<ul>
+<li>插入 O(log n)</li>
+<li>查找 O(log n)</li>
+</ul>
+
+<h1 id="红黑树">红黑树</h1>
+
+<p><img src="https://s1.ax1x.com/2020/03/12/8Zzh0U.png" alt="8Zzh0U.png" /></p>
+
+<h4 id="性质-1">性质</h4>
+
+<ul>
+<li><p>一种自平衡二叉查找树。</p></li>
+
+<li><p>点是红色或黑色。</p></li>
+
+<li><p>根是黑色。</p></li>
+
+<li><p>所有叶子都是黑色（叶子是NIL节点）。</p></li>
+
+<li><p>每个红色节点必须有两个黑色的子节点。（从每个叶子到根的所有路径上不能有两个连续的红色节点。）</p></li>
+
+<li><p>从任一节点到其每个叶子的所有简单路径都包含相同数目的黑色节点。</p></li>
+</ul>
+
+<h4 id="用途-1">用途</h4>
+
+<ul>
+<li>linux进程调度CFS</li>
+<li>epoll在内核中的实现，用红黑树管理事件块</li>
+<li>Java的TreeMap，HashMap实现</li>
+</ul>
+
+<h4 id="操作">操作</h4>
+
+<ul>
+<li><p>recolor (重新标记黑色或红色)</p></li>
+
+<li><p>rotation (旋转，这是树达到平衡的关键)</p></li>
+</ul>
+
+<h1 id="b树">B树</h1>
+
+<p><img src="https://s1.ax1x.com/2020/03/12/8eFp4S.png" alt="8eFp4S.png" /></p>
+
+<h4 id="性质-2">性质</h4>
+
+<p>一个 <em>m</em> 阶的B树</p>
+
+<ul>
+<li>每一个节点最多有 <em>m</em> 个子节点</li>
+<li>每一个非叶子节点（除根节点）最少有 ⌈<em>m</em>/2⌉ 个子节点</li>
+<li>如果根节点不是叶子节点，那么它至少有两个子节点</li>
+<li>有 <em>k</em> 个子节点的非叶子节点拥有 <em>k</em> − 1 个键</li>
+<li>所有的叶子节点都在同一层</li>
+</ul>
+
+<h4 id="用途-2">用途</h4>
+
+<ul>
+<li>B树适用于读写相对大的数据块的存储系统，例如磁盘【利用了磁盘块的原理，把节点大小限制和充分使用在磁盘快大小范围】。</li>
+
+<li><p>B树减少定位记录时所经历的中间过程，从而加快存取速度【树的高度比原来的二叉树少】。</p></li>
+
+<li><p>B树常被应用在数据库和文件系统的实现上【每个节点包含的关键字增多了】。</p></li>
+</ul>
+
+<h1 id="b-树">B+树</h1>
+
+<p><img src="https://s1.ax1x.com/2020/03/12/8eFFjs.png" alt="8eFFjs.png" /></p>
+
+<h4 id="性质-3">性质</h4>
+
+<p>B+树是B树的一种变形，主要区别有</p>
+
+<ul>
+<li>内部结点不保存数据【<strong>非叶子节点没有data域</strong>】，只用于索引，<strong>所有数据都保存在叶子结点中</strong></li>
+<li>树的所有叶结点构成一个<strong>有序链表</strong>，可以按照关键码排序的次序遍历全部记录</li>
+<li>阶数m同时限制了叶子结点最多存储m-1个记录</li>
+<li>在搜索过程中，如果查询和内部节点的关键字一致，那么搜索过程不停止，而是继续向下搜索这个分支</li>
+</ul>
+
+<h4 id="用途-3">用途</h4>
+
+<p>适合实际应用中操作系统的文件索引和数据库索引</p>
+
+<h1 id="b树和b-树对比">B树和B+树对比</h1>
+
+<p>B和B+树的区别在于</p>
+
+<ul>
+<li>B+树的非叶子结点只包含导航信息，不包含实际的值</li>
+<li>所有的叶子结点和相连的节点使用链表相连，便于区间查找和遍历</li>
+</ul>
+
+<p>B+ 树的优点</p>
+
+<ul>
+<li>由于B+树在内部节点上不好含数据信息，因此在内存页中能够存放更多的key。 数据存放的更加紧密，具有更好的空间局部性。因此访问叶子几点上关联的数据也具有更好的缓存命中率。</li>
+<li>B+树的叶子结点都是相链的，因此对整棵树的便利只需要一次线性遍历叶子结点即可。而且由于数据顺序排列并且相连，所以便于区间查找和搜索。而B树则需要进行每一层的递归遍历。相邻的元素可能在内存中不相邻，所以缓存命中性没有B+树好。</li>
+</ul>
+
+<p>B树的优点</p>
+
+<p>由于B树的每一个节点都包含key和value，因此经常访问的元素可能离根节点更近，因此访问也更迅速。</p>
+
+<h1 id="innodb聚簇索引的实现原理">innodb聚簇索引的实现原理</h1>
+
+<p><img src="https://s1.ax1x.com/2020/03/28/Gk1xbt.png" alt="Gk1xbt.png" /></p>
+
+<h4 id="参考">参考</h4>
+
+<p><a href="https://www.cnblogs.com/nullzx/p/8729425.html">B树和B+树的插入、删除图文详解</a></p>
+
+<p><a href="https://tech.meituan.com/2014/06/30/mysql-index.html">MySQL索引原理及慢查询优化</a></p>
+
+<p><a href="https://www.cnblogs.com/yangecnu/p/Introduce-B-Tree-and-B-Plus-Tree.html">浅谈算法和数据结构: 十 平衡查找树之B树</a></p>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">Author</span>
+    <span class="item-content">Rolo</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">LastMod</span>
+    <span class="item-content">
+        2020-02-29
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/java/">Java</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/springcloud/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">SpringCloud组件选型</span>
+            <span class="prev-text nav-mobile">Prev</span>
+          </a>
+        <a class="next" href="/post/manjaro/">
+            <span class="next-text nav-default">Manjaro配置记录</span>
+            <span class="next-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+  
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="elrolo@outlook.com" class="iconfont icon-email" title="email"></a>
+      <a href="https://github.com/IsaacRolo" class="iconfont icon-github" title="github"></a>
+  <a href="https://isaacrolo.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  <div class="busuanzi-footer">
+    <span id="busuanzi_container_site_pv"> site pv: <span id="busuanzi_value_site_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> </span>
+      <span class="division">|</span>
+    <span id="busuanzi_container_site_uv"> site uv: <span id="busuanzi_value_site_uv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> </span>
+  </div>
+
+  <span class="copyright-year">
+    &copy; 
+    2019 - 
+    2020
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">Rolo</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="/dist/even.26188efa.min.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <title>池化技术的思考 - Rolo&#39;s Note</title>
+  <title>池化技术 - Rolo&#39;s Note</title>
   <meta name="renderer" content="webkit" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 
@@ -38,26 +38,26 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
 
 
-<meta property="og:title" content="池化技术的思考" />
+<meta property="og:title" content="池化技术" />
 <meta property="og:description" content="当我们频繁的使用一个资源对象时，特别是在高并发的情况下都可以考虑使用资源池的模式 资源池主要提供以下几个功能 提供资源对象 归还资源对象 销毁过期的" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://isaacrolo.github.io/post/pool/" />
 <meta property="article:published_time" content="2019-11-14T10:12:22&#43;08:00"/>
 <meta property="article:modified_time" content="2019-11-14T10:12:22&#43;08:00"/>
 
-<meta itemprop="name" content="池化技术的思考">
+<meta itemprop="name" content="池化技术">
 <meta itemprop="description" content="当我们频繁的使用一个资源对象时，特别是在高并发的情况下都可以考虑使用资源池的模式 资源池主要提供以下几个功能 提供资源对象 归还资源对象 销毁过期的">
 
 
 <meta itemprop="datePublished" content="2019-11-14T10:12:22&#43;08:00" />
 <meta itemprop="dateModified" content="2019-11-14T10:12:22&#43;08:00" />
-<meta itemprop="wordCount" content="259">
+<meta itemprop="wordCount" content="557">
 
 
 
 <meta itemprop="keywords" content="Java," />
 <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="池化技术的思考"/>
+<meta name="twitter:title" content="池化技术"/>
 <meta name="twitter:description" content="当我们频繁的使用一个资源对象时，特别是在高并发的情况下都可以考虑使用资源池的模式 资源池主要提供以下几个功能 提供资源对象 归还资源对象 销毁过期的"/>
 
 <!--[if lte IE 9]>
@@ -121,7 +121,7 @@
           <article class="post">
     
     <header class="post-header">
-      <h1 class="post-title">池化技术的思考</h1>
+      <h1 class="post-title">池化技术</h1>
 
       <div class="post-meta">
         <span class="post-time"> 2019-11-14 </span>
@@ -140,6 +140,8 @@
 <li>
 <ul>
 <li><a href="#线程池">线程池</a></li>
+<li><a href="#数据库连接池">数据库连接池</a></li>
+<li><a href="#字符串常量池">字符串常量池</a></li>
 </ul></li>
 </ul>
 </nav>
@@ -176,6 +178,39 @@
 
 <p>场景：app的listview中，主线程加载所有文字，其余的每张图片都新创建一个线程来加载，若快速上下滑动，线程创建和销毁就过于频繁</p>
 
+<p><a href="https://www.cnblogs.com/dolphin0520/p/3932921.html">https://www.cnblogs.com/dolphin0520/p/3932921.html</a></p>
+
+<h2 id="数据库连接池">数据库连接池</h2>
+
+<p>以druid为例，druid使用两个数组，一个用于存储当前可以使用的空闲连接，一个用于存储要被清理的连接。使用ReentrantLock 保证数组的安全访问。</p>
+
+<h2 id="字符串常量池">字符串常量池</h2>
+
+<p>字符串常量池在JDK1.7后存放到堆区，存储的内容是首次出现实例的引用</p>
+
+<p>避免了对象的重复创建，节省内存资源</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="c1">//1.在字符串常量池中找是否存在“abc”对象的引用
+</span><span class="c1">//2.存在则直接返回常量池中的地址
+</span><span class="c1">//3.不存在则在堆中创建一个”abc“对象，再将对象的引用存放到字符串常量池中，最后返回对象的引用
+</span><span class="c1"></span><span class="n">String</span> <span class="n">str1</span><span class="o">=</span><span class="s">&#34;abc&#34;</span><span class="o">;</span>
+
+<span class="c1">//1.直接在堆上创建abc对象和String对象，
+</span><span class="c1">//2.在常量池中保存“2”对象的引用地址
+</span><span class="c1"></span><span class="n">String</span> <span class="n">a</span><span class="o">=</span><span class="k">new</span> <span class="n">String</span><span class="o">(</span><span class="s">&#34;abc&#34;</span><span class="o">);</span></code></pre></td></tr></table>
+</div>
+</div>
     </div>
 
     <div class="post-copyright">

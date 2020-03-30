@@ -6,22 +6,13 @@
     <description>Recent content in Java on Rolo&#39;s Note</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Mon, 13 Jan 2020 13:48:05 +0800</lastBuildDate>
+    <lastBuildDate>Thu, 14 Nov 2019 10:12:22 +0800</lastBuildDate>
     
 	<atom:link href="https://isaacrolo.github.io/categories/java/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>常用设计模式小结</title>
-      <link>https://isaacrolo.github.io/post/pattern/</link>
-      <pubDate>Mon, 13 Jan 2020 13:48:05 +0800</pubDate>
-      
-      <guid>https://isaacrolo.github.io/post/pattern/</guid>
-      <description>总览 设计模式分类，共23种 创建型模式【对象】 单例；工厂；抽象工厂；原型；建造者 结构型模式【类结构】 适配器；桥接；装饰；组合；外观；享元；代理</description>
-    </item>
-    
-    <item>
-      <title>池化技术的思考</title>
+      <title>池化技术</title>
       <link>https://isaacrolo.github.io/post/pool/</link>
       <pubDate>Thu, 14 Nov 2019 10:12:22 +0800</pubDate>
       

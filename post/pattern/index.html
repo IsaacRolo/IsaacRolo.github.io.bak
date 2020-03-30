@@ -51,7 +51,7 @@
 
 <meta itemprop="datePublished" content="2020-01-13T13:48:05&#43;08:00" />
 <meta itemprop="dateModified" content="2020-01-13T13:48:05&#43;08:00" />
-<meta itemprop="wordCount" content="3291">
+<meta itemprop="wordCount" content="3928">
 
 
 
@@ -126,7 +126,7 @@
       <div class="post-meta">
         <span class="post-time"> 2020-01-13 </span>
         <div class="post-category">
-            <a href="/categories/java/"> Java </a>
+            <a href="/categories//">  </a>
             </div>
         <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> times read </span>
       </div>
@@ -165,6 +165,7 @@
 <li><a href="#静态代理">静态代理</a></li>
 <li><a href="#动态代理">动态代理</a></li>
 <li><a href="#代理模式应用场景">代理模式应用场景</a></li>
+<li><a href="#jdk动态代理相关的3个问题">JDK动态代理相关的3个问题</a></li>
 </ul></li>
 </ul></li>
 </ul>
@@ -914,8 +915,6 @@
 
 <li><p>JDK动态代理实例【使用了JDK的反射API；被代理对象必须实现接口】</p></li>
 </ul>
-
-<p>JDK动态代理的被代理对象为何必须实现接口？</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt"> 1
@@ -966,7 +965,7 @@
 </span><span class="lnt">46
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java">  <span class="kd">interface</span> <span class="nc">PhoneFactory</span><span class="o">{</span>
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">interface</span> <span class="nc">PhoneFactory</span><span class="o">{</span>
       <span class="kt">void</span> <span class="nf">salePhone</span><span class="o">();</span>
       <span class="kt">void</span> <span class="nf">getPhoneName</span><span class="o">(</span><span class="n">String</span> <span class="n">name</span><span class="o">);</span>
   <span class="o">}</span>
@@ -1130,6 +1129,69 @@
 <li>延迟加载，用代理模式实现延迟加载的一个经典应用就在 Hibernate 框架里面。当 Hibernate 加载实体 bean 时，并不会一次性将数据库所有的数据都装载。使用代理拦截原有的 getter 方法，在真正使用对象数据时才去数据库或者其他第三方组件加载实际的数据，从而提升系统性能。</li>
 </ul>
 
+<h3 id="jdk动态代理相关的3个问题">JDK动态代理相关的3个问题</h3>
+
+<p>问题1：JDK动态代理的被代理对象为何必须实现接口？而不能基于继承来实现？</p>
+
+<ul>
+<li>生成的代理类需要implements被代理类的接口，是多态性的一种体现</li>
+<li>生成的代理类继承了Proxy类，而Java不支持多继承</li>
+<li>CGLib动态代理会生成被代理类的子类作为代理类</li>
+</ul>
+
+<p>问题2：在JDK的动态代理中，在目标对象方法内部调用自己的另一个方法时，另一个方法在执行时，为什么没有经过代理对象？</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">UserServiceImpl</span> <span class="kd">implements</span> <span class="n">UserService</span><span class="o">{</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">int</span> <span class="nf">insert</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">query</span><span class="o">();</span>
+        <span class="k">return</span> <span class="n">0</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="n">String</span> <span class="nf">query</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="kc">null</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>通过代理对象调用insert方法时，query方法并没有被代理</p>
+
+<p>原因是调用query方法的是当前对象this，并不是代理对象</p>
+
+<p>知识延申：</p>
+
+<ul>
+<li>Spring声明式事务，userService.insert( )，userService是从IOC容器中获取的代理对象，而内部query方法的调用者是当前对象this，要注意事务失效的问题</li>
+<li>AOP的实现原理是动态代理，AOP代理的也是类，实现方式是定义一个切点【自定义注解】，代理类代理的是注解接口，并不是代理单个方法，在切面中实现具体的处理逻辑</li>
+</ul>
+
+<p>问题3：代理对象是如何生成的？Proxy.newInstance(ClassLoader, Class&lt;?&gt;[] , InvocationHandler)生成代理对象的原理？</p>
+
+<ul>
+<li>生成代理类$Proxy0</li>
+<li>代理类$Proxy0 继承Proxy 实现被代理类的接口</li>
+<li>方法的逻辑写在InvocationHandler的invoke中</li>
+<li>代理类通过反射获取构造方法，通过构造方法创建代理对象，cons.newInstance( )</li>
+</ul>
+
     </div>
 
     <div class="post-copyright">
@@ -1158,7 +1220,7 @@
             <span class="prev-text nav-mobile">Prev</span>
           </a>
         <a class="next" href="/post/pool/">
-            <span class="next-text nav-default">池化技术的思考</span>
+            <span class="next-text nav-default">池化技术</span>
             <span class="next-text nav-mobile">Next</span>
             <i class="iconfont icon-right"></i>
           </a>

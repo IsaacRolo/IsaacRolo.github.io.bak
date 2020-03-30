@@ -45,7 +45,7 @@
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://isaacrolo.github.io/" />
 
-<meta property="og:updated_time" content="2019-03-19T13:50:30&#43;08:00"/>
+<meta property="og:updated_time" content="2019-03-28T20:36:54&#43;08:00"/>
 
 <meta itemprop="name" content="Rolo&#39;s Note">
 <meta itemprop="description" content="It&#39;s time to touch fish.">
@@ -113,6 +113,88 @@
       <div class="content-wrapper">
         <div id="content" class="content">
           <section id="posts" class="posts">
+    <article class="post">
+  <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/jvm/">深入理解java虚拟机读书笔记</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2019-03-28 </span>
+      <div class="post-category">
+          <a href="/categories/java/"> Java </a>
+          </div>
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      垃圾收集器与内存分配策略 垃圾收集器主要作用于内存的哪部分？ 不考虑回收：程序计数器，虚拟机栈，本地方法栈 原因：方法结束或线程结束时，内存自然会
+    </div>
+    <div class="read-more">
+      <a href="/post/jvm/" class="read-more-link">Read more..</a>
+    </div>
+  </div>
+</article>
+
+    <article class="post">
+  <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/informatica/">ETL工具Informatica实战</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2019-03-28 </span>
+      <div class="post-category">
+          <a href="/categories/informatica/"> Informatica </a>
+          </div>
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      使用Informatica将数据导出到文件或数据库 导出时间比较 20300条数据 导出为文件：7s 导出到数据库：12s 187100条数据 导出为文
+    </div>
+    <div class="read-more">
+      <a href="/post/informatica/" class="read-more-link">Read more..</a>
+    </div>
+  </div>
+</article>
+
+    <article class="post">
+  <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/resttemplate/">RestTemplate</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2019-03-21 </span>
+      
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      RestTemplate 1 2 3 4 5 6 7 8 9 10 11 12 @Test public void restTemplatePost() { String url = &#34;http://127.0.0.1/trusted&#34;; RestTemplate restTemplate = new RestTemplate(); HttpHeaders headers = new HttpHeaders(); headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED); MultiValueMap&lt;String, String&gt; params = new LinkedMultiValueMap&lt;&gt;(); params.add(&#34;username&#34;, &#34;admin&#34;); HttpEntity&lt;MultiValueMap&lt;String, String&gt;&gt; requestEntity = new HttpEntity&lt;&gt;(params, headers); String result = restTemplate.postForObject(url, requestEntity, String.class); System.out.println(result); } HttpClient 普通的post请求 1 2 3 4
+    </div>
+    <div class="read-more">
+      <a href="/post/resttemplate/" class="read-more-link">Read more..</a>
+    </div>
+  </div>
+</article>
+
+    <article class="post">
+  <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/zuul/">整合Zuul</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2019-03-20 </span>
+      <div class="post-category">
+          <a href="/categories/spring-cloud/"> Spring Cloud </a>
+          </div>
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      场景：仅作为web服务集群与外界请求之间的网关，和Nginx结合使用 Zuul的使用 添加依赖 1 2 3 4 5 6 7 8 9 &lt;dependency&gt; &lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt; &lt;artifactId&gt;spring-cloud-starter-zuul&lt;/artifactId&gt; &lt;/dependency&gt; &lt;dependency&gt; &lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt; &lt;artifactId&gt;spring-cloud-starter-eureka&lt;/artifactId&gt; &lt;/dependency&gt; 配置文件 将Zuu
+    </div>
+    <div class="read-more">
+      <a href="/post/zuul/" class="read-more-link">Read more..</a>
+    </div>
+  </div>
+</article>
+
     <article class="post">
   <header class="post-header">
     <h1 class="post-title"><a class="post-link" href="/post/springboot-transfer/">SpringBoot 迁移</a></h1>

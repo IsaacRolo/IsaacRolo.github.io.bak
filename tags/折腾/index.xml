@@ -12,6 +12,15 @@
     
     
     <item>
+      <title>Manjaro配置记录</title>
+      <link>https://isaacrolo.github.io/post/manjaro/</link>
+      <pubDate>Sun, 19 Jan 2020 15:42:05 +0800</pubDate>
+      
+      <guid>https://isaacrolo.github.io/post/manjaro/</guid>
+      <description>更换国内源 1 2 3 sudo pacman -Syy sudo pacman-mirrors -i -c China -m rank #选一个清华源就行 sudo pacman -Syyu 添加arch源 编辑/etc/pacman.conf文件 1 [archlinuxcn]SigLevel = Optional TrustedOnlyServer = https://mirrors.sjtug.sjtu.edu.cn/archlinux-cn/$arch 1 sudo pacman -Syy &amp;amp;&amp;amp; sudo</description>
+    </item>
+    
+    <item>
       <title>路由器拆机刷机记录</title>
       <link>https://isaacrolo.github.io/post/breed/</link>
       <pubDate>Sun, 19 Jan 2020 15:42:05 +0800</pubDate>

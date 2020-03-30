@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <title>Tags - Rolo&#39;s Note</title>
+  <title>JVM性能监控工具 - Rolo&#39;s Note</title>
   <meta name="renderer" content="webkit" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 
@@ -16,7 +16,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-<meta name="author" content="Rolo" /><meta name="description" content="It&#39;s time to touch fish." /><meta name="keywords" content="Hugo, theme, even" />
+<meta name="author" content="Rolo" /><meta name="description" content="JDK命令行工具 工具 命令 作用 jps jps -l 列出正在执行的虚拟机进程 jstat jstat -class -gc -compiler 收集虚拟机运行时数据；运行期定位虚拟机性能问题 jinfo jinfo -flag 查看虚拟机参数 jmap jmap -dump" /><meta name="keywords" content="Hugo, theme, even" />
 
 
 
@@ -26,9 +26,7 @@
 <meta name="generator" content="Hugo 0.54.0 with even 4.0.0" />
 
 
-<link rel="canonical" href="https://isaacrolo.github.io/tags/" />
-  <link href="https://isaacrolo.github.io/tags/index.xml" rel="alternate" type="application/rss+xml" title="Rolo&#39;s Note" />
-  <link href="https://isaacrolo.github.io/tags/index.xml" rel="feed" type="application/rss+xml" title="Rolo&#39;s Note" />
+<link rel="canonical" href="https://isaacrolo.github.io/post/jvmtools/" />
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
@@ -40,19 +38,27 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
 
 
-<meta property="og:title" content="Tags" />
-<meta property="og:description" content="It&#39;s time to touch fish." />
-<meta property="og:type" content="website" />
-<meta property="og:url" content="https://isaacrolo.github.io/tags/" />
+<meta property="og:title" content="JVM性能监控工具" />
+<meta property="og:description" content="JDK命令行工具 工具 命令 作用 jps jps -l 列出正在执行的虚拟机进程 jstat jstat -class -gc -compiler 收集虚拟机运行时数据；运行期定位虚拟机性能问题 jinfo jinfo -flag 查看虚拟机参数 jmap jmap -dump" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://isaacrolo.github.io/post/jvmtools/" />
+<meta property="article:published_time" content="2019-06-19T19:40:01&#43;08:00"/>
+<meta property="article:modified_time" content="2019-06-19T19:40:01&#43;08:00"/>
 
-<meta property="og:updated_time" content="2020-01-13T13:48:05&#43;08:00"/>
+<meta itemprop="name" content="JVM性能监控工具">
+<meta itemprop="description" content="JDK命令行工具 工具 命令 作用 jps jps -l 列出正在执行的虚拟机进程 jstat jstat -class -gc -compiler 收集虚拟机运行时数据；运行期定位虚拟机性能问题 jinfo jinfo -flag 查看虚拟机参数 jmap jmap -dump">
 
-<meta itemprop="name" content="Tags">
-<meta itemprop="description" content="It&#39;s time to touch fish.">
 
+<meta itemprop="datePublished" content="2019-06-19T19:40:01&#43;08:00" />
+<meta itemprop="dateModified" content="2019-06-19T19:40:01&#43;08:00" />
+<meta itemprop="wordCount" content="237">
+
+
+
+<meta itemprop="keywords" content="Java," />
 <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Tags"/>
-<meta name="twitter:description" content="It&#39;s time to touch fish."/>
+<meta name="twitter:title" content="JVM性能监控工具"/>
+<meta name="twitter:description" content="JDK命令行工具 工具 命令 作用 jps jps -l 列出正在执行的虚拟机进程 jstat jstat -class -gc -compiler 收集虚拟机运行时数据；运行期定位虚拟机性能问题 jinfo jinfo -flag 查看虚拟机参数 jmap jmap -dump"/>
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -112,79 +118,142 @@
     <main id="main" class="main">
       <div class="content-wrapper">
         <div id="content" class="content">
-          <div class="terms">
-      <div class="terms-title">
-        13 Tags In Total
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">JVM性能监控工具</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2019-06-19 </span>
+        <div class="post-category">
+            <a href="/categories//">  </a>
+            </div>
+        <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> times read </span>
       </div>
-      <div class="terms-tags">
-          <a class="terms-link" href="/tags//">
-            
-            <span class="terms-count">11</span>
-          </a>
-        
-          <a class="terms-link" href="/tags/java/">
-            Java
-            <span class="terms-count">7</span>
-          </a>
-        
-          <a class="terms-link" href="/tags/spring-cloud/">
-            Spring Cloud
-            <span class="terms-count">5</span>
-          </a>
-        
-          <a class="terms-link" href="/tags/spring-boot/">
-            Spring Boot
-            <span class="terms-count">4</span>
-          </a>
-        
-          <a class="terms-link" href="/tags/web/">
-            web
-            <span class="terms-count">3</span>
-          </a>
-        
-          <a class="terms-link" href="/tags/informatica/">
-            Informatica
-            <span class="terms-count">2</span>
-          </a>
-        
-          <a class="terms-link" href="/tags/tableau/">
-            Tableau
-            <span class="terms-count">2</span>
-          </a>
-        
-          <a class="terms-link" href="/tags/%E6%8A%98%E8%85%BE/">
-            折腾
-            <span class="terms-count">2</span>
-          </a>
-        
-          <a class="terms-link" href="/tags/elasticsearch/">
-            Elasticsearch
-            <span class="terms-count">1</span>
-          </a>
-        
-          <a class="terms-link" href="/tags/redis/">
-            Redis
-            <span class="terms-count">1</span>
-          </a>
-        
-          <a class="terms-link" href="/tags/tensorflow/">
-            TensorFlow
-            <span class="terms-count">1</span>
-          </a>
-        
-          <a class="terms-link" href="/tags/%E6%9D%82%E8%B0%88/">
-            杂谈
-            <span class="terms-count">1</span>
-          </a>
-        
-          <a class="terms-link" href="/tags/%E7%BD%91%E7%BB%9C/">
-            网络
-            <span class="terms-count">1</span>
-          </a>
-        </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Contents</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+<ul>
+<li><a href="#jdk命令行工具">JDK命令行工具</a></li>
+<li><a href="#jdk可视化工具">JDK可视化工具</a>
+<ul>
+<li>
+<ul>
+<li><a href="#jconsole">JConsole</a></li>
+<li><a href="#visualvm">VisualVM</a></li>
+</ul></li>
+</ul></li>
+</ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      
+
+<h1 id="jdk命令行工具">JDK命令行工具</h1>
+
+<table>
+<thead>
+<tr>
+<th>工具</th>
+<th>命令</th>
+<th>作用</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>jps</td>
+<td>jps -l</td>
+<td>列出正在执行的虚拟机进程</td>
+</tr>
+
+<tr>
+<td>jstat</td>
+<td>jstat -class -gc -compiler</td>
+<td>收集虚拟机运行时数据；运行期定位虚拟机性能问题</td>
+</tr>
+
+<tr>
+<td>jinfo</td>
+<td>jinfo -flag</td>
+<td>查看虚拟机参数</td>
+</tr>
+
+<tr>
+<td>jmap</td>
+<td>jmap -dump</td>
+<td>生成dump文件</td>
+</tr>
+
+<tr>
+<td>jhat</td>
+<td></td>
+<td>和jmap配合使用，分析dump文件</td>
+</tr>
+
+<tr>
+<td>jstack</td>
+<td>jstack -l</td>
+<td>生成线程快照，查看各个线程的调用堆栈，定位线程出现停顿的原因</td>
+</tr>
+</tbody>
+</table>
+
+<h1 id="jdk可视化工具">JDK可视化工具</h1>
+
+<h3 id="jconsole">JConsole</h3>
+
+<p>从java5开始，在JDK中自带的java监控和管理控制台，用于对JVM中内存，线程和类等的监控</p>
+
+<h3 id="visualvm">VisualVM</h3>
+
+<p>提供了一个可视化界面，用于查看 JVM上运行的Java 应用程序的详细信息，涉及了jvm调优的方方面面</p>
+
     </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">Author</span>
+    <span class="item-content">Rolo</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">LastMod</span>
+    <span class="item-content">
+        2019-06-19
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/java/">Java</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/elasticsearch/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">Elasticsearch</span>
+            <span class="prev-text nav-mobile">Prev</span>
+          </a>
+        <a class="next" href="/post/java8/">
+            <span class="next-text nav-default">关于lambda表达式和Stream API的思考</span>
+            <span class="next-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
         </div>
         
+  
+  
+
+  
 
       </div>
     </main>
